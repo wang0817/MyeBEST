@@ -1,0 +1,117 @@
+###############################################################################
+#                                                                             #
+#                                                       02/May/2014  18:28:40 #
+# IAR ANSI C/C++ Compiler V6.30.6.23336/W32 EVALUATION for ARM                #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  E:\学习\第九届智能车\省赛程序\14427\MyFunction\Speed_PID #
+#                    .c                                                       #
+#    Command line =  E:\学习\第九届智能车\省赛程序\14427\MyFunction\Speed_PID #
+#                    .c -D IAR -lCN E:\学习\第九届智能车\省赛程序\14427\Flash #
+#                    _512K\List\ -lB E:\学习\第九届智能车\省赛程序\14427\Flas #
+#                    h_512K\List\ -o E:\学习\第九届智能车\省赛程序\14427\Flas #
+#                    h_512K\Obj\ --no_cse --no_unroll --no_inline             #
+#                    --no_code_motion --no_tbaa --no_clustering               #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M4  #
+#                    -e --fpu=None --dlib_config "D:\Program Files            #
+#                    (x86)\iar\arm\INC\c\DLib_Config_Normal.h" -I             #
+#                    E:\学习\第九届智能车\省赛程序\14427\Library\CPU\ -I      #
+#                    E:\学习\第九届智能车\省赛程序\14427\Library\Drivers\ADC\ #
+#                     -I E:\学习\第九届智能车\省赛程序\14427\Library\Drivers\ #
+#                    FTM\ -I E:\学习\第九届智能车\省赛程序\14427\Library\Driv #
+#                    ers\GPIO\ -I E:\学习\第九届智能车\省赛程序\14427\Library #
+#                    \Drivers\PIT\ -I E:\学习\第九届智能车\省赛程序\14427\MyF #
+#                    unction\ -I E:\学习\第九届智能车\省赛程序\14427\SD_Syste #
+#                    m\ -I E:\学习\第九届智能车\省赛程序\14427\OLED\ -Ol      #
+#    List file    =  E:\学习\第九届智能车\省赛程序\14427\Flash_512K\List\Spee #
+#                    d_PID.lst                                                #
+#    Object file  =  E:\学习\第九届智能车\省赛程序\14427\Flash_512K\Obj\Speed #
+#                    _PID.o                                                   #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+E:\学习\第九届智能车\省赛程序\14427\MyFunction\Speed_PID.c
+      1          #include "AllHeaders.h"
+      2          
+      3          /*------隶属于Speed_PI函数-------*/
+      4          int16s_t PI_SpeedNew;                     //Speed_PI函数算出最新输出速度值
+      5          int16s_t PI_SpeedOld;                     //Speed_PI函数算出的上一次输出的速度值
+      6          int32s_t PI_SpeedKeep;                    //Speed_PI函数中速度偏差积分值
+      7          int32s_t PI_SpeedErr;                     //速度偏差
+      8          int32s_t His_PI_SpeedErr = 0;             //速度偏差历史值
+      9          /*-----隶属于Speed_PI_OUT函数----*/
+     10          int16s_t PI_Out;
+     11          /*===============================
+     12          函数名：Speed_PI()
+     13          作用  ：速度位置式PI控制,100ms调用一次
+     14          备注  ：无
+     15          ================================*/
+     16          void Speed_PI(void) 
+     17          {
+     18           int32s_t  nP, nI, nD;
+     19           int16s_t  nSpeed;
+     20           int32s_t  nValue1, nValue2;
+     21           
+     22           nSpeed = (NowSpeed_L + NowSpeed_R)/ 2;  //计算当前速度
+     23          
+     24           PI_SpeedErr = ObjectSpeed - nSpeed;      //求速度偏差，用于求速度微分
+     25           nValue1     = ObjectSpeed - nSpeed;      //求速度偏差，用于计算速度PI的比例部分
+     26           nValue2     = ObjectSpeed - nSpeed;      //求速度偏差，用于计算速度PI的积分部分
+     27          		
+     28           if(nValue1 > 215)  nValue1 = 215;        //用于比例部分的速度偏差限幅 215
+     29           if(nValue1 < -215) nValue1 = -215;
+     30           if(nValue2 > 175)  nValue2 = 175;         //用于积分部分的速度偏差限幅175
+     31           if(nValue2 < -175) nValue2 = -175;
+     32           
+     33           nP = nValue1 * (MOTOR_SPEED_P);          //求比例
+     34           
+     35           nI = nValue2 * (MOTOR_SPEED_I);          //求积分
+     36          
+     37           nD = (int32s_t)((PI_SpeedErr - His_PI_SpeedErr)*MOTOR_SPEED_D);//求微分
+     38           
+     39           
+     40           PI_SpeedOld = PI_SpeedNew;	
+     41           PI_SpeedKeep += nI;
+     42          
+     43           
+     44           PI_SpeedNew = (int16s_t)((nP + nD + (PI_SpeedKeep / 8)) / 100L);
+     45           
+     46           if(PI_SpeedNew > PID_SPEED_LIMIT)        //速度换输出总限幅 
+     47               
+     48           PI_SpeedNew = PID_SPEED_LIMIT;
+     49           
+     50           if(PI_SpeedNew <-PID_SPEED_LIMIT)
+     51               
+     52           PI_SpeedNew = -PID_SPEED_LIMIT;
+     53          
+     54           His_PI_SpeedErr = PI_SpeedErr;
+     55          
+     56           if(PI_SpeedKeep > 30000) 
+     57           {
+     58            PI_SpeedKeep = 30000;
+     59           }
+     60           if(PI_SpeedKeep < -30000) 
+     61           { 
+     62            PI_SpeedKeep = -30000;
+     63           }
+     64          
+     65          }
+     66          /*====================================
+     67          函数名:Speed_PI_OUT()
+     68          作用  ：计算速度PI控制的输出，5ms调用一次
+     69          备注  ：无
+     70          ======================================*/  
+     71          void Speed_PI_OUT(void) 
+     72          {
+     73           int32s_t  nValue;
+     74            
+     75           nValue = PI_SpeedNew - PI_SpeedOld;
+     76           nValue = nValue * (Motor_Count + 1) / (CAR_MOTOR_PERIOD - 1) + PI_SpeedOld;                             
+     77           PI_Out = (int16s_t)nValue;                                                        
+     78          }
+
+Errors: 10
+Warnings: none

@@ -1,0 +1,114 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[InterruptLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+SumSortOrder=0
+[Interrupts]
+Enabled=1
+[MemoryMap]
+Enabled=0
+Base=0
+UseAuto=0
+TypeViolation=1
+UnspecRange=1
+ActionState=1
+[DebugChecksum]
+Checksum=-685554048
+[JLinkDriver]
+TraceBufferSize=0x00010000
+TraceStallIfFIFOFull=0x00000000
+TracePortSize=0x00000004
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[Breakpoints]
+Count=0
+[struct_types]
+Fmt0=CCD_GROUP-Groove_limit	3	0
+Fmt1=CCD_GROUP-Heave_limit	3	0
+[array_types]
+Fmt0=int8s_t[116]	3	0
+Fmt1=int8u_t[128]	3	0
+Fmt2=int8u_t[20]	3	0
+Fmt3=int8u_t[4]	3	0
+[watch_formats]
+Fmt0={W}42:Acc_X	3	0
+Fmt1={W}42:Acc_Y	3	0
+Fmt2={W}42:Acc_Z	3	0
+Fmt3={W}42:Asin_Exchange_Angle	3	0
+Fmt4={W}42:CCD_k_max_Value	3	0
+Fmt5={W}42:CCD_k_min_Value	3	0
+Fmt6={W}42:Motor_Count	3	0
+Fmt7={W}42:Track_Slope	3	0
+Fmt8={W}42:g_CarAngle	0	7
+Fmt9={W}42:g_GyroscopeAngleSpeed	0	7
+Fmt10={W}42:g_nCarAngle	0	7
+Fmt11={W}42:i	5	0
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[Trace1]
+Enabled=0
+ShowSource=1
+[CallStackLog]
+Enabled=0
+[DriverProfiling]
+Enabled=0
+Mode=1
+Graph=0
+Symbiont=0
+Exclusions=
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Aliases]
+A0=_ "C:\Users\a\Desktop\线性CCD程序\5月8号晚上添加SD卡\5月8号晚上添加SD卡\直立程序调试中\SD_System\fat32txt.c" ""
+A1=_ "C:\Users\a\Desktop\直立程序7月14号基本能过障碍\7月14日 基本能跑\MyFunction\System_Init.c" ""
+A2=_ "C:\Users\a\Desktop\直立程序7月14号基本能过障碍\直立程序\MyFunction\System_Init.c" ""
+A3=_ "C:\Users\dong\Desktop\1109调试版\Library\CPU\KinetisCrt0.s" ""
+A4=_ "C:\Users\dong\Desktop\1109调试版\Simple_AD\Simple_AD.c" ""
+A5=_ "C:\Users\dong\Desktop\11、28加小凹槽自适应滤除修改\SD_System\fat32txt.c" ""
+A6=_ "C:\Users\dong\Desktop\第一次 校内赛+IIC\Simple_AD\Simple_AD.c" ""
+A7=_ "C:\Users\dong\Desktop\可以直立\Simple_AD\Simple_AD.c" ""
+A8=_ "C:\Users\dong\Desktop\新板测试好的\Simple_AD\Simple_AD.c" ""
+A9=_ "C:\Users\zsp\Desktop\7月15日 凌晨修改\MyFunction\System_Init.c" ""
+A10=_ "C:\Users\zsp\Desktop\7月15日 晚上10点能检测起跑线\MyFunction\System_Init.c" ""
+A11=_ "C:\Users\zsp\Desktop\7月15日 晚上六点1m 7.56v\MyFunction\System_Init.c" ""
+A12=_ "C:\Users\zsp\Desktop\直立ARM程序\5月13号修改版\5月20号三CCD 周期5ms\Library\CPU\StartupCode.c" "E:\2013智能车\2013光电\fighting\Library\CPU\StartupCode.c"
+A13=_ "C:\Users\zsp\Desktop\直立ARM程序\V0.0.1\V0.0.1\MyFunction\System_Init.c" ""
+A14=_ "C:\Users\zsp\Desktop\直立ARM程序\直立程序调试中\直立程序调试中\MyFunction\System_Init.c" ""
+A15=_ "C:\Users\zsp\Desktop\直立ARM程序\直立程序调试中\直立调试中基本能直立1\MyFunction\System_Init.c" ""
+A16=_ "C:\Users\zsp\Desktop\直立ARM程序\直立程序调试中\直立调试中基本能直立\MyFunction\System_Init.c" ""
+A17=_ "E:\2014智能车\智能车程序\3.31新\Simple_AD\Simple_AD.c" ""
+A18=_ "E:\2014智能车\智能车程序\4月2号新\Simple_AD\Simple_AD.c" ""
+A19=_ "E:\2014智能车\智能车程序\5月2号\Simple_AD\Simple_AD.c" ""
+A20=_ "E:\2014智能车\智能车程序\第二次直立车\3.28新\Simple_AD\Simple_AD.c" ""
+A21=_ "E:\2014智能车\智能车程序\调试\1202加小凹槽自适应滤除修改\Simple_AD\Simple_AD.c" ""
+A22=_ "E:\创新活动\智能车\第十届\程序\本车程序\1029调试版\Simple_AD\Simple_AD.c" ""
+A23=_ "E:\课外资料\飞思卡尔智能车\日常资料\第八届资料\第八届智能车\直立车调试\ARM\ARM学习使用\20130110\V0.0.3\Library\CPU\KinetisCrt0.s" ""
+A24=_ "E:\课外资料\飞思卡尔智能车\日常资料\第八届资料\第八届智能车\直立车调试\ARM\ARM学习使用\20130119\V0.0.1\Library\CPU\KinetisCrt0.s" ""
+A25=_ "E:\课外资料\飞思卡尔智能车\日常资料\第八届资料\第八届智能车\直立车调试\ARM\ARM学习使用\20130119\V0.0.1\MyFunction\System_Init.c" ""
+A26=_ "E:\学习\第九届智能车\fighting\Library\CPU\KinetisCrt0.s" ""
+Count=27
+SuppressDialog=1

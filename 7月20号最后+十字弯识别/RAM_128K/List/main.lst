@@ -1,0 +1,96 @@
+###############################################################################
+#                                                                             #
+#                                                       30/Oct/2014  20:25:33 #
+# IAR ANSI C/C++ Compiler V6.30.6.23336/W32 EVALUATION for ARM                #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\Source\mai #
+#                    n.c                                                      #
+#    Command line =  E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\Source\mai #
+#                    n.c -D IAR -lCN E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ #
+#                    ÷ÊÔ°æ\RAM_128K\List\ -lB E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ #
+#                    ÌÐò\1029µ÷ÊÔ°æ\RAM_128K\List\ -o                         #
+#                    E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\RAM_128K\O #
+#                    bj\ --debug --endian=little --cpu=Cortex-M4 -e           #
+#                    --fpu=None --dlib_config "C:\Program Files\IAR           #
+#                    Systems\Embedded Workbench 6.0                           #
+#                    Evaluation\arm\INC\c\DLib_Config_Normal.h" -I            #
+#                    E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\Library\CP #
+#                    U\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\Libr #
+#                    ary\Drivers\ADC\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1 #
+#                    029µ÷ÊÔ°æ\Library\Drivers\FTM\ -I                        #
+#                    E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\Library\Dr #
+#                    ivers\GPIO\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ #
+#                    ÊÔ°æ\Library\Drivers\PIT\ -I                             #
+#                    E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\System_Ini #
+#                    t\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\Sour #
+#                    ce\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\OLE #
+#                    D\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\SD_S #
+#                    ystem\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\ #
+#                    Simple_AD\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷Ê #
+#                    Ô°æ\Delay\ -I E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷Ê #
+#                    Ô°æ\Make_Desicion\ -Oh                                   #
+#    List file    =  E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\RAM_128K\L #
+#                    ist\main.lst                                             #
+#    Object file  =  E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\RAM_128K\O #
+#                    bj\main.o                                                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+E:\´´ÐÂ»î¶¯\ÖÇÄÜ³µ\µÚÊ®½ì\±¾³µ³ÌÐò\1029µ÷ÊÔ°æ\Source\main.c
+      1          
+      2          #include "AllHeaders.h"
+      3          
+
+   \                                 In section .text, align 4, keep-with-next
+      4          void main(void) 
+      5          {
+   \                     main:
+   \   00000000   0xB580             PUSH     {R7,LR}
+      6            DisableInterrupts();                               //³ÌÐòÒ»¿ªÊ¼ÐèÒª¹Ø±ÕËùÓÐÖÐ¶Ï£¬·ÀÖ¹µ¥Æ¬»ú³õÊ¼»¯¹ý³ÌÖÐ±»Ä³¸öÖÐ¶Ï´ò¶Ï
+   \   00000002   0xB672             CPSID i          
+      7            /***************************µ÷ÓÃ³õÊ¼»¯º¯Êý*******************************/
+      8            delay_ms(100);
+   \   00000004   0x2064             MOVS     R0,#+100
+   \   00000006   0x.... 0x....      BL       delay_ms
+      9            System_Init();
+   \   0000000A   0x.... 0x....      BL       System_Init
+     10            EnableInterrupts();                               //ÔÊÐíÖÐ¶Ï£¬ÓÃµ½ÊµÊ±Ê±ÖÓ¶¨Ê±ÖÐ¶Ï¡¢¶¨Ê±Æ÷Òç³öÖÐ¶ÏµÈÖÐ¶ÏµÄ»°£¬±ØÐëÔÊÐí×ÜÖÐ¶Ï
+   \   0000000E   0xB662             CPSIE i          
+     11            
+     12            for(;;) 
+   \                     ??main_0:
+   \   00000010   0xE7FE             B.N      ??main_0
+     13            {
+     14          
+     15            }
+     16          }        
+     17          
+     18              
+     19              
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        8  main
+             8 -> System_Init
+             8 -> delay_ms
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      18  main
+
+ 
+ 18 bytes in section .text
+ 
+ 18 bytes of CODE memory
+
+Errors: none
+Warnings: none

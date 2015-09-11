@@ -1,0 +1,761 @@
+###############################################################################
+#                                                                             #
+#                                                       22/Jul/2015  10:59:28 #
+# IAR ANSI C/C++ Compiler V6.30.6.23336/W32 EVALUATION for ARM                #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Make_Desici #
+#                    on\Judge_Way\Judge_Way.c                                 #
+#    Command line =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Make_Desici #
+#                    on\Judge_Way\Judge_Way.c -D IAR -lCN                     #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    List\ -lB C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\F #
+#                    lash_512K\List\ -o C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®× #
+#                    ÖÍäÊ¶±ð\Flash_512K\Obj\ --no_cse --no_unroll             #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M4  #
+#                    -e --char_is_signed --fpu=None --dlib_config             #
+#                    "C:\Program Files\IAR Systems\Embedded Workbench 6.0     #
+#                    Evaluation\arm\INC\c\DLib_Config_Normal.h" -I            #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\CPU #
+#                    \ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Librar #
+#                    y\Drivers\ADC\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×Ö #
+#                    ÍäÊ¶±ð\Library\Drivers\FTM\ -I                           #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Dri #
+#                    vers\GPIO\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶ #
+#                    ±ð\Library\Drivers\PIT\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ #
+#                    ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Drivers\I2C\ -I                  #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Dri #
+#                    vers\UART\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶ #
+#                    ±ð\Library\Drivers\FTFL\ -I                              #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\MyFunction\ #
+#                     -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\SD_Syst #
+#                    em\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Dela #
+#                    y\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Syste #
+#                    m_Init\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\ #
+#                    OLED\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\ZL #
+#                    G7290\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\S #
+#                    imple_AD\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶± #
+#                    ð\Make_Desicion\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê® #
+#                    ×ÖÍäÊ¶±ð\Make_Desicion\Judge_Way\ -I                     #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Make_Desici #
+#                    on\Speed_Control\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê #
+#                    ®×ÖÍäÊ¶±ð\Source\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê #
+#                    ®×ÖÍäÊ¶±ð\Peripheral_Oparation\ -I                       #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Balance_con #
+#                    trol\ -Ol                                                #
+#    List file    =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    List\Judge_Way.lst                                       #
+#    Object file  =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    Obj\Judge_Way.o                                          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Make_Desicion\Judge_Way\Judge_Way.c
+      1          #include "AllHeaders.h"
+      2          #include "../math_car.h"
+      3          
+
+   \                                 In section .bss, align 4
+      4          int32s_t BlackTip_Len=0;            //Ö±½ÇÇ°ºÚÏßµ½Ö±½Ç¾àÀë
+   \                     BlackTip_Len:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 1
+      5          int8u_t Black_Tip_Flag=0;    //Ö±½ÇÇ°ºÚÌõ±êÖ¾
+   \                     Black_Tip_Flag:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 4
+      6          int32s_t TipAfter_Len = 0;
+   \                     TipAfter_Len:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+      7          int32s_t Judge_RightAngle_Len = 0;                   //ÅÐ¶ÏÖ±½ÇµÄ¾àÀë
+   \                     Judge_RightAngle_Len:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 1
+      8          int8u_t RightAngle_Flag = 0;                        //Ö±½ÇÍä±êÖ¾
+   \                     RightAngle_Flag:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+      9          int8u_t ResureTip_Flag = 0;
+   \                     ResureTip_Flag:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     10          int8u_t Finish_RightAngle_Flag = 0;                  //Í¨¹ýÖ±½ÓÍä±êÖ¾ 
+   \                     Finish_RightAngle_Flag:
+   \   00000000                      DS8 1
+     11          //int32s_t Acr_RightAngle_Len = 10000;                 //¿ªÊ¼¼ì²â¶¯×÷Ö±½Ç¾àÀë
+     12          
+
+   \                                 In section .bss, align 4
+     13          int8u_t Main_L_array[EAGEARRLEN] = {0};      //Ö÷CCD×ó±ßÑØ¼ÇÂ¼Êý×é
+   \                     Main_L_array:
+   \   00000000                      DS8 32
+
+   \                                 In section .bss, align 4
+     14          int8u_t Main_R_array[EAGEARRLEN] = {0};      //Ö÷CCDÓÒ±ßÑØ¼ÇÂ¼Êý×é
+   \                     Main_R_array:
+   \   00000000                      DS8 32
+
+   \                                 In section .bss, align 4
+     15          int8u_t Assi_L_array[EAGEARRLEN] = {0};      //¸¨ÖúCCD×ó±ßÑØ¼ÇÂ¼Êý×é
+   \                     Assi_L_array:
+   \   00000000                      DS8 32
+
+   \                                 In section .bss, align 4
+     16          int8u_t Assi_R_array[EAGEARRLEN] = {0};      //¸¨ÖúCCDÓÒ±ßÑØ¼ÇÂ¼Êý×é
+   \                     Assi_R_array:
+   \   00000000                      DS8 32
+
+   \                                 In section .bss, align 1
+     17          int8u_t Main_Edge_Counter = 0;       //Ö÷CCD±ßÑØ¼ÆÊý
+   \                     Main_Edge_Counter:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     18          int8u_t Assi_Edge_Counter = 0;       //¸¨ÖúCCD±ßÑØ¼ÆÊý
+   \                     Assi_Edge_Counter:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     19          int8u_t ResureTip_Add_Flag = 0;      //ºÚÌõÈ·¶¨¼Ó±êÖ¾Î»
+   \                     ResureTip_Add_Flag:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     20          int8u_t ResureTip_Add_Flag_His = 0;   //ºÚÌõÈ·¶¨¼ÓÀúÊ·±êÖ¾Î»
+   \                     ResureTip_Add_Flag_His:
+   \   00000000                      DS8 1
+     21          
+
+   \                                 In section .bss, align 1
+     22          int8u_t Frist_Scan_Flag = 0;         //ÈüµÀÅÐ¶ÏÊý×éÊ×´ÎÐ´Âú±êÖ¾
+   \                     Frist_Scan_Flag:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 4
+     23          int8u_t Valid_M_R[EAGEARRLEN] = {0};             //ÓÐÐ§ÐÔ±êÖ¾Êý×é
+   \                     Valid_M_R:
+   \   00000000                      DS8 32
+
+   \                                 In section .bss, align 4
+     24          int8u_t Valid_M_L[EAGEARRLEN] = {0};             //ÓÐÐ§ÐÔ±êÖ¾Êý×é
+   \                     Valid_M_L:
+   \   00000000                      DS8 32
+
+   \                                 In section .bss, align 4
+     25          int8u_t Valid_A_R[EAGEARRLEN] = {0};             //ÓÐÐ§ÐÔ±êÖ¾Êý×é
+   \                     Valid_A_R:
+   \   00000000                      DS8 32
+
+   \                                 In section .bss, align 4
+     26          int8u_t Valid_A_L[EAGEARRLEN] = {0};             //ÓÐÐ§ÐÔ±êÖ¾Êý×é
+   \                     Valid_A_L:
+   \   00000000                      DS8 32
+     27          
+     28          
+
+   \                                 In section .text, align 2, keep-with-next
+     29          void Measure_Length()
+     30          {
+     31            int16s_t AveSpeed;
+     32            
+     33            AveSpeed = R_MotorSpeed + L_MotorSpeed;
+   \                     Measure_Length:
+   \   00000000   0x....             LDR.N    R0,??DataTable2
+   \   00000002   0x8800             LDRH     R0,[R0, #+0]
+   \   00000004   0x....             LDR.N    R1,??DataTable2_1
+   \   00000006   0x8809             LDRH     R1,[R1, #+0]
+   \   00000008   0x1808             ADDS     R0,R1,R0
+     34            //Judge_RightAngle_Len += AveSpeed;
+     35            
+     36            if(WholeBlack_Flag==1)                        //¼ÆËãºÚÌõ³¤¶È
+   \   0000000A   0x....             LDR.N    R1,??DataTable2_2
+   \   0000000C   0x7809             LDRB     R1,[R1, #+0]
+   \   0000000E   0x2901             CMP      R1,#+1
+   \   00000010   0xD126             BNE.N    ??Measure_Length_0
+     37            {
+     38              BlackTip_Len+=AveSpeed;
+   \   00000012   0x....             LDR.N    R1,??DataTable2_3
+   \   00000014   0x6809             LDR      R1,[R1, #+0]
+   \   00000016   0xFA01 0xF180      SXTAH    R1,R1,R0
+   \   0000001A   0x....             LDR.N    R2,??DataTable2_3
+   \   0000001C   0x6011             STR      R1,[R2, #+0]
+     39              
+     40              if(BlackTip_Len > BLACKTPLEN)
+   \   0000001E   0x....             LDR.N    R1,??DataTable2_3
+   \   00000020   0x6809             LDR      R1,[R1, #+0]
+   \   00000022   0x29FB             CMP      R1,#+251
+   \   00000024   0xDB1F             BLT.N    ??Measure_Length_1
+     41              {
+     42                BlackTip_Len = 0;
+   \   00000026   0x....             LDR.N    R1,??DataTable2_3
+   \   00000028   0x2200             MOVS     R2,#+0
+   \   0000002A   0x600A             STR      R2,[R1, #+0]
+     43                Black_Tip_Flag = 1;
+   \   0000002C   0x....             LDR.N    R1,??DataTable2_4
+   \   0000002E   0x2201             MOVS     R2,#+1
+   \   00000030   0x700A             STRB     R2,[R1, #+0]
+     44                
+     45                if(Black_Tip_Flag == 1)
+   \   00000032   0x....             LDR.N    R1,??DataTable2_4
+   \   00000034   0x7809             LDRB     R1,[R1, #+0]
+   \   00000036   0x2901             CMP      R1,#+1
+   \   00000038   0xD115             BNE.N    ??Measure_Length_1
+     46                {
+     47                  TipAfter_Len = 0;
+   \   0000003A   0x....             LDR.N    R1,??DataTable2_5
+   \   0000003C   0x2200             MOVS     R2,#+0
+   \   0000003E   0x600A             STR      R2,[R1, #+0]
+     48                  Double_Edge_Flag = 0;
+   \   00000040   0x....             LDR.N    R1,??DataTable2_6
+   \   00000042   0x2200             MOVS     R2,#+0
+   \   00000044   0x700A             STRB     R2,[R1, #+0]
+     49                  Double_Edge_Num = 0;
+   \   00000046   0x....             LDR.N    R1,??DataTable2_7
+   \   00000048   0x2200             MOVS     R2,#+0
+   \   0000004A   0x800A             STRH     R2,[R1, #+0]
+     50                  ResureTip_Flag = 0;
+   \   0000004C   0x....             LDR.N    R1,??DataTable2_8
+   \   0000004E   0x2200             MOVS     R2,#+0
+   \   00000050   0x700A             STRB     R2,[R1, #+0]
+     51                  Black_Tid_Bend_Flag = 0;
+   \   00000052   0x....             LDR.N    R1,??DataTable2_9
+   \   00000054   0x2200             MOVS     R2,#+0
+   \   00000056   0x700A             STRB     R2,[R1, #+0]
+     52                  Single_Edge_Num = 0;
+   \   00000058   0x....             LDR.N    R1,??DataTable2_10
+   \   0000005A   0x2200             MOVS     R2,#+0
+   \   0000005C   0x800A             STRH     R2,[R1, #+0]
+   \   0000005E   0xE002             B.N      ??Measure_Length_1
+     53                }
+     54              }
+     55            }
+     56            else
+     57            {
+     58              BlackTip_Len = 0;
+   \                     ??Measure_Length_0:
+   \   00000060   0x....             LDR.N    R1,??DataTable2_3
+   \   00000062   0x2200             MOVS     R2,#+0
+   \   00000064   0x600A             STR      R2,[R1, #+0]
+     59              
+     60            }
+     61            
+     62            if(Black_Tip_Flag == 1)                     //¼ÆËãÖ±½ÇÇ°µ½ºÚÌõµÄÈüµÀ³¤¶È
+   \                     ??Measure_Length_1:
+   \   00000066   0x....             LDR.N    R1,??DataTable2_4
+   \   00000068   0x7809             LDRB     R1,[R1, #+0]
+   \   0000006A   0x2901             CMP      R1,#+1
+   \   0000006C   0xD13C             BNE.N    ??Measure_Length_2
+     63            {
+     64              TipAfter_Len+=AveSpeed;
+   \   0000006E   0x....             LDR.N    R1,??DataTable2_5
+   \   00000070   0x6809             LDR      R1,[R1, #+0]
+   \   00000072   0xFA01 0xF080      SXTAH    R0,R1,R0
+   \   00000076   0x....             LDR.N    R1,??DataTable2_5
+   \   00000078   0x6008             STR      R0,[R1, #+0]
+     65              if(TipAfter_Len >9000)
+   \   0000007A   0x....             LDR.N    R0,??DataTable2_5
+   \   0000007C   0x6800             LDR      R0,[R0, #+0]
+   \   0000007E   0xF242 0x3129      MOVW     R1,#+9001
+   \   00000082   0x4288             CMP      R0,R1
+   \   00000084   0xDB02             BLT.N    ??Measure_Length_3
+     66              {
+     67                Double_Edge_Flag = 1;
+   \   00000086   0x....             LDR.N    R0,??DataTable2_6
+   \   00000088   0x2101             MOVS     R1,#+1
+   \   0000008A   0x7001             STRB     R1,[R0, #+0]
+     68              }  
+     69              if((TipAfter_Len > 10000)&&(Double_Edge_Num > Double_Edge_Limit))
+   \                     ??Measure_Length_3:
+   \   0000008C   0x....             LDR.N    R0,??DataTable2_5
+   \   0000008E   0x6800             LDR      R0,[R0, #+0]
+   \   00000090   0xF242 0x7111      MOVW     R1,#+10001
+   \   00000094   0x4288             CMP      R0,R1
+   \   00000096   0xDB0C             BLT.N    ??Measure_Length_4
+   \   00000098   0x....             LDR.N    R0,??DataTable2_7
+   \   0000009A   0x8800             LDRH     R0,[R0, #+0]
+   \   0000009C   0x2806             CMP      R0,#+6
+   \   0000009E   0xD308             BCC.N    ??Measure_Length_4
+     70              { 
+     71                Double_Edge_Flag = 0;
+   \   000000A0   0x....             LDR.N    R0,??DataTable2_6
+   \   000000A2   0x2100             MOVS     R1,#+0
+   \   000000A4   0x7001             STRB     R1,[R0, #+0]
+     72                ResureTip_Flag = 1;
+   \   000000A6   0x....             LDR.N    R0,??DataTable2_8
+   \   000000A8   0x2101             MOVS     R1,#+1
+   \   000000AA   0x7001             STRB     R1,[R0, #+0]
+     73                Black_Tid_Bend_Flag = 1;
+   \   000000AC   0x....             LDR.N    R0,??DataTable2_9
+   \   000000AE   0x2101             MOVS     R1,#+1
+   \   000000B0   0x7001             STRB     R1,[R0, #+0]
+     74              }
+     75              
+     76              if(TipAfter_Len > 20000)
+   \                     ??Measure_Length_4:
+   \   000000B2   0x....             LDR.N    R0,??DataTable2_5
+   \   000000B4   0x6800             LDR      R0,[R0, #+0]
+   \   000000B6   0xF644 0x6121      MOVW     R1,#+20001
+   \   000000BA   0x4288             CMP      R0,R1
+   \   000000BC   0xDB14             BLT.N    ??Measure_Length_2
+     77              {
+     78                Double_Edge_Num = 0;
+   \   000000BE   0x....             LDR.N    R0,??DataTable2_7
+   \   000000C0   0x2100             MOVS     R1,#+0
+   \   000000C2   0x8001             STRH     R1,[R0, #+0]
+     79                Double_Edge_Flag = 0;
+   \   000000C4   0x....             LDR.N    R0,??DataTable2_6
+   \   000000C6   0x2100             MOVS     R1,#+0
+   \   000000C8   0x7001             STRB     R1,[R0, #+0]
+     80                TipAfter_Len = 0;
+   \   000000CA   0x....             LDR.N    R0,??DataTable2_5
+   \   000000CC   0x2100             MOVS     R1,#+0
+   \   000000CE   0x6001             STR      R1,[R0, #+0]
+     81                Black_Tip_Flag = 0;
+   \   000000D0   0x....             LDR.N    R0,??DataTable2_4
+   \   000000D2   0x2100             MOVS     R1,#+0
+   \   000000D4   0x7001             STRB     R1,[R0, #+0]
+     82                ResureTip_Flag = 0;
+   \   000000D6   0x....             LDR.N    R0,??DataTable2_8
+   \   000000D8   0x2100             MOVS     R1,#+0
+   \   000000DA   0x7001             STRB     R1,[R0, #+0]
+     83                Black_Tid_Bend_Flag = 0;
+   \   000000DC   0x....             LDR.N    R0,??DataTable2_9
+   \   000000DE   0x2100             MOVS     R1,#+0
+   \   000000E0   0x7001             STRB     R1,[R0, #+0]
+     84                Single_Edge_Num = 0;
+   \   000000E2   0x....             LDR.N    R0,??DataTable2_10
+   \   000000E4   0x2100             MOVS     R1,#+0
+   \   000000E6   0x8001             STRH     R1,[R0, #+0]
+     85              }
+     86            }
+     87          }
+   \                     ??Measure_Length_2:
+   \   000000E8   0x4770             BX       LR               ;; return
+     88          
+     89          /******************************************************************************
+     90          º¯ÊýÃû£ºJudgeValid
+     91          ×÷ÓÃ£º  ÅÐ¶ÏÉÏÉýÑØÓëÏÂ½µÑØµÄÓÐÐ§ÐÔ
+     92          Èë¿Ú²ÎÊý£ºconst int8u_t* edgeArr:±ßÑØÊý×é
+     93                    int8u_t* Valid:ÓÐÐ§ÖµÊý×é
+     94          ³ö¿Ú²ÎÊý£ºÎÞ
+     95          ******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     96          void JudgeValid(const int8u_t* edgeArr,int8u_t* Valid)
+     97          {
+   \                     JudgeValid:
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+     98            int8u_t i;
+     99            if(abs_int16s(edgeArr[0]-edgeArr[EAGEARRLEN - 1])>VALIDLIMIT                //ÅÐ¶ÏÑØÓëÇ°ºóÁ½ÑØ²îÖµ
+    100                ||abs_int16s(edgeArr[1]-edgeArr[0])>VALIDLIMIT)
+   \   00000006   0x7820             LDRB     R0,[R4, #+0]
+   \   00000008   0x7F61             LDRB     R1,[R4, #+29]
+   \   0000000A   0x1A40             SUBS     R0,R0,R1
+   \   0000000C   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   0000000E   0x.... 0x....      BL       abs_int16s
+   \   00000012   0x280B             CMP      R0,#+11
+   \   00000014   0xDA07             BGE.N    ??JudgeValid_0
+   \   00000016   0x7860             LDRB     R0,[R4, #+1]
+   \   00000018   0x7821             LDRB     R1,[R4, #+0]
+   \   0000001A   0x1A40             SUBS     R0,R0,R1
+   \   0000001C   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   0000001E   0x.... 0x....      BL       abs_int16s
+   \   00000022   0x280B             CMP      R0,#+11
+   \   00000024   0xDB02             BLT.N    ??JudgeValid_1
+    101              Valid[0] = 0;
+   \                     ??JudgeValid_0:
+   \   00000026   0x2000             MOVS     R0,#+0
+   \   00000028   0x7028             STRB     R0,[R5, #+0]
+   \   0000002A   0xE001             B.N      ??JudgeValid_2
+    102            else
+    103              Valid[0] = 1;
+   \                     ??JudgeValid_1:
+   \   0000002C   0x2001             MOVS     R0,#+1
+   \   0000002E   0x7028             STRB     R0,[R5, #+0]
+    104            for(i=1;i<(EAGEARRLEN - 1);i++)
+   \                     ??JudgeValid_2:
+   \   00000030   0x2601             MOVS     R6,#+1
+   \   00000032   0xE003             B.N      ??JudgeValid_3
+    105            {
+    106              if(abs_int16s(edgeArr[i]-edgeArr[i-1])>VALIDLIMIT
+    107                 ||abs_int16s(edgeArr[i+1]-edgeArr[i])>VALIDLIMIT)
+    108                Valid[i] = 0;
+    109              else
+    110              Valid[i] = 1;
+   \                     ??JudgeValid_4:
+   \   00000034   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000036   0x2001             MOVS     R0,#+1
+   \   00000038   0x5570             STRB     R0,[R6, R5]
+   \                     ??JudgeValid_5:
+   \   0000003A   0x1C76             ADDS     R6,R6,#+1
+   \                     ??JudgeValid_3:
+   \   0000003C   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   0000003E   0x2E1D             CMP      R6,#+29
+   \   00000040   0xD21A             BCS.N    ??JudgeValid_6
+   \   00000042   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000044   0x5D30             LDRB     R0,[R6, R4]
+   \   00000046   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000048   0x1931             ADDS     R1,R6,R4
+   \   0000004A   0xF811 0x1C01      LDRB     R1,[R1, #-1]
+   \   0000004E   0x1A40             SUBS     R0,R0,R1
+   \   00000050   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   00000052   0x.... 0x....      BL       abs_int16s
+   \   00000056   0x280B             CMP      R0,#+11
+   \   00000058   0xDA0A             BGE.N    ??JudgeValid_7
+   \   0000005A   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   0000005C   0x1930             ADDS     R0,R6,R4
+   \   0000005E   0x7840             LDRB     R0,[R0, #+1]
+   \   00000060   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000062   0x5D31             LDRB     R1,[R6, R4]
+   \   00000064   0x1A40             SUBS     R0,R0,R1
+   \   00000066   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   00000068   0x.... 0x....      BL       abs_int16s
+   \   0000006C   0x280B             CMP      R0,#+11
+   \   0000006E   0xDBE1             BLT.N    ??JudgeValid_4
+   \                     ??JudgeValid_7:
+   \   00000070   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000072   0x2000             MOVS     R0,#+0
+   \   00000074   0x5570             STRB     R0,[R6, R5]
+   \   00000076   0xE7E0             B.N      ??JudgeValid_5
+    111            }
+    112            if(abs_int16s(edgeArr[EAGEARRLEN - 1]-edgeArr[EAGEARRLEN - 2])>VALIDLIMIT
+    113               ||abs_int16s(edgeArr[1]-edgeArr[EAGEARRLEN - 1])>VALIDLIMIT)
+   \                     ??JudgeValid_6:
+   \   00000078   0x7F60             LDRB     R0,[R4, #+29]
+   \   0000007A   0x7F21             LDRB     R1,[R4, #+28]
+   \   0000007C   0x1A40             SUBS     R0,R0,R1
+   \   0000007E   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   00000080   0x.... 0x....      BL       abs_int16s
+   \   00000084   0x280B             CMP      R0,#+11
+   \   00000086   0xDA07             BGE.N    ??JudgeValid_8
+   \   00000088   0x7860             LDRB     R0,[R4, #+1]
+   \   0000008A   0x7F61             LDRB     R1,[R4, #+29]
+   \   0000008C   0x1A40             SUBS     R0,R0,R1
+   \   0000008E   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   00000090   0x.... 0x....      BL       abs_int16s
+   \   00000094   0x280B             CMP      R0,#+11
+   \   00000096   0xDB02             BLT.N    ??JudgeValid_9
+    114              Valid[EAGEARRLEN - 1] = 0;
+   \                     ??JudgeValid_8:
+   \   00000098   0x2000             MOVS     R0,#+0
+   \   0000009A   0x7768             STRB     R0,[R5, #+29]
+   \   0000009C   0xE001             B.N      ??JudgeValid_10
+    115            else
+    116              Valid[EAGEARRLEN - 1] = 1;     
+   \                     ??JudgeValid_9:
+   \   0000009E   0x2001             MOVS     R0,#+1
+   \   000000A0   0x7768             STRB     R0,[R5, #+29]
+    117          }
+   \                     ??JudgeValid_10:
+   \   000000A2   0xBD70             POP      {R4-R6,PC}       ;; return
+    118          
+    119          
+    120          
+    121          /******************************************************************************
+    122          º¯ÊýÃû£ºJudge_MainCCD
+    123          ×÷ÓÃ£º  Ö÷CCD±ßÑØ×¥È¡º¯Êý
+    124          Èë¿Ú²ÎÊý£ºCatch_Edge½á¹¹Ìåº¬ÓÐÖ÷CCD±ßÑØ²ÎÊý
+    125          ³ö¿Ú²ÎÊý£ºÎÞ
+    126          ******************************************************************************/
+    127          
+
+   \                                 In section .text, align 2, keep-with-next
+    128          void Judge_MainCCD(CCD_GROUP*Catch_Edge)        
+    129          {
+   \                     Judge_MainCCD:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    130                Main_R_array[Main_Edge_Counter] = Catch_Edge->Black_TO_White[0];           //×¥È¡ÉÏÉýÑØ
+   \   00000002   0x....             LDR.N    R1,??DataTable2_11
+   \   00000004   0x7809             LDRB     R1,[R1, #+0]
+   \   00000006   0x....             LDR.N    R2,??DataTable2_12
+   \   00000008   0xF890 0x31F8      LDRB     R3,[R0, #+504]
+   \   0000000C   0x548B             STRB     R3,[R1, R2]
+    131                Main_L_array[Main_Edge_Counter] = Catch_Edge->White_TO_Black[0];           //×¥È¡ÏÂ½µÑØ
+   \   0000000E   0x....             LDR.N    R1,??DataTable2_11
+   \   00000010   0x7809             LDRB     R1,[R1, #+0]
+   \   00000012   0x....             LDR.N    R2,??DataTable2_13
+   \   00000014   0xF890 0x01FC      LDRB     R0,[R0, #+508]
+   \   00000018   0x5488             STRB     R0,[R1, R2]
+    132                Main_Edge_Counter++;
+   \   0000001A   0x....             LDR.N    R0,??DataTable2_11
+   \   0000001C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000001E   0x1C40             ADDS     R0,R0,#+1
+   \   00000020   0x....             LDR.N    R1,??DataTable2_11
+   \   00000022   0x7008             STRB     R0,[R1, #+0]
+    133                
+    134          /*********************ÅÐ¶ÏÑØµÄÓÐÐ§ÐÔ*******************************************/
+    135                
+    136                if(Main_Edge_Counter >= EAGEARRLEN)                                       //Ñ­»·¶ÓÁÐ
+   \   00000024   0x....             LDR.N    R0,??DataTable2_11
+   \   00000026   0x7800             LDRB     R0,[R0, #+0]
+   \   00000028   0x281E             CMP      R0,#+30
+   \   0000002A   0xD305             BCC.N    ??Judge_MainCCD_0
+    137                {
+    138                  Main_Edge_Counter = 0;
+   \   0000002C   0x....             LDR.N    R0,??DataTable2_11
+   \   0000002E   0x2100             MOVS     R1,#+0
+   \   00000030   0x7001             STRB     R1,[R0, #+0]
+    139                  Frist_Scan_Flag = 1;                                            //µÚÒ»´ÎÌîÂúÊý×é±êÖ¾
+   \   00000032   0x....             LDR.N    R0,??DataTable2_14
+   \   00000034   0x2101             MOVS     R1,#+1
+   \   00000036   0x7001             STRB     R1,[R0, #+0]
+    140                }
+    141                if(Frist_Scan_Flag == 1)
+   \                     ??Judge_MainCCD_0:
+   \   00000038   0x....             LDR.N    R0,??DataTable2_14
+   \   0000003A   0x7800             LDRB     R0,[R0, #+0]
+   \   0000003C   0x2801             CMP      R0,#+1
+   \   0000003E   0xD107             BNE.N    ??Judge_MainCCD_1
+    142                {
+    143                  JudgeValid(Main_L_array,Valid_M_L);
+   \   00000040   0x....             LDR.N    R1,??DataTable2_15
+   \   00000042   0x....             LDR.N    R0,??DataTable2_13
+   \   00000044   0x.... 0x....      BL       JudgeValid
+    144                  JudgeValid(Main_R_array,Valid_M_R);
+   \   00000048   0x....             LDR.N    R1,??DataTable2_16
+   \   0000004A   0x....             LDR.N    R0,??DataTable2_12
+   \   0000004C   0x.... 0x....      BL       JudgeValid
+    145                }
+    146          }
+   \                     ??Judge_MainCCD_1:
+   \   00000050   0xBD01             POP      {R0,PC}          ;; return
+    147          
+    148          /******************************************************************************
+    149          º¯ÊýÃû£ºJudge_AssiCCD
+    150          ×÷ÓÃ£º  ¸¨ÖúCCD±ßÑØ×¥È¡º¯Êý
+    151          Èë¿Ú²ÎÊý£ºCatch_Edge½á¹¹Ìåº¬ÓÐÖ÷CCD±ßÑØ²ÎÊý
+    152          ³ö¿Ú²ÎÊý£ºÎÞ
+    153          ******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    154          void Judge_AssiCCD(CCD_GROUP*Catch_Edge)
+    155          {
+   \                     Judge_AssiCCD:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    156                Assi_R_array[Main_Edge_Counter] = Catch_Edge->Black_TO_White[0];
+   \   00000002   0x....             LDR.N    R1,??DataTable2_11
+   \   00000004   0x7809             LDRB     R1,[R1, #+0]
+   \   00000006   0x....             LDR.N    R2,??DataTable2_17
+   \   00000008   0xF890 0x31F8      LDRB     R3,[R0, #+504]
+   \   0000000C   0x548B             STRB     R3,[R1, R2]
+    157                Assi_L_array[Main_Edge_Counter] = Catch_Edge->White_TO_Black[0];
+   \   0000000E   0x....             LDR.N    R1,??DataTable2_11
+   \   00000010   0x7809             LDRB     R1,[R1, #+0]
+   \   00000012   0x....             LDR.N    R2,??DataTable2_18
+   \   00000014   0xF890 0x01FC      LDRB     R0,[R0, #+508]
+   \   00000018   0x5488             STRB     R0,[R1, R2]
+    158                Assi_Edge_Counter++;
+   \   0000001A   0x....             LDR.N    R0,??DataTable2_19
+   \   0000001C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000001E   0x1C40             ADDS     R0,R0,#+1
+   \   00000020   0x....             LDR.N    R1,??DataTable2_19
+   \   00000022   0x7008             STRB     R0,[R1, #+0]
+    159                if(Assi_Edge_Counter >= EAGEARRLEN)
+   \   00000024   0x....             LDR.N    R0,??DataTable2_19
+   \   00000026   0x7800             LDRB     R0,[R0, #+0]
+   \   00000028   0x281E             CMP      R0,#+30
+   \   0000002A   0xD305             BCC.N    ??Judge_AssiCCD_0
+    160                {
+    161                  Assi_Edge_Counter = 0;
+   \   0000002C   0x....             LDR.N    R0,??DataTable2_19
+   \   0000002E   0x2100             MOVS     R1,#+0
+   \   00000030   0x7001             STRB     R1,[R0, #+0]
+    162                  Frist_Scan_Flag = 1;
+   \   00000032   0x....             LDR.N    R0,??DataTable2_14
+   \   00000034   0x2101             MOVS     R1,#+1
+   \   00000036   0x7001             STRB     R1,[R0, #+0]
+    163                }
+    164                if(Frist_Scan_Flag == 1)
+   \                     ??Judge_AssiCCD_0:
+   \   00000038   0x....             LDR.N    R0,??DataTable2_14
+   \   0000003A   0x7800             LDRB     R0,[R0, #+0]
+   \   0000003C   0x2801             CMP      R0,#+1
+   \   0000003E   0xD107             BNE.N    ??Judge_AssiCCD_1
+    165                {
+    166                  JudgeValid(Assi_L_array,Valid_A_L);
+   \   00000040   0x....             LDR.N    R1,??DataTable2_20
+   \   00000042   0x....             LDR.N    R0,??DataTable2_18
+   \   00000044   0x.... 0x....      BL       JudgeValid
+    167                  JudgeValid(Assi_R_array,Valid_A_R);
+   \   00000048   0x....             LDR.N    R1,??DataTable2_21
+   \   0000004A   0x....             LDR.N    R0,??DataTable2_17
+   \   0000004C   0x.... 0x....      BL       JudgeValid
+    168                }
+    169          }
+   \                     ??Judge_AssiCCD_1:
+   \   00000050   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2:
+   \   00000000   0x........         DC32     R_MotorSpeed
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_1:
+   \   00000000   0x........         DC32     L_MotorSpeed
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_2:
+   \   00000000   0x........         DC32     WholeBlack_Flag
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_3:
+   \   00000000   0x........         DC32     BlackTip_Len
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_4:
+   \   00000000   0x........         DC32     Black_Tip_Flag
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_5:
+   \   00000000   0x........         DC32     TipAfter_Len
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_6:
+   \   00000000   0x........         DC32     Double_Edge_Flag
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_7:
+   \   00000000   0x........         DC32     Double_Edge_Num
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_8:
+   \   00000000   0x........         DC32     ResureTip_Flag
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_9:
+   \   00000000   0x........         DC32     Black_Tid_Bend_Flag
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_10:
+   \   00000000   0x........         DC32     Single_Edge_Num
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_11:
+   \   00000000   0x........         DC32     Main_Edge_Counter
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_12:
+   \   00000000   0x........         DC32     Main_R_array
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_13:
+   \   00000000   0x........         DC32     Main_L_array
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_14:
+   \   00000000   0x........         DC32     Frist_Scan_Flag
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_15:
+   \   00000000   0x........         DC32     Valid_M_L
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_16:
+   \   00000000   0x........         DC32     Valid_M_R
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_17:
+   \   00000000   0x........         DC32     Assi_R_array
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_18:
+   \   00000000   0x........         DC32     Assi_L_array
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_19:
+   \   00000000   0x........         DC32     Assi_Edge_Counter
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_20:
+   \   00000000   0x........         DC32     Valid_A_L
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_21:
+   \   00000000   0x........         DC32     Valid_A_R
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  JudgeValid
+             16 -> abs_int16s
+        8  Judge_AssiCCD
+              8 -> JudgeValid
+        8  Judge_MainCCD
+              8 -> JudgeValid
+        0  Measure_Length
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+       4  ??DataTable2_10
+       4  ??DataTable2_11
+       4  ??DataTable2_12
+       4  ??DataTable2_13
+       4  ??DataTable2_14
+       4  ??DataTable2_15
+       4  ??DataTable2_16
+       4  ??DataTable2_17
+       4  ??DataTable2_18
+       4  ??DataTable2_19
+       4  ??DataTable2_2
+       4  ??DataTable2_20
+       4  ??DataTable2_21
+       4  ??DataTable2_3
+       4  ??DataTable2_4
+       4  ??DataTable2_5
+       4  ??DataTable2_6
+       4  ??DataTable2_7
+       4  ??DataTable2_8
+       4  ??DataTable2_9
+       1  Assi_Edge_Counter
+      32  Assi_L_array
+      32  Assi_R_array
+       4  BlackTip_Len
+       1  Black_Tip_Flag
+       1  Finish_RightAngle_Flag
+       1  Frist_Scan_Flag
+     164  JudgeValid
+      82  Judge_AssiCCD
+      82  Judge_MainCCD
+       4  Judge_RightAngle_Len
+       1  Main_Edge_Counter
+      32  Main_L_array
+      32  Main_R_array
+     234  Measure_Length
+       1  ResureTip_Add_Flag
+       1  ResureTip_Add_Flag_His
+       1  ResureTip_Flag
+       1  RightAngle_Flag
+       4  TipAfter_Len
+      32  Valid_A_L
+      32  Valid_A_R
+      32  Valid_M_L
+      32  Valid_M_R
+
+ 
+ 277 bytes in section .bss
+ 650 bytes in section .text
+ 
+ 650 bytes of CODE memory
+ 277 bytes of DATA memory
+
+Errors: none
+Warnings: none

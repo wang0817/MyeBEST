@@ -1,0 +1,263 @@
+###############################################################################
+#                                                                             #
+#                                                       22/Jul/2015  10:59:28 #
+# IAR ANSI C/C++ Compiler V6.30.6.23336/W32 EVALUATION for ARM                #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Peripheral_ #
+#                    Oparation\ITG3200.c                                      #
+#    Command line =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Peripheral_ #
+#                    Oparation\ITG3200.c -D IAR -lCN                          #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    List\ -lB C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\F #
+#                    lash_512K\List\ -o C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®× #
+#                    ÖÍäÊ¶±ð\Flash_512K\Obj\ --no_cse --no_unroll             #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M4  #
+#                    -e --char_is_signed --fpu=None --dlib_config             #
+#                    "C:\Program Files\IAR Systems\Embedded Workbench 6.0     #
+#                    Evaluation\arm\INC\c\DLib_Config_Normal.h" -I            #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\CPU #
+#                    \ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Librar #
+#                    y\Drivers\ADC\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×Ö #
+#                    ÍäÊ¶±ð\Library\Drivers\FTM\ -I                           #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Dri #
+#                    vers\GPIO\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶ #
+#                    ±ð\Library\Drivers\PIT\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ #
+#                    ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Drivers\I2C\ -I                  #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Dri #
+#                    vers\UART\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶ #
+#                    ±ð\Library\Drivers\FTFL\ -I                              #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\MyFunction\ #
+#                     -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\SD_Syst #
+#                    em\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Dela #
+#                    y\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Syste #
+#                    m_Init\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\ #
+#                    OLED\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\ZL #
+#                    G7290\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\S #
+#                    imple_AD\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶± #
+#                    ð\Make_Desicion\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê® #
+#                    ×ÖÍäÊ¶±ð\Make_Desicion\Judge_Way\ -I                     #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Make_Desici #
+#                    on\Speed_Control\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê #
+#                    ®×ÖÍäÊ¶±ð\Source\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê #
+#                    ®×ÖÍäÊ¶±ð\Peripheral_Oparation\ -I                       #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Balance_con #
+#                    trol\ -Ol                                                #
+#    List file    =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    List\ITG3200.lst                                         #
+#    Object file  =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    Obj\ITG3200.o                                            #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Peripheral_Oparation\ITG3200.c
+      1          #include "AllHeaders.h"
+      2          
+
+   \                                 In section .bss, align 2
+      3          int16s_t Gyro_X,Gyro_Z;
+   \                     Gyro_X:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 2
+   \                     Gyro_Z:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 2
+      4          int16s_t Gyro_Y;
+   \                     Gyro_Y:
+   \   00000000                      DS8 2
+      5          // ÉèÖÃÁ¿³Ì·¶Î§
+
+   \                                 In section .text, align 2, keep-with-next
+      6          void SetScaleRange(void)
+      7          {
+   \                     SetScaleRange:
+   \   00000000   0xB580             PUSH     {R7,LR}
+      8              int8u_t byData;
+      9          
+     10              // Linda
+     11              int8u_t Itg3200Wr;
+     12          
+     13          
+     14              Itg3200Wr = ITG3200_IIC_ADDR << 1;
+   \   00000002   0x20D0             MOVS     R0,#+208
+     15              Itg3200Wr = Itg3200Wr | 0x0; // wirte : 0
+     16          
+     17              // Bit4 Bit3 µÈÓÚ11Ê±£¬Ñ¡Ôñ2000¶È/ÃëµÄÁ¿³Ì
+     18              byData = 0x18;
+   \   00000004   0x2218             MOVS     R2,#+24
+     19              Single_Write(Itg3200Wr, REG_DLPF_FS, byData);
+   \   00000006   0xB2D2             UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+   \   00000008   0x2116             MOVS     R1,#+22
+   \   0000000A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000000C   0x.... 0x....      BL       Single_Write
+     20          }
+   \   00000010   0xBD01             POP      {R0,PC}          ;; return
+     21          
+     22          //¶ÁÍÓÂÝÒÇITG3200µÄÖµ
+
+   \                                 In section .text, align 2, keep-with-next
+     23          void Read_ITG3200D(void)
+     24          {
+   \                     Read_ITG3200D:
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB083             SUB      SP,SP,#+12
+     25             int8u_t BUF[6];
+     26            
+     27             BUF[0]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_XOUT_L);
+   \   00000004   0x211E             MOVS     R1,#+30
+   \   00000006   0x2068             MOVS     R0,#+104
+   \   00000008   0x.... 0x....      BL       Single_Read
+   \   0000000C   0xF88D 0x0000      STRB     R0,[SP, #+0]
+     28             //Delay_I2C();
+     29             BUF[1]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_XOUT_H);
+   \   00000010   0x211D             MOVS     R1,#+29
+   \   00000012   0x2068             MOVS     R0,#+104
+   \   00000014   0x.... 0x....      BL       Single_Read
+   \   00000018   0xF88D 0x0001      STRB     R0,[SP, #+1]
+     30             //Delay_I2C();
+     31             Gyro_X=(BUF[1]<<8)|BUF[0];
+   \   0000001C   0xF89D 0x0001      LDRB     R0,[SP, #+1]
+   \   00000020   0xF89D 0x1000      LDRB     R1,[SP, #+0]
+   \   00000024   0xEA51 0x2000      ORRS     R0,R1,R0, LSL #+8
+   \   00000028   0x....             LDR.N    R1,??DataTable1
+   \   0000002A   0x8008             STRH     R0,[R1, #+0]
+     32             Gyro_X*=-0.06;
+   \   0000002C   0x....             LDR.N    R0,??DataTable1
+   \   0000002E   0xF9B0 0x0000      LDRSH    R0,[R0, #+0]
+   \   00000032   0x.... 0x....      BL       __aeabi_i2d
+   \   00000036   0x....             LDR.N    R2,??DataTable1_1  ;; 0xeb851eb8
+   \   00000038   0x....             LDR.N    R3,??DataTable1_2  ;; 0xbfaeb851
+   \   0000003A   0x.... 0x....      BL       __aeabi_dmul
+   \   0000003E   0x.... 0x....      BL       __aeabi_d2iz
+   \   00000042   0x....             LDR.N    R1,??DataTable1
+   \   00000044   0x8008             STRH     R0,[R1, #+0]
+     33             
+     34             //ÆÁ±ÎÒÔÏÂ¼¸ÐÐÒÔ½ÚÊ¡Ê±¼ä£¬ÓÃÄÄ¸ö¿ªÄÄ¸ö
+     35             /*BUF[2]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_YOUT_L);
+     36             //Delay_I2C();
+     37             BUF[3]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_YOUT_H);
+     38             //Delay_I2C();
+     39             Gyro_Y=(BUF[3]<<8)|BUF[2];
+     40             Gyro_Y*=0.07;
+     41             BUF[4]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_ZOUT_L);
+     42             //Delayms(5);
+     43             BUF[5]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_ZOUT_H);
+     44             //Delayms(5);
+     45             Gyro_Z=(BUF[5]<<8)|BUF[4];
+     46             Gyro_Z*=0.07;
+     47             */
+     48          }
+   \   00000046   0xBD07             POP      {R0-R2,PC}       ;; return
+     49          
+
+   \                                 In section .text, align 2, keep-with-next
+     50          void Read_ITG3200D_Y(void)
+     51          {
+   \                     Read_ITG3200D_Y:
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB083             SUB      SP,SP,#+12
+     52             int8u_t BUF[6];
+     53            
+     54             BUF[0]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_ZOUT_L);
+   \   00000004   0x2122             MOVS     R1,#+34
+   \   00000006   0x2068             MOVS     R0,#+104
+   \   00000008   0x.... 0x....      BL       Single_Read
+   \   0000000C   0xF88D 0x0000      STRB     R0,[SP, #+0]
+     55             //Delay_I2C();
+     56             BUF[1]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_ZOUT_H);
+   \   00000010   0x2121             MOVS     R1,#+33
+   \   00000012   0x2068             MOVS     R0,#+104
+   \   00000014   0x.... 0x....      BL       Single_Read
+   \   00000018   0xF88D 0x0001      STRB     R0,[SP, #+1]
+     57             //Delay_I2C();
+     58             Gyro_Y=(BUF[1]<<8)|BUF[0];
+   \   0000001C   0xF89D 0x0001      LDRB     R0,[SP, #+1]
+   \   00000020   0xF89D 0x1000      LDRB     R1,[SP, #+0]
+   \   00000024   0xEA51 0x2000      ORRS     R0,R1,R0, LSL #+8
+   \   00000028   0x....             LDR.N    R1,??DataTable1_3
+   \   0000002A   0x8008             STRH     R0,[R1, #+0]
+     59             Gyro_Y/=32;    //ÒÆ5Î»³ý32
+   \   0000002C   0x....             LDR.N    R0,??DataTable1_3
+   \   0000002E   0xF9B0 0x0000      LDRSH    R0,[R0, #+0]
+   \   00000032   0x2120             MOVS     R1,#+32
+   \   00000034   0xFB90 0xF0F1      SDIV     R0,R0,R1
+   \   00000038   0x....             LDR.N    R1,??DataTable1_3
+   \   0000003A   0x8008             STRH     R0,[R1, #+0]
+     60             //ÆÁ±ÎÒÔÏÂ¼¸ÐÐÒÔ½ÚÊ¡Ê±¼ä£¬ÓÃÄÄ¸ö¿ªÄÄ¸ö
+     61             /*BUF[2]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_YOUT_L);
+     62             //Delay_I2C();
+     63             BUF[3]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_YOUT_H);
+     64             //Delay_I2C();
+     65             Gyro_Y=(BUF[3]<<8)|BUF[2];
+     66             Gyro_Y*=0.07;
+     67             BUF[4]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_ZOUT_L);
+     68             //Delayms(5);
+     69             BUF[5]=Single_Read(ITG3200_IIC_ADDR,REG_GYRO_ZOUT_H);
+     70             //Delayms(5);
+     71             Gyro_Z=(BUF[5]<<8)|BUF[4];
+     72             Gyro_Z*=0.07;
+     73             */
+     74          }
+   \   0000003C   0xBD07             POP      {R0-R2,PC}       ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x........         DC32     Gyro_X
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_1:
+   \   00000000   0xEB851EB8         DC32     0xeb851eb8
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_2:
+   \   00000000   0xBFAEB851         DC32     0xbfaeb851
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_3:
+   \   00000000   0x........         DC32     Gyro_Y
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  Read_ITG3200D
+             16 -> Single_Read
+             16 -> __aeabi_d2iz
+             16 -> __aeabi_dmul
+             16 -> __aeabi_i2d
+       16  Read_ITG3200D_Y
+             16 -> Single_Read
+        8  SetScaleRange
+              8 -> Single_Write
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       4  ??DataTable1_1
+       4  ??DataTable1_2
+       4  ??DataTable1_3
+       2  Gyro_X
+       2  Gyro_Y
+       2  Gyro_Z
+      72  Read_ITG3200D
+      62  Read_ITG3200D_Y
+      18  SetScaleRange
+
+ 
+   6 bytes in section .bss
+ 168 bytes in section .text
+ 
+ 168 bytes of CODE memory
+   6 bytes of DATA memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,230 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     17/Jul/2015  16:24:53 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\math. #
+#                    c                                                        #
+#    Command line =  E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\math. #
+#                    c -D IAR -lCN E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ #
+#                    ÈüµÀÊ¶±ð\Flash_512K\List\ -lB                            #
+#                    E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Flash #
+#                    _512K\List\ -o E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò #
+#                    +ÈüµÀÊ¶±ð\Flash_512K\Obj\ --no_cse --no_unroll           #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M4  #
+#                    -e --char_is_signed --fpu=None --dlib_config             #
+#                    "D:\Program Files (x86)\IAR\arm\INC\c\DLib_Config_Normal #
+#                    .h" -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶± #
+#                    ð\Library\CPU\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ #
+#                    ÌÐò+ÈüµÀÊ¶±ð\Library\Drivers\ADC\ -I                     #
+#                    E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Libra #
+#                    ry\Drivers\FTM\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü #
+#                    ³ÌÐò+ÈüµÀÊ¶±ð\Library\Drivers\GPIO\ -I                   #
+#                    E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Libra #
+#                    ry\Drivers\PIT\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü #
+#                    ³ÌÐò+ÈüµÀÊ¶±ð\Library\Drivers\I2C\ -I                    #
+#                    E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Libra #
+#                    ry\Drivers\UART\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈ #
+#                    ü³ÌÐò+ÈüµÀÊ¶±ð\Library\Drivers\FTFL\ -I                  #
+#                    E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\MyFun #
+#                    ction\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀ #
+#                    Ê¶±ð\SD_System\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü #
+#                    ³ÌÐò+ÈüµÀÊ¶±ð\Delay\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ #
+#                    £ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\System_Init\ -I                       #
+#                    E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\OLED\ #
+#                     -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Z #
+#                    LG7290\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+Èüµ #
+#                    ÀÊ¶±ð\Simple_AD\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈ #
+#                    ü³ÌÐò+ÈüµÀÊ¶±ð\Make_Desicion\ -I                         #
+#                    E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Make_ #
+#                    Desicion\Judge_Way\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ #
+#                    ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Make_Desicion\Speed_Control\ -I        #
+#                    E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Sourc #
+#                    e\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð #
+#                    \Peripheral_Oparation\ -I E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ #
+#                    ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Balance_control\ -Ol                #
+#    List file    =  E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Flash #
+#                    _512K\List\math.lst                                      #
+#    Object file  =  E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\Flash #
+#                    _512K\Obj\math.o                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+E:\2014ÖÇÄÜ³µ\ÖÇÄÜ³µ³ÌÐò\µÚÈý´ÎÐ£ÄÚÈü³ÌÐò+ÈüµÀÊ¶±ð\math.c
+      1          #include "AllHeaders.h"
+      2          #include "math.h"
+      3          
+      4          inline int16s_t abs_int16s(int16s_t num)
+      5          {
+      6            if(num < 0)
+      7              return (-num);
+      8            else
+      9              return num;
+     10          }
+     11          
+     12          
+     13          /*
+     14          inline int8u_t JudgeValid(int16s_t pointer, const int8u_t* edgeArr)
+     15          {
+     16            int16s_t p_last, p_past, p_next, p_2nd;
+     17            
+     18            p_last = pointer - 1;
+     19            if(p_last <0)
+     20              p_last = EAGEARRLEN - 1;
+     21            p_past = p_last - 1;
+     22            if(p_past <0)
+     23              p_past = EAGEARRLEN - 1;
+     24            p_next = pointer + 1;
+     25            if(p_next >= EAGEARRLEN)
+     26              p_next = 0;
+     27            p_2nd = p_next + 1;
+     28            if(p_2nd >= EAGEARRLEN)
+     29              p_2nd = 0;
+     30            
+     31            if(abs_int16s(edgeArr[pointer] - edgeArr[p_last]) < VALIDLIMIT
+     32               &&abs_int16s(edgeArr[p_last] - edgeArr[p_past]) < VALIDLIMIT
+     33                 &&abs_int16s(edgeArr[pointer] - edgeArr[p_next]) < VALIDLIMIT
+     34                   &&abs_int16s(edgeArr[p_next] - edgeArr[p_2nd]) < VALIDLIMIT)
+     35              return 1;
+     36            else
+     37              return 0;
+     38          }  */
+     39          
+     40          
+     41          /************************************************************************************************ 
+     42          * CalculateSlope
+     43          * ÀûÓÃ×îÐ¡¶þ³Ë·¨ÇóÒ»¶ÎÍ¼ÏñµÄÐ±ÂÊ(*10À©Õ¹)
+     44          * Èë¿Ú²ÎÊý  x_start:ÆðÊ¼ÐÐ2Êý(µÚÒ»¸ö²ÎÓë¼ÆËãÐÐµÄÏÂ±ê)
+     45                      x_end:ÖÕÖ¹º¯Êý(×îºóÒ»¸ö²ÎÓë¼ÆËãÐÐµÄÏÂ±ê)
+     46                      y:´æ·Å¸÷ÐÐÇúÏß×ø±êÖµÊý×é(16Î»±äÁ¿)
+     47                      Valid:´æ·Å¸÷ÐÐÓÐÐ§ÐÔ±êÖ¾µÄÊý×é(!!!8Î»±äÁ¿) 
+     48          * ·µ»Ø²ÎÊý  ÇúÏßÐ±ÂÊ(*10À©Õ¹)   
+     49          ************************************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     50          int16s_t CalculateSlope(int8u_t x_start ,int8u_t x_num ,const int8u_t *y,const int8u_t *valid)
+     51          {
+   \                     CalculateSlope:
+   \   00000000   0xB5F0             PUSH     {R4-R7,LR}
+     52            int8u_t n=0;
+   \   00000002   0x2700             MOVS     R7,#+0
+     53            int32s_t x_sum=0;
+   \   00000004   0x2400             MOVS     R4,#+0
+     54            int32s_t y_sum=0;
+   \   00000006   0x2500             MOVS     R5,#+0
+     55            int32s_t xy_sum=0;
+   \   00000008   0x2600             MOVS     R6,#+0
+     56            int32s_t x2_sum=0;
+   \   0000000A   0xF05F 0x0C00      MOVS     R12,#+0
+     57            int32s_t tmp;                        
+     58           
+     59            if(x_num > EAGEARRLEN)
+   \   0000000E   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+   \   00000010   0x2915             CMP      R1,#+21
+   \   00000012   0xD300             BCC.N    ??CalculateSlope_0
+     60              x_num = EAGEARRLEN;
+   \   00000014   0x2114             MOVS     R1,#+20
+     61            for(n=0;n<x_num;x_start++)
+   \                     ??CalculateSlope_0:
+   \   00000016   0x2700             MOVS     R7,#+0
+   \   00000018   0xE022             B.N      ??CalculateSlope_1
+     62            {
+     63              if(x_start >= EAGEARRLEN)
+   \                     ??CalculateSlope_2:
+   \   0000001A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000001C   0x2814             CMP      R0,#+20
+   \   0000001E   0xD300             BCC.N    ??CalculateSlope_3
+     64                x_start = 0;
+   \   00000020   0x2000             MOVS     R0,#+0
+     65              if((valid[x_start] != 0)&&(y[x_start])) 
+   \                     ??CalculateSlope_3:
+   \   00000022   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000024   0xF810 0xE003      LDRB     LR,[R0, R3]
+   \   00000028   0xF1BE 0x0F00      CMP      LR,#+0
+   \   0000002C   0xD017             BEQ.N    ??CalculateSlope_4
+   \   0000002E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000030   0xF810 0xE002      LDRB     LR,[R0, R2]
+   \   00000034   0xF1BE 0x0F00      CMP      LR,#+0
+   \   00000038   0xD011             BEQ.N    ??CalculateSlope_4
+     66              {
+     67                x_sum += n;
+   \   0000003A   0xFA54 0xF487      UXTAB    R4,R4,R7
+     68                y_sum += y[x_start];
+   \   0000003E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000040   0xF810 0xE002      LDRB     LR,[R0, R2]
+   \   00000044   0xEB15 0x050E      ADDS     R5,R5,LR
+     69                x2_sum += n*n;
+   \   00000048   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   0000004A   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   0000004C   0xFB07 0xCC07      MLA      R12,R7,R7,R12
+     70                xy_sum += n*y[x_start];
+   \   00000050   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   00000052   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000054   0xF810 0xE002      LDRB     LR,[R0, R2]
+   \   00000058   0xFB0E 0x6607      MLA      R6,LR,R7,R6
+     71                
+     72                n++;
+   \   0000005C   0x1C7F             ADDS     R7,R7,#+1
+     73              }
+     74            }
+   \                     ??CalculateSlope_4:
+   \   0000005E   0x1C40             ADDS     R0,R0,#+1
+   \                     ??CalculateSlope_1:
+   \   00000060   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   00000062   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+   \   00000064   0x428F             CMP      R7,R1
+   \   00000066   0xD3D8             BCC.N    ??CalculateSlope_2
+     75              
+     76            
+     77            tmp=n*x2_sum-x_sum*x_sum;
+   \   00000068   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   0000006A   0xFB0C 0xF007      MUL      R0,R12,R7
+   \   0000006E   0xFB04 0x0014      MLS      R0,R4,R4,R0
+     78            if(tmp != 0)
+   \   00000072   0x2800             CMP      R0,#+0
+   \   00000074   0xD00A             BEQ.N    ??CalculateSlope_5
+     79            {
+     80              return (int16s_t)(10*(n*xy_sum-x_sum*y_sum)/tmp); 
+   \   00000076   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   00000078   0xFB06 0xF107      MUL      R1,R6,R7
+   \   0000007C   0xFB05 0x1114      MLS      R1,R5,R4,R1
+   \   00000080   0x220A             MOVS     R2,#+10
+   \   00000082   0x4351             MULS     R1,R2,R1
+   \   00000084   0xFB91 0xF0F0      SDIV     R0,R1,R0
+   \   00000088   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   0000008A   0xE000             B.N      ??CalculateSlope_6
+     81            }
+     82            else
+     83            {
+     84              return 0;
+   \                     ??CalculateSlope_5:
+   \   0000008C   0x2000             MOVS     R0,#+0
+   \                     ??CalculateSlope_6:
+   \   0000008E   0xBDF0             POP      {R4-R7,PC}       ;; return
+     85            }
+     86          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       20  CalculateSlope
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     144  CalculateSlope
+
+ 
+ 144 bytes in section .text
+ 
+ 144 bytes of CODE memory
+
+Errors: none
+Warnings: none

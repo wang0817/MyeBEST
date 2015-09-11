@@ -1,0 +1,203 @@
+###############################################################################
+#                                                                             #
+#                                                       22/Jul/2015  10:59:26 #
+# IAR ANSI C/C++ Compiler V6.30.6.23336/W32 EVALUATION for ARM                #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Delay\Delay #
+#                    .c                                                       #
+#    Command line =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Delay\Delay #
+#                    .c -D IAR -lCN C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ #
+#                    ¶±ð\Flash_512K\List\ -lB C:\Users\dong\Desktop\7ÔÂ20ºÅ×î #
+#                    ºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\List\ -o                        #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    Obj\ --no_cse --no_unroll --no_inline --no_code_motion   #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M4 -e --char_is_signed      #
+#                    --fpu=None --dlib_config "C:\Program Files\IAR           #
+#                    Systems\Embedded Workbench 6.0                           #
+#                    Evaluation\arm\INC\c\DLib_Config_Normal.h" -I            #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\CPU #
+#                    \ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Librar #
+#                    y\Drivers\ADC\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×Ö #
+#                    ÍäÊ¶±ð\Library\Drivers\FTM\ -I                           #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Dri #
+#                    vers\GPIO\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶ #
+#                    ±ð\Library\Drivers\PIT\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ #
+#                    ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Drivers\I2C\ -I                  #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Library\Dri #
+#                    vers\UART\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶ #
+#                    ±ð\Library\Drivers\FTFL\ -I                              #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\MyFunction\ #
+#                     -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\SD_Syst #
+#                    em\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Dela #
+#                    y\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Syste #
+#                    m_Init\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\ #
+#                    OLED\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\ZL #
+#                    G7290\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\S #
+#                    imple_AD\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶± #
+#                    ð\Make_Desicion\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê® #
+#                    ×ÖÍäÊ¶±ð\Make_Desicion\Judge_Way\ -I                     #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Make_Desici #
+#                    on\Speed_Control\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê #
+#                    ®×ÖÍäÊ¶±ð\Source\ -I C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê #
+#                    ®×ÖÍäÊ¶±ð\Peripheral_Oparation\ -I                       #
+#                    C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Balance_con #
+#                    trol\ -Ol                                                #
+#    List file    =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    List\Delay.lst                                           #
+#    Object file  =  C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Flash_512K\ #
+#                    Obj\Delay.o                                              #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\dong\Desktop\7ÔÂ20ºÅ×îºó+Ê®×ÖÍäÊ¶±ð\Delay\Delay.c
+      1          #include "AllHeaders.h"
+      2          
+      3          //----------------------------------------------------------------------
+      4          //º¯ Êý Ãû:ÑÓÊ±º¯Êý delay(), DelayMs()                                                     
+      5          //¹¦    ÄÜ:ÑÓÊ±º¯Êý                                                              
+      6          //·µ    »Ø:ÎÞ                                                                                       
+      7          //----------------------------------------------------------------------
+
+   \                                 In section .text, align 4, keep-with-next
+      8           void Integration_delay()
+      9          {
+     10            unsigned int i;
+     11            for(i=0;i<2;i++)
+   \                     Integration_delay:
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0xE001             B.N      ??Integration_delay_0
+     12            {
+     13              asm("nop");
+   \                     ??Integration_delay_1:
+   \   00000004   0xBF00             nop              
+     14            }
+   \   00000006   0x1C40             ADDS     R0,R0,#+1
+   \                     ??Integration_delay_0:
+   \   00000008   0x2802             CMP      R0,#+2
+   \   0000000A   0xD3FB             BCC.N    ??Integration_delay_1
+     15          
+     16          }
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+     17          void delay()
+     18          {
+     19            unsigned int i;
+     20            for(i=0;i<2;i++)
+   \                     delay:
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0xE001             B.N      ??delay_0
+     21            {
+     22              asm("nop");
+   \                     ??delay_1:
+   \   00000004   0xBF00             nop              
+     23            }
+   \   00000006   0x1C40             ADDS     R0,R0,#+1
+   \                     ??delay_0:
+   \   00000008   0x2802             CMP      R0,#+2
+   \   0000000A   0xD3FB             BCC.N    ??delay_1
+     24          }
+   \   0000000C   0x4770             BX       LR               ;; return
+     25          
+     26          /******************************
+     27          º¯ÊýÃû£ºDelay_us()
+     28          ×÷ÓÃ  £ºÓÃÓÚ¼òµ¥µÄÑÓÊ±
+     29          ±¸×¢  £º
+     30          ******************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     31          void Delay_us(unsigned int t) 
+     32          {
+     33           while(t--);   
+   \                     Delay_us:
+   \                     ??Delay_us_0:
+   \   00000000   0x0001             MOVS     R1,R0
+   \   00000002   0x1E48             SUBS     R0,R1,#+1
+   \   00000004   0x2900             CMP      R1,#+0
+   \   00000006   0xD1FB             BNE.N    ??Delay_us_0
+     34          }
+   \   00000008   0x4770             BX       LR               ;; return
+     35          
+
+   \                                 In section .text, align 2, keep-with-next
+     36          void delay_ms(unsigned int delay_time) 
+     37          {
+     38            unsigned int i,delay_temp;
+     39            for(i=0;i<delay_time;i++) 
+   \                     delay_ms:
+   \   00000000   0x2100             MOVS     R1,#+0
+   \   00000002   0xE005             B.N      ??delay_ms_0
+     40            {
+     41              for(delay_temp=0;delay_temp<10000;delay_temp++);  
+   \                     ??delay_ms_1:
+   \   00000004   0x1C52             ADDS     R2,R2,#+1
+   \                     ??delay_ms_2:
+   \   00000006   0xF242 0x7310      MOVW     R3,#+10000
+   \   0000000A   0x429A             CMP      R2,R3
+   \   0000000C   0xD3FA             BCC.N    ??delay_ms_1
+   \   0000000E   0x1C49             ADDS     R1,R1,#+1
+   \                     ??delay_ms_0:
+   \   00000010   0x4281             CMP      R1,R0
+   \   00000012   0xD201             BCS.N    ??delay_ms_3
+   \   00000014   0x2200             MOVS     R2,#+0
+   \   00000016   0xE7F6             B.N      ??delay_ms_2
+     42            }
+     43          }
+   \                     ??delay_ms_3:
+   \   00000018   0x4770             BX       LR               ;; return
+     44          
+
+   \                                 In section .text, align 2, keep-with-next
+     45          void Delay1(int16u_t Delay1)
+     46          {
+     47             int16u_t i;
+     48             for(i=0;i<Delay1;i++)
+   \                     Delay1:
+   \   00000000   0x2100             MOVS     R1,#+0
+   \   00000002   0xE000             B.N      ??Delay1_0
+   \                     ??Delay1_1:
+   \   00000004   0x1C49             ADDS     R1,R1,#+1
+   \                     ??Delay1_0:
+   \   00000006   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000008   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
+   \   0000000A   0x4281             CMP      R1,R0
+   \   0000000C   0xD3FA             BCC.N    ??Delay1_1
+     49             {
+     50             }
+     51          }
+   \   0000000E   0x4770             BX       LR               ;; return
+     52          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  Delay1
+        0  Delay_us
+        0  Integration_delay
+        0  delay
+        0  delay_ms
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      16  Delay1
+      10  Delay_us
+      14  Integration_delay
+      14  delay
+      26  delay_ms
+
+ 
+ 80 bytes in section .text
+ 
+ 80 bytes of CODE memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,443 @@
+###############################################################################
+#                                                                             #
+#                                                       08/Mar/2014  10:38:43 #
+# IAR ANSI C/C++ Compiler V6.30.6.23336/W32 EVALUATION for ARM                #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\OLED\stdlib.c                                       #
+#    Command line =  E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\OLED\stdlib.c -D IAR -lCN                           #
+#                    E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\Flash_512K\List\ -lB E:\学习\第九届智能车\lishi\hua #
+#                    n\guangdian_ccd_project14.2.10\Flash_512K\List\ -o       #
+#                    E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\Flash_512K\Obj\ --no_cse --no_unroll --no_inline    #
+#                    --no_code_motion --no_tbaa --no_clustering               #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M4  #
+#                    -e --fpu=None --dlib_config "D:\Program Files            #
+#                    (x86)\iar\arm\INC\c\DLib_Config_Normal.h" -I             #
+#                    E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\Library\CPU\ -I E:\学习\第九届智能车\lishi\huan\gua #
+#                    ngdian_ccd_project14.2.10\Library\Drivers\ADC\ -I        #
+#                    E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\Library\Drivers\FTM\ -I                             #
+#                    E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\Library\Drivers\GPIO\ -I                            #
+#                    E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\Library\Drivers\PIT\ -I                             #
+#                    E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\MyFunction\ -I E:\学习\第九届智能车\lishi\huan\guan #
+#                    gdian_ccd_project14.2.10\SD_System\ -Ol                  #
+#    List file    =  E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\Flash_512K\List\stdlib.lst                          #
+#    Object file  =  E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14. #
+#                    2.10\Flash_512K\Obj\stdlib.o                             #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+E:\学习\第九届智能车\lishi\huan\guangdian_ccd_project14.2.10\OLED\stdlib.c
+      1          /*
+      2           * File:        stdlib.c
+      3           * Purpose:     Functions normally found in a standard C lib.
+      4           *
+      5           * Notes:       This supports ASCII only!!!
+      6           *
+      7           */
+      8          
+      9          
+     10          #include "stdlib.h"
+     11          
+     12          /****************************************************************/
+     13          int
+     14          isspace (int ch)
+     15          {
+     16              if ((ch == ' ') || (ch == '\t'))    /* \n ??? */
+     17                  return TRUE;
+     18              else
+     19                  return FALSE;
+     20          }
+     21          
+     22          /****************************************************************/
+     23          int
+     24          isalnum (int ch)
+     25          {
+     26              /* ASCII only */
+     27              if (((ch >= '0') && (ch <= '9')) ||
+     28                      ((ch >= 'A') && (ch <= 'Z')) ||
+     29                      ((ch >= 'a') && (ch <= 'z')))
+     30                  return TRUE;
+     31              else
+     32                  return FALSE;
+     33          }
+     34          
+     35          /****************************************************************/
+     36          int
+     37          isdigit (int ch)
+     38          {
+     39              /* ASCII only */
+     40              if ((ch >= '0') && (ch <= '9'))
+     41                  return TRUE;
+     42              else
+     43                  return FALSE;
+     44          }
+     45          
+     46          /****************************************************************/
+     47          int
+     48          isupper (int ch)
+     49          {
+     50              /* ASCII only */
+     51              if ((ch >= 'A') && (ch <= 'Z'))
+     52                  return TRUE;
+     53              else
+     54                  return FALSE;
+     55          }
+     56          
+     57          /****************************************************************/
+     58          int
+     59          strcasecmp (const char *s1, const char *s2)
+     60          {
+     61              char    c1, c2;
+     62              int     result = 0;
+     63          
+     64              while (result == 0)
+     65              {
+     66                  c1 = *s1++;
+     67                  c2 = *s2++;
+     68                  if ((c1 >= 'a') && (c1 <= 'z'))
+     69                      c1 = (char)(c1 - ' ');
+     70                  if ((c2 >= 'a') && (c2 <= 'z'))
+     71                      c2 = (char)(c2 - ' ');
+     72                  if ((result = (c1 - c2)) != 0)
+     73                      break;
+     74                  if ((c1 == 0) || (c2 == 0))
+     75                      break;
+     76              }
+     77              return result;
+     78          }
+     79          
+     80          
+     81          /****************************************************************/
+     82          int
+     83          strncasecmp (const char *s1, const char *s2, int n)
+     84          {
+     85              char    c1, c2;
+     86              int     k = 0;
+     87              int     result = 0;
+     88          
+     89              while ( k++ < n )
+     90              {
+     91                  c1 = *s1++;
+     92                  c2 = *s2++;
+     93                  if ((c1 >= 'a') && (c1 <= 'z'))
+     94                      c1 = (char)(c1 - ' ');
+     95                  if ((c2 >= 'a') && (c2 <= 'z'))
+     96                      c2 = (char)(c2 - ' ');
+     97                  if ((result = (c1 - c2)) != 0)
+     98                      break;
+     99                  if ((c1 == 0) || (c2 == 0))
+    100                      break;
+    101              }
+    102              return result;
+    103          }
+    104          
+    105          /****************************************************************/
+    106          uint32
+    107          strtoul (char *str, char **ptr, int base)
+    108          {
+    109              unsigned long rvalue;
+    110              int c, err, neg;
+    111              char *endp;
+    112              char *startp;
+    113          
+    114              rvalue = 0;
+    115              err = 0;
+    116              neg = 0;
+    117          
+    118              /* Check for invalid arguments */
+    119              if ((str == NULL) || (base < 0) || (base == 1) || (base > 36))
+    120              {
+    121                  if (ptr != NULL)
+    122                  {
+    123                      *ptr = str;
+    124                  }
+    125                  return 0;
+    126              }
+    127          
+    128              /* Skip leading white spaces */
+    129              for (startp = str; isspace(*startp); ++startp)
+    130                  ;
+    131          
+    132              /* Check for notations */
+    133              switch (startp[0])
+    134              {
+    135              case '0':
+    136                  if ((startp[1] == 'x') || (startp[1] == 'X'))
+    137                  {
+    138                      if ((base == 0) || (base == 16))
+    139                      {
+    140                          base = 16;
+    141                          startp = &startp[2];
+    142                      }
+    143                  }
+    144                  break;
+    145              case '-':
+    146                  neg = 1;
+    147                  startp = &startp[1];
+    148                  break;
+    149              default:
+    150                  break;
+    151              }
+    152          
+    153              if (base == 0)
+    154                  base = 10;
+    155          
+    156              /* Check for invalid chars in str */
+    157              for ( endp = startp; (c = *endp) != '\0'; ++endp)
+    158              {
+    159                  /* Check for 0..9,Aa-Zz */
+    160                  if (!isalnum(c))
+    161                  {
+    162                      err = 1;
+    163                      break;
+    164                  }
+    165          
+    166                  /* Convert char to num in 0..36 */
+    167                  if (isdigit(c))
+    168                  {
+    169                      c = c - '0';
+    170                  }
+    171                  else
+    172                  {
+    173                      if (isupper(c))
+    174                      {
+    175                          c = c - 'A' + 10;
+    176                      }
+    177                      else
+    178                      {
+    179                          c = c - 'a' + 10;
+    180                      }
+    181                  }
+    182          
+    183                  /* check c against base */
+    184                  if (c >= base)
+    185                  {
+    186                      err = 1;
+    187                      break;
+    188                  }
+    189          
+    190                  if (neg)
+    191                  {
+    192                      rvalue = (rvalue * base) - c;
+    193                  }
+    194                  else
+    195                  {
+    196                      rvalue = (rvalue * base) + c;
+    197                  }
+    198              }
+    199          
+    200              /* Upon exit, endp points to the character at which valid info */
+    201              /* STOPS.  No chars including and beyond endp are used.        */
+    202          
+    203              if (ptr != NULL)
+    204                  *ptr = endp;
+    205          
+    206              if (err)
+    207              {
+    208                  if (ptr != NULL)
+    209                      *ptr = str;
+    210          
+    211                  return 0;
+    212              }
+    213              else
+    214              {
+    215                  return rvalue;
+    216              }
+    217          }
+    218          
+    219          /****************************************************************/
+    220          int
+    221          strlen (const char *str)
+    222          {
+    223              char *s = (char *)str;
+    224              int len = 0;
+    225          
+    226              if (s == NULL)
+    227                  return 0;
+    228          
+    229              while (*s++ != '\0')
+    230                  ++len;
+    231          
+    232              return len;
+    233          }
+    234          
+    235          /****************************************************************/
+    236          char *
+    237          strcat (char *dest, const char *src)
+    238          {
+    239              char *dp;
+    240              char *sp = (char *)src;
+    241          
+    242              if ((dest != NULL) && (src != NULL))
+    243              {
+    244                  dp = &dest[strlen(dest)];
+    245          
+    246                  while (*sp != '\0')
+    247                  {
+    248                      *dp++ = *sp++;
+    249                  }
+    250                  *dp = '\0';
+    251              }
+    252              return dest;
+    253          }
+    254          
+    255          /****************************************************************/
+    256          char *
+    257          strncat (char *dest, const char *src, int n)
+    258          {
+    259              char *dp;
+    260              char *sp = (char *)src;
+    261          
+    262              if ((dest != NULL) && (src != NULL) && (n > 0))
+    263              {
+    264                  dp = &dest[strlen(dest)];
+    265          
+    266                  while ((*sp != '\0') && (n-- > 0))
+    267                  {
+    268                      *dp++ = *sp++;
+    269                  }
+    270                  *dp = '\0';
+    271              }
+    272              return dest;
+    273          }
+    274          
+    275          /****************************************************************/
+    276          char *
+    277          strcpy (char *dest, const char *src)
+    278          {
+    279              char *dp = (char *)dest;
+    280              char *sp = (char *)src;
+    281          
+    282              if ((dest != NULL) && (src != NULL))
+    283              {
+    284                  while (*sp != '\0')
+    285                  {
+    286                      *dp++ = *sp++;
+    287                  }
+    288                  *dp = '\0';
+    289              }
+    290              return dest;
+    291          }
+    292          
+    293          /****************************************************************/
+    294          char *
+    295          strncpy (char *dest, const char *src, int n)
+    296          {
+    297              char *dp = (char *)dest;
+    298              char *sp = (char *)src;
+    299          
+    300              if ((dest != NULL) && (src != NULL) && (n > 0))
+    301              {
+    302                  while ((*sp != '\0') && (n-- > 0))
+    303                  {
+    304                      *dp++ = *sp++;
+    305                  }
+    306                  *dp = '\0';
+    307              }
+    308              return dest;
+    309          }
+    310          
+    311          /****************************************************************/
+    312          int
+    313          strcmp (const char *s1, const char *s2)
+    314          {
+    315              /* No checks for NULL */
+    316              char *s1p = (char *)s1;
+    317              char *s2p = (char *)s2;
+    318          
+    319              while (*s2p != '\0')
+    320              {
+    321                  if (*s1p != *s2p)
+    322                      break;
+    323          
+    324                  ++s1p;
+    325                  ++s2p;
+    326              }
+    327              return (*s1p - *s2p);
+    328          }
+    329          
+    330          /****************************************************************/
+    331          int
+    332          strncmp (const char *s1, const char *s2, int n)
+    333          {
+    334              /* No checks for NULL */
+    335              char *s1p = (char *)s1;
+    336              char *s2p = (char *)s2;
+    337          
+    338              if (n <= 0)
+    339                  return 0;
+    340          
+    341              while (*s2p != '\0')
+    342              {
+    343                  if (*s1p != *s2p)
+    344                      break;
+    345          
+    346                  if (--n == 0)
+    347                      break;
+    348          
+    349                  ++s1p;
+    350                  ++s2p;
+    351              }
+    352              return (*s1p - *s2p);
+    353          }
+    354          
+    355          /****************************************************************/
+    356          void *
+    357          memcpy (void *dest, const void *src, unsigned n)
+    358          {
+    359              int longs, bytes;
+    360              uint32 *dpl = (uint32 *)dest;
+    361              uint32 *spl = (uint32 *)src;
+    362              uint8  *dpb, *spb;
+    363          
+    364              if ((dest != NULL) && (src != NULL) && (n > 0))
+    365              {
+    366                  bytes = (n & 0x3);
+    367                  longs = (n - bytes) >> 2;
+    368          
+    369                  while (longs--)
+    370                      *dpl++ = *spl++;
+    371          
+    372                  dpb = (uint8 *)dpl;
+    373                  spb = (uint8 *)spl;
+    374          
+    375                  while (bytes--)
+    376                      *dpb++ = *spb++;
+    377              }
+    378              return dest;
+    379          }
+    380          
+    381          /****************************************************************/
+    382          void *
+    383          memset (void *s, int c, unsigned n)
+    384          {
+    385              /* Not optimized, but very portable */
+    386              unsigned char *sp = (unsigned char *)s;
+    387          
+    388              if ((s != NULL) && (n > 0))
+    389              {
+    390                  while (n--)
+    391                  {
+    392                      *sp++ = (unsigned char)c;
+    393                  }
+    394              }
+    395              return s;
+    396          }
+    397          
+    398          /****************************************************************/
+
+Errors: 34
+Warnings: none

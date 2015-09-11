@@ -1,0 +1,371 @@
+###############################################################################
+#                                                                             #
+#                                                       18/Jan/2013  21:34:44 #
+# IAR ANSI C/C++ Compiler V6.30.6.23336/W32 EVALUATION for ARM                #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄ #
+#                    Ü³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\MyFunctio #
+#                    n\Speed_PID.c                                            #
+#    Command line =  E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄ #
+#                    Ü³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\MyFunctio #
+#                    n\Speed_PID.c -D IAR -lCN E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³ #
+#                    £×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄÜ³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ #
+#                    \20130118\V0.0.0\RAM_128K\List\ -lB                      #
+#                    E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄ #
+#                    Ü³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\RAM_128K\ #
+#                    List\ -o E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\ #
+#                    µÚ°Ë½ìÖÇÄÜ³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\ #
+#                    RAM_128K\Obj\ --no_cse --no_unroll --no_inline           #
+#                    --no_code_motion --no_tbaa --no_clustering               #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M4  #
+#                    -e --fpu=None --dlib_config                              #
+#                    D:\Tools\IAR6.30\arm\INC\c\DLib_Config_Normal.h -I       #
+#                    E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄ #
+#                    Ü³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\Library\C #
+#                    PU\ -I E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ #
+#                    °Ë½ìÖÇÄÜ³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\Li #
+#                    brary\Drivers\ADC\ -I E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁ #
+#                    Ï\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄÜ³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\201 #
+#                    30118\V0.0.0\Library\Drivers\FTM\ -I                     #
+#                    E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄ #
+#                    Ü³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\Library\D #
+#                    rivers\GPIO\ -I E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë #
+#                    ½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄÜ³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\ #
+#                    V0.0.0\Library\Drivers\PIT\ -I                           #
+#                    E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄ #
+#                    Ü³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\MyFunctio #
+#                    n\ -Ol                                                   #
+#    List file    =  E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄ #
+#                    Ü³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\RAM_128K\ #
+#                    List\Speed_PID.lst                                       #
+#    Object file  =  E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄ #
+#                    Ü³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\RAM_128K\ #
+#                    Obj\Speed_PID.o                                          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+E:\¿ÎÍâ×ÊÁÏ\·ÉË¼¿¨¶ûÖÇÄÜ³µ\ÈÕ³£×ÊÁÏ\µÚ°Ë½ì×ÊÁÏ\µÚ°Ë½ìÖÇÄÜ³µ\Ö±Á¢³µµ÷ÊÔ\ARM\ARMÑ§Ï°Ê¹ÓÃ\20130118\V0.0.0\MyFunction\Speed_PID.c
+      1          #include "AllHeaders.h"
+      2          
+      3          /*------Á¥ÊôÓÚSpeed_PIº¯Êý-------*/
+
+   \                                 In section .bss, align 2
+      4          int16s_t PI_SpeedNew;                     //Speed_PIº¯ÊýËã³ö×îÐÂÊä³öËÙ¶ÈÖµ
+   \                     PI_SpeedNew:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 2
+      5          int16s_t PI_SpeedOld;                     //Speed_PIº¯ÊýËã³öµÄÉÏÒ»´ÎÊä³öµÄËÙ¶ÈÖµ
+   \                     PI_SpeedOld:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 4
+      6          int32s_t PI_SpeedKeep;                    //Speed_PIº¯ÊýÖÐËÙ¶ÈÆ«²î»ý·ÖÖµ
+   \                     PI_SpeedKeep:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+      7          int32s_t PI_SpeedErr;                     //ËÙ¶ÈÆ«²î
+   \                     PI_SpeedErr:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+      8          int32s_t His_PI_SpeedErr = 0;             //ËÙ¶ÈÆ«²îÀúÊ·Öµ
+   \                     His_PI_SpeedErr:
+   \   00000000                      DS8 4
+      9          /*-----Á¥ÊôÓÚSpeed_PI_OUTº¯Êý----*/
+
+   \                                 In section .bss, align 2
+     10          int16s_t PI_Out;
+   \                     PI_Out:
+   \   00000000                      DS8 2
+     11          /*===============================
+     12          º¯ÊýÃû£ºSpeed_PI()
+     13          ×÷ÓÃ  £ºËÙ¶ÈÎ»ÖÃÊ½PI¿ØÖÆ,100msµ÷ÓÃÒ»´Î
+     14          ±¸×¢  £ºÎÞ
+     15          ================================*/
+
+   \                                 In section .text, align 2, keep-with-next
+     16          void Speed_PI(void) 
+     17          {
+   \                     Speed_PI:
+   \   00000000   0xB410             PUSH     {R4}
+     18           int32s_t  nP, nI, nD;
+     19           int16s_t  nSpeed;
+     20           int32s_t  nValue1, nValue2;
+     21           
+     22           nSpeed = (NowSpeed_L + NowSpeed_R) / 2;  //¼ÆËãµ±Ç°ËÙ¶È
+   \   00000002   0x....             LDR.N    R0,??DataTable1
+   \   00000004   0xF9B0 0x0000      LDRSH    R0,[R0, #+0]
+   \   00000008   0x....             LDR.N    R1,??DataTable1_1
+   \   0000000A   0xF9B1 0x1000      LDRSH    R1,[R1, #+0]
+   \   0000000E   0x1808             ADDS     R0,R1,R0
+   \   00000010   0x2102             MOVS     R1,#+2
+   \   00000012   0xFB90 0xF0F1      SDIV     R0,R0,R1
+     23          
+     24           PI_SpeedErr = ObjectSpeed - nSpeed;      //ÇóËÙ¶ÈÆ«²î£¬ÓÃÓÚÇóËÙ¶ÈÎ¢·Ö
+   \   00000016   0x....             LDR.N    R1,??DataTable1_2
+   \   00000018   0xF9B1 0x1000      LDRSH    R1,[R1, #+0]
+   \   0000001C   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   0000001E   0x1A09             SUBS     R1,R1,R0
+   \   00000020   0x....             LDR.N    R2,??DataTable1_3
+   \   00000022   0x6011             STR      R1,[R2, #+0]
+     25           nValue1 = ObjectSpeed - nSpeed;          //ÇóËÙ¶ÈÆ«²î£¬ÓÃÓÚ¼ÆËãËÙ¶ÈPIµÄ±ÈÀý²¿·Ö
+   \   00000024   0x....             LDR.N    R1,??DataTable1_2
+   \   00000026   0xF9B1 0x1000      LDRSH    R1,[R1, #+0]
+   \   0000002A   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   0000002C   0x1A09             SUBS     R1,R1,R0
+     26           nValue2 = ObjectSpeed - nSpeed;          //ÇóËÙ¶ÈÆ«²î£¬ÓÃÓÚ¼ÆËãËÙ¶ÈPIµÄ»ý·Ö²¿·Ö
+   \   0000002E   0x....             LDR.N    R2,??DataTable1_2
+   \   00000030   0xF9B2 0x2000      LDRSH    R2,[R2, #+0]
+   \   00000034   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   00000036   0x1A12             SUBS     R2,R2,R0
+     27          		
+     28           if(nValue1 > 215)  nValue1 = 215;        //ÓÃÓÚ±ÈÀý²¿·ÖµÄËÙ¶ÈÆ«²îÏÞ·ù
+   \   00000038   0x29D8             CMP      R1,#+216
+   \   0000003A   0xDB00             BLT.N    ??Speed_PI_0
+   \   0000003C   0x21D7             MOVS     R1,#+215
+     29           if(nValue1 < -215) nValue1  = -215;
+   \                     ??Speed_PI_0:
+   \   0000003E   0xF111 0x0FD7      CMN      R1,#+215
+   \   00000042   0xDA01             BGE.N    ??Speed_PI_1
+   \   00000044   0xF07F 0x01D6      MVNS     R1,#+214
+     30           if(nValue2 > 170)  nValue2 = 170;        //ÓÃÓÚ»ý·Ö²¿·ÖµÄËÙ¶ÈÆ«²îÏÞ·ù
+   \                     ??Speed_PI_1:
+   \   00000048   0x2AAB             CMP      R2,#+171
+   \   0000004A   0xDB00             BLT.N    ??Speed_PI_2
+   \   0000004C   0x22AA             MOVS     R2,#+170
+     31           if(nValue2 < -170) nValue2  = -170;
+   \                     ??Speed_PI_2:
+   \   0000004E   0xF112 0x0FAA      CMN      R2,#+170
+   \   00000052   0xDA01             BGE.N    ??Speed_PI_3
+   \   00000054   0xF07F 0x02A9      MVNS     R2,#+169
+     32           
+     33           nP = nValue1 * (MOTOR_SPEED_P);          //Çó±ÈÀý
+   \                     ??Speed_PI_3:
+   \   00000058   0x2088             MOVS     R0,#+136
+   \   0000005A   0xFB00 0xF001      MUL      R0,R0,R1
+     34           
+     35           nI = nValue2 * (MOTOR_SPEED_I);          //Çó»ý·Ö
+   \   0000005E   0x218D             MOVS     R1,#+141
+   \   00000060   0xFB01 0xF102      MUL      R1,R1,R2
+     36          
+     37           nD = (int32s_t)((PI_SpeedErr - His_PI_SpeedErr));//ÇóÎ¢·Ö
+   \   00000064   0x....             LDR.N    R2,??DataTable1_3
+   \   00000066   0x6812             LDR      R2,[R2, #+0]
+   \   00000068   0x....             LDR.N    R3,??DataTable1_4
+   \   0000006A   0x681B             LDR      R3,[R3, #+0]
+   \   0000006C   0x1AD2             SUBS     R2,R2,R3
+     38           
+     39           
+     40           PI_SpeedOld = PI_SpeedNew;	
+   \   0000006E   0x....             LDR.N    R3,??DataTable1_5
+   \   00000070   0x....             LDR.N    R4,??DataTable1_6
+   \   00000072   0x8824             LDRH     R4,[R4, #+0]
+   \   00000074   0x801C             STRH     R4,[R3, #+0]
+     41           PI_SpeedKeep += nI;
+   \   00000076   0x....             LDR.N    R3,??DataTable1_7
+   \   00000078   0x681B             LDR      R3,[R3, #+0]
+   \   0000007A   0x18C9             ADDS     R1,R1,R3
+   \   0000007C   0x....             LDR.N    R3,??DataTable1_7
+   \   0000007E   0x6019             STR      R1,[R3, #+0]
+     42          	
+     43           PI_SpeedNew = (int16s_t)((nP + nD + (PI_SpeedKeep / 8)) / 100L);
+   \   00000080   0x1810             ADDS     R0,R2,R0
+   \   00000082   0x....             LDR.N    R1,??DataTable1_7
+   \   00000084   0x6809             LDR      R1,[R1, #+0]
+   \   00000086   0x2208             MOVS     R2,#+8
+   \   00000088   0xFB91 0xF1F2      SDIV     R1,R1,R2
+   \   0000008C   0x1808             ADDS     R0,R1,R0
+   \   0000008E   0x2164             MOVS     R1,#+100
+   \   00000090   0xFB90 0xF0F1      SDIV     R0,R0,R1
+   \   00000094   0x....             LDR.N    R1,??DataTable1_6
+   \   00000096   0x8008             STRH     R0,[R1, #+0]
+     44           
+     45           if(PI_SpeedNew > PID_SPEED_LIMIT)        //ËÙ¶È»»Êä³ö×ÜÏÞ·ù       
+   \   00000098   0x....             LDR.N    R0,??DataTable1_6
+   \   0000009A   0xF9B0 0x0000      LDRSH    R0,[R0, #+0]
+   \   0000009E   0xF240 0x11A5      MOVW     R1,#+421
+   \   000000A2   0x4288             CMP      R0,R1
+   \   000000A4   0xDB03             BLT.N    ??Speed_PI_4
+     46           PI_SpeedNew = PID_SPEED_LIMIT;
+   \   000000A6   0x....             LDR.N    R0,??DataTable1_6
+   \   000000A8   0xF44F 0x71D2      MOV      R1,#+420
+   \   000000AC   0x8001             STRH     R1,[R0, #+0]
+     47           if(PI_SpeedNew <-PID_SPEED_LIMIT)
+   \                     ??Speed_PI_4:
+   \   000000AE   0x....             LDR.N    R0,??DataTable1_6
+   \   000000B0   0xF9B0 0x0000      LDRSH    R0,[R0, #+0]
+   \   000000B4   0x....             LDR.N    R1,??DataTable1_8  ;; 0xfffffe5c
+   \   000000B6   0x4288             CMP      R0,R1
+   \   000000B8   0xDA02             BGE.N    ??Speed_PI_5
+     48           PI_SpeedNew = -PID_SPEED_LIMIT;
+   \   000000BA   0x....             LDR.N    R0,??DataTable1_6
+   \   000000BC   0x....             LDR.N    R1,??DataTable1_8  ;; 0xfffffe5c
+   \   000000BE   0x8001             STRH     R1,[R0, #+0]
+     49          
+     50           His_PI_SpeedErr = PI_SpeedErr;
+   \                     ??Speed_PI_5:
+   \   000000C0   0x....             LDR.N    R0,??DataTable1_4
+   \   000000C2   0x....             LDR.N    R1,??DataTable1_3
+   \   000000C4   0x6809             LDR      R1,[R1, #+0]
+   \   000000C6   0x6001             STR      R1,[R0, #+0]
+     51          
+     52           if(PI_SpeedKeep > 50000) 
+   \   000000C8   0x....             LDR.N    R0,??DataTable1_7
+   \   000000CA   0x6800             LDR      R0,[R0, #+0]
+   \   000000CC   0xF24C 0x3151      MOVW     R1,#+50001
+   \   000000D0   0x4288             CMP      R0,R1
+   \   000000D2   0xDB03             BLT.N    ??Speed_PI_6
+     53           {
+     54            PI_SpeedKeep = 50000;
+   \   000000D4   0x....             LDR.N    R0,??DataTable1_7
+   \   000000D6   0xF24C 0x3150      MOVW     R1,#+50000
+   \   000000DA   0x6001             STR      R1,[R0, #+0]
+     55           }
+     56           if(PI_SpeedKeep < -50000) 
+   \                     ??Speed_PI_6:
+   \   000000DC   0x....             LDR.N    R0,??DataTable1_7
+   \   000000DE   0x6800             LDR      R0,[R0, #+0]
+   \   000000E0   0x....             LDR.N    R1,??DataTable1_9  ;; 0xffff3cb0
+   \   000000E2   0x4288             CMP      R0,R1
+   \   000000E4   0xDA02             BGE.N    ??Speed_PI_7
+     57           { 
+     58            PI_SpeedKeep = -50000;
+   \   000000E6   0x....             LDR.N    R0,??DataTable1_7
+   \   000000E8   0x....             LDR.N    R1,??DataTable1_9  ;; 0xffff3cb0
+   \   000000EA   0x6001             STR      R1,[R0, #+0]
+     59           }
+     60          
+     61          }
+   \                     ??Speed_PI_7:
+   \   000000EC   0xBC10             POP      {R4}
+   \   000000EE   0x4770             BX       LR               ;; return
+     62          /*====================================
+     63          º¯ÊýÃû:£SSpeed_PI_OUT()
+     64          ×÷ÓÃ  £º¼ÆËãËÙ¶ÈPI¿ØÖÆµÄÊä³ö£¬5msµ÷ÓÃÒ»´Î
+     65          ±¸×¢  £ºÎÞ
+     66          ======================================*/  
+
+   \                                 In section .text, align 2, keep-with-next
+     67          void Speed_PI_OUT(void) 
+     68          {
+     69           int32s_t  nValue;
+     70            
+     71           nValue = PI_SpeedNew - PI_SpeedOld;
+   \                     Speed_PI_OUT:
+   \   00000000   0x....             LDR.N    R0,??DataTable1_6
+   \   00000002   0xF9B0 0x0000      LDRSH    R0,[R0, #+0]
+   \   00000006   0x....             LDR.N    R1,??DataTable1_5
+   \   00000008   0xF9B1 0x1000      LDRSH    R1,[R1, #+0]
+   \   0000000C   0x1A40             SUBS     R0,R0,R1
+     72           nValue = nValue * (Motor_Count + 1) / (CAR_MOTOR_PERIOD - 1) + PI_SpeedOld;                             
+   \   0000000E   0x....             LDR.N    R1,??DataTable1_10
+   \   00000010   0xF9B1 0x1000      LDRSH    R1,[R1, #+0]
+   \   00000014   0x1C49             ADDS     R1,R1,#+1
+   \   00000016   0x4348             MULS     R0,R1,R0
+   \   00000018   0x210F             MOVS     R1,#+15
+   \   0000001A   0xFB90 0xF0F1      SDIV     R0,R0,R1
+   \   0000001E   0x....             LDR.N    R1,??DataTable1_5
+   \   00000020   0xF9B1 0x1000      LDRSH    R1,[R1, #+0]
+   \   00000024   0x1840             ADDS     R0,R0,R1
+     73           PI_Out = (int16s_t)nValue;                                                        
+   \   00000026   0x....             LDR.N    R1,??DataTable1_11
+   \   00000028   0x8008             STRH     R0,[R1, #+0]
+     74          }
+   \   0000002A   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x........         DC32     NowSpeed_L
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_1:
+   \   00000000   0x........         DC32     NowSpeed_R
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_2:
+   \   00000000   0x........         DC32     ObjectSpeed
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_3:
+   \   00000000   0x........         DC32     PI_SpeedErr
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_4:
+   \   00000000   0x........         DC32     His_PI_SpeedErr
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_5:
+   \   00000000   0x........         DC32     PI_SpeedOld
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_6:
+   \   00000000   0x........         DC32     PI_SpeedNew
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_7:
+   \   00000000   0x........         DC32     PI_SpeedKeep
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_8:
+   \   00000000   0xFFFFFE5C         DC32     0xfffffe5c
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_9:
+   \   00000000   0xFFFF3CB0         DC32     0xffff3cb0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_10:
+   \   00000000   0x........         DC32     Motor_Count
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_11:
+   \   00000000   0x........         DC32     PI_Out
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        4  Speed_PI
+        0  Speed_PI_OUT
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       4  ??DataTable1_1
+       4  ??DataTable1_10
+       4  ??DataTable1_11
+       4  ??DataTable1_2
+       4  ??DataTable1_3
+       4  ??DataTable1_4
+       4  ??DataTable1_5
+       4  ??DataTable1_6
+       4  ??DataTable1_7
+       4  ??DataTable1_8
+       4  ??DataTable1_9
+       4  His_PI_SpeedErr
+       2  PI_Out
+       4  PI_SpeedErr
+       4  PI_SpeedKeep
+       2  PI_SpeedNew
+       2  PI_SpeedOld
+     240  Speed_PI
+      44  Speed_PI_OUT
+
+ 
+  18 bytes in section .bss
+ 332 bytes in section .text
+ 
+ 332 bytes of CODE memory
+  18 bytes of DATA memory
+
+Errors: none
+Warnings: none
