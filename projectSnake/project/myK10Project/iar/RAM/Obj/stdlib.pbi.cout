@@ -6,6 +6,8 @@ E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\app
 -I
 E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\..\..\lib\CPU
 -I
+E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\..\..\lib\config
+-I
 E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\..\..\lib\common
 -I
 E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\..\..\lib\LPLD
@@ -41,6 +43,8 @@ D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\arm\inc\c
 E:\gitProject\MyeBEST\projectSnake\project\myK10Project\app
 -I
 E:\gitProject\MyeBEST\projectSnake\lib\CPU
+-I
+E:\gitProject\MyeBEST\projectSnake\lib\config
 -I
 E:\gitProject\MyeBEST\projectSnake\lib\common
 -I
@@ -264,8 +268,8 @@ D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\arm\CMSIS\Include
 -D__HAS_LOCATED_DECLARATION__=1
 -D__HAS_LOCATED_WITH_INIT__=1
 -D__IAR_COMPILERBASE__=593924
--D__DATE__="Oct 24 2015"
--D__TIME__="23:15:47"
+-D__DATE__="Oct 25 2015"
+-D__TIME__="00:04:03"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1

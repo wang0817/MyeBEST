@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       24/Oct/2015  23:15:36
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:13:24
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -23,6 +23,8 @@
 //        E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\app\
 //        -I
 //        E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\..\..\lib\CPU\
+//        -I
+//        E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\..\..\lib\config\
 //        -I
 //        E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\..\..\..\lib\common\
 //        -I
@@ -80,20 +82,20 @@
 //   17  *
 //   18  */
 //   19 #include "common.h"
-//   20 
+//   20 #include "DEV_OLED.h"
+//   21 
 
         SECTION `.text`:CODE:NOROOT(1)
         THUMB
-//   21 void main (void)
-//   22 {
-//   23 
+//   22 void main (void)
+//   23 {
 //   24   while(1)
 main:
 ??main_0:
         B.N      ??main_0
 //   25   {
 //   26 
-//   27   } 
+//   27   }
 //   28 }
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)

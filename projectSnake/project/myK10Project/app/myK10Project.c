@@ -17,13 +17,13 @@
  *
  */
 #include "common.h"
+#include "DEV_OLED.h"
 
 void main (void)
 {
-
   while(1)
   {
 
-  } 
+  }
 }
 

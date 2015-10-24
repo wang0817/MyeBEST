@@ -304,6 +304,7 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\app</state>
           <state>$PROJ_DIR$\..\..\..\lib\CPU</state>
+          <state>$PROJ_DIR$\..\..\..\lib\config</state>
           <state>$PROJ_DIR$\..\..\..\lib\common</state>
           <state>$PROJ_DIR$\..\..\..\lib\LPLD</state>
           <state>$PROJ_DIR$\..\..\..\lib\LPLD\HW</state>
@@ -2930,6 +2931,15 @@
       </file>
     </group>
     <group>
+      <name>config</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\lib\config\Card_Config.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\lib\config\Card_Config.h</name>
+      </file>
+    </group>
+    <group>
       <name>CPU</name>
       <file>
         <name>$PROJ_DIR$\..\..\..\lib\CPU\startup_K60DZ10.s</name>
@@ -2942,6 +2952,12 @@
       <name>LPLD</name>
       <group>
         <name>DEV</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\lib\LPLD\DEV\DEV_OLED.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\lib\LPLD\DEV\DEV_OLED.h</name>
+        </file>
       </group>
       <group>
         <name>HW</name>
