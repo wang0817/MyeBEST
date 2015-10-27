@@ -26,8 +26,8 @@ void main (void)
   
   while(1)
   {
-    OLED_WriteChar(0, 0, 'a', 0);
-    OLED_Refresh_Gram();
+//    OLED_WriteChar(0, 0, 'a', 0);
+//    OLED_Refresh_Gram();
   }
 }
 
