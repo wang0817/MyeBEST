@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM        25/Oct/2015  00:13:24
+# IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM        26/Oct/2015  19:35:37
 # Copyright 1999-2014 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -85,33 +85,49 @@ E:\gitProject\MyeBEST\projectSnake\project\myK10Project\app\myK10Project.c
    \                                 In section .text, align 2, keep-with-next
      22          void main (void)
      23          {
-     24            while(1)
    \                     main: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     24            OLED_Init();
+   \   00000002   0x.... 0x....      BL       OLED_Init
+     25            //OLED_Clear();
+     26            
+     27            while(1)
+     28            {
+     29              OLED_WriteChar(0, 0, 'a', 0);
    \                     ??main_0: (+1)
-   \   00000000   0xE7FE             B.N      ??main_0
-     25            {
-     26          
-     27            }
-     28          }
-     29          
+   \   00000006   0x2300             MOVS     R3,#+0
+   \   00000008   0x2261             MOVS     R2,#+97
+   \   0000000A   0x2100             MOVS     R1,#+0
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0x.... 0x....      BL       OLED_WriteChar
+     30              OLED_Refresh_Gram();
+   \   00000012   0x.... 0x....      BL       OLED_Refresh_Gram
+   \   00000016   0xE7F6             B.N      ??main_0
+     31            }
+     32          }
+     33          
+     34          
 
    Maximum stack usage in bytes:
 
    .cstack Function
    ------- --------
-       0   main
+       8   main
+         8   -> OLED_Init
+         8   -> OLED_Refresh_Gram
+         8   -> OLED_WriteChar
 
 
    Section sizes:
 
    Bytes  Function/Label
    -----  --------------
-       2  main
+      24  main
 
  
- 2 bytes in section .text
+ 24 bytes in section .text
  
- 2 bytes of CODE memory
+ 24 bytes of CODE memory
 
 Errors: none
 Warnings: none

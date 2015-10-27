@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=1526830957
+Checksum=473975840
 [CodeCoverage]
 Enabled=_ 0
 [Stack]
@@ -79,6 +79,15 @@ GraphEnabled=0
 ShowTimeLog=1
 ShowTimeSum=1
 SumSortOrder=0
+[PowerProbe]
+Frequency=10000
+Probe0=I0
+ProbeSetup0=2 1 1 2 0 0
+[array_types]
+Fmt0=unsigned char[6]	4	0
+[watch_formats]
+Fmt0={W}42:ASCII_0608	0	1
+Fmt1={W}42:displayGRAM	4	1
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -88,10 +97,6 @@ LoggingEnabled=_ 0
 LogFile=_ ""
 [CallStackLog]
 Enabled=0
-[PowerProbe]
-Frequency=10000
-Probe0=I0
-ProbeSetup0=2 1 1 2 0 0
 [DriverProfiling]
 Enabled=0
 Mode=1

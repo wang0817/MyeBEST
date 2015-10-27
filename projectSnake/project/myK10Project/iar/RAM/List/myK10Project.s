@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:13:24
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  19:35:37
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -60,6 +60,10 @@
 
         #define SHT_PROGBITS 0x1
 
+        EXTERN OLED_Init
+        EXTERN OLED_Refresh_Gram
+        EXTERN OLED_WriteChar
+
         PUBLIC main
 
 // E:\gitProject\MyeBEST\projectSnake\project\myK10Project\app\myK10Project.c
@@ -89,14 +93,26 @@
         THUMB
 //   22 void main (void)
 //   23 {
-//   24   while(1)
 main:
+        PUSH     {R7,LR}
+//   24   OLED_Init();
+        BL       OLED_Init
+//   25   //OLED_Clear();
+//   26   
+//   27   while(1)
+//   28   {
+//   29     OLED_WriteChar(0, 0, 'a', 0);
 ??main_0:
+        MOVS     R3,#+0
+        MOVS     R2,#+97
+        MOVS     R1,#+0
+        MOVS     R0,#+0
+        BL       OLED_WriteChar
+//   30     OLED_Refresh_Gram();
+        BL       OLED_Refresh_Gram
         B.N      ??main_0
-//   25   {
-//   26 
-//   27   }
-//   28 }
+//   31   }
+//   32 }
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
@@ -110,11 +126,12 @@ main:
         SECTION_TYPE SHT_PROGBITS, 0
 
         END
-//   29 
+//   33 
+//   34 
 // 
-// 2 bytes in section .text
+// 24 bytes in section .text
 // 
-// 2 bytes of CODE memory
+// 24 bytes of CODE memory
 //
 //Errors: none
 //Warnings: none

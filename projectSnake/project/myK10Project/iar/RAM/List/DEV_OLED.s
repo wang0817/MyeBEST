@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:10:21
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  19:24:21
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -297,16 +297,16 @@ OLED_SclSet:
         BEQ.N    ??OLED_SclSet_0
 //  122     return;
 //  123   
-//  124   sclInfo = oledConfig->SCL_Pin;
+//  124   sclInfo = oledConfig->SCL_Pin.gpioPins;
 ??OLED_SclSet_1:
         ADD      R0,SP,#+0
         MOVS     R1,R5
         MOVS     R2,#+20
         BL       __aeabi_memcpy4
-//  125   LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, sclInfo.GPIO_Pins, status);
+//  125   LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, oledConfig->SCL_Pin.pinNum, status);
         MOVS     R2,R4
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
-        LDR      R1,[SP, #+4]
+        LDR      R1,[R5, #+20]
         LDR      R0,[SP, #+0]
         BL       LPLD_GPIO_Output_b
 //  126 }
@@ -335,16 +335,16 @@ OLED_SdaSet:
         BEQ.N    ??OLED_SdaSet_0
 //  135     return;
 //  136   
-//  137   sclInfo = oledConfig->SDA_Pin;
+//  137   sclInfo = oledConfig->SDA_Pin.gpioPins;
 ??OLED_SdaSet_1:
         ADD      R0,SP,#+0
-        ADDS     R1,R5,#+20
+        ADDS     R1,R5,#+24
         MOVS     R2,#+20
         BL       __aeabi_memcpy4
-//  138   LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, sclInfo.GPIO_Pins, status);
+//  138   LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, oledConfig->SDA_Pin.pinNum, status);
         MOVS     R2,R4
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
-        LDR      R1,[SP, #+4]
+        LDR      R1,[R5, #+44]
         LDR      R0,[SP, #+0]
         BL       LPLD_GPIO_Output_b
 //  139 }
@@ -373,16 +373,16 @@ OLED_RstSet:
         BEQ.N    ??OLED_RstSet_0
 //  148     return;
 //  149   
-//  150   sclInfo = oledConfig->RST_Pin;
+//  150   sclInfo = oledConfig->RST_Pin.gpioPins;
 ??OLED_RstSet_1:
         ADD      R0,SP,#+0
-        ADDS     R1,R5,#+60
+        ADDS     R1,R5,#+72
         MOVS     R2,#+20
         BL       __aeabi_memcpy4
-//  151   LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, sclInfo.GPIO_Pins, status);
+//  151   LPLD_GPIO_Output_b(sclInfo.GPIO_PTx,oledConfig->RST_Pin.pinNum , status);
         MOVS     R2,R4
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
-        LDR      R1,[SP, #+4]
+        LDR      R1,[R5, #+92]
         LDR      R0,[SP, #+0]
         BL       LPLD_GPIO_Output_b
 //  152 }
@@ -411,16 +411,16 @@ OLED_DcSet:
         BEQ.N    ??OLED_DcSet_0
 //  161     return;
 //  162   
-//  163   sclInfo = oledConfig->DC_Pin;
+//  163   sclInfo = oledConfig->DC_Pin.gpioPins;
 ??OLED_DcSet_1:
         ADD      R0,SP,#+0
-        ADDS     R1,R5,#+40
+        ADDS     R1,R5,#+48
         MOVS     R2,#+20
         BL       __aeabi_memcpy4
-//  164   LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, sclInfo.GPIO_Pins, status);
+//  164   LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, oledConfig->DC_Pin.pinNum, status);
         MOVS     R2,R4
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
-        LDR      R1,[SP, #+4]
+        LDR      R1,[R5, #+68]
         LDR      R0,[SP, #+0]
         BL       LPLD_GPIO_Output_b
 //  165 }
@@ -453,7 +453,7 @@ OLED_IO_Init:
         BEQ.N    ??OLED_IO_Init_0
 //  180     return;
 //  181   
-//  182   (void)LPLD_GPIO_Init(oledConfig->SCL_Pin);
+//  182   (void)LPLD_GPIO_Init(oledConfig->SCL_Pin.gpioPins);
 ??OLED_IO_Init_1:
         MOVS     R1,R4
         SUB      SP,SP,#+16
@@ -463,8 +463,8 @@ OLED_IO_Init:
         POP      {R0-R3}
         BL       LPLD_GPIO_Init
         MOVS     R5,R0
-//  183   (void)LPLD_GPIO_Init(oledConfig->SDA_Pin);
-        ADDS     R1,R4,#+20
+//  183   (void)LPLD_GPIO_Init(oledConfig->SDA_Pin.gpioPins);
+        ADDS     R1,R4,#+24
         SUB      SP,SP,#+16
         MOV      R0,SP
         MOVS     R2,#+20
@@ -472,8 +472,8 @@ OLED_IO_Init:
         POP      {R0-R3}
         BL       LPLD_GPIO_Init
         MOVS     R6,R0
-//  184   (void)LPLD_GPIO_Init(oledConfig->DC_Pin);
-        ADDS     R1,R4,#+40
+//  184   (void)LPLD_GPIO_Init(oledConfig->DC_Pin.gpioPins);
+        ADDS     R1,R4,#+48
         SUB      SP,SP,#+16
         MOV      R0,SP
         MOVS     R2,#+20
@@ -481,8 +481,8 @@ OLED_IO_Init:
         POP      {R0-R3}
         BL       LPLD_GPIO_Init
         MOVS     R7,R0
-//  185   (void)LPLD_GPIO_Init(oledConfig->RST_Pin);
-        ADDS     R1,R4,#+60
+//  185   (void)LPLD_GPIO_Init(oledConfig->RST_Pin.gpioPins);
+        ADDS     R1,R4,#+72
         SUB      SP,SP,#+16
         MOV      R0,SP
         MOVS     R2,#+20
@@ -641,7 +641,7 @@ OLED_Refresh_Gram:
 //  256         OLED_WrCmd(0xB0+i);    //设置页地址（0~7）
 //  257         OLED_WrCmd(0x00);      //设置显示位置-列低地址
 //  258         OLED_WrCmd(0x10);      //设置显示位置-列高地址   
-//  259         for(n=132;n>0;n--)
+//  259         for(n=127;n>0;n--)
 //  260                 OLED_WrDat(displayGRAM[n][i]);
 ??OLED_Refresh_Gram_1:
         LDR.N    R0,??DataTable2
@@ -667,7 +667,7 @@ OLED_Refresh_Gram:
         BL       OLED_WrCmd
         MOVS     R0,#+16
         BL       OLED_WrCmd
-        MOVS     R5,#+132
+        MOVS     R5,#+127
         B.N      ??OLED_Refresh_Gram_2
 //  261     }
 //  262 }
@@ -854,7 +854,7 @@ OLED_Init:
 OLED_Clear:
         MOVS     R0,#+0
         B.N      ??OLED_Clear_0
-//  345               for(n=0;n<132;n++)
+//  345               for(n=0;n<127;n++)
 //  346                       displayGRAM[n][i]=0x00;  
 ??OLED_Clear_1:
         LDR.N    R2,??DataTable2
@@ -866,7 +866,7 @@ OLED_Clear:
         ADDS     R1,R1,#+1
 ??OLED_Clear_2:
         UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
-        CMP      R1,#+132
+        CMP      R1,#+127
         BLT.N    ??OLED_Clear_1
         ADDS     R0,R0,#+1
 ??OLED_Clear_0:

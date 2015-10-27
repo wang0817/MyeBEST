@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:03:57
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  14:59:51
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -60,7 +60,6 @@
         #define SHT_PROGBITS 0x1
 
         EXTERN __aeabi_memcpy4
-        EXTERN assert_failed
         EXTERN g_bus_clock
 
         PUBLIC FTM0_IRQHandler
@@ -117,7 +116,7 @@ NVIC_EnableIRQ:
         MOVS     R1,#+1
         ANDS     R2,R0,#0x1F
         LSLS     R1,R1,R2
-        LDR.W    R2,??DataTable10  ;; 0xe000e100
+        LDR.W    R2,??DataTable8  ;; 0xe000e100
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         LSRS     R0,R0,#+5
         STR      R1,[R2, R0, LSL #+2]
@@ -130,7 +129,7 @@ NVIC_DisableIRQ:
         MOVS     R1,#+1
         ANDS     R2,R0,#0x1F
         LSLS     R1,R1,R2
-        LDR.W    R2,??DataTable10_1  ;; 0xe000e180
+        LDR.W    R2,??DataTable8_1  ;; 0xe000e180
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         LSRS     R0,R0,#+5
         STR      R1,[R2, R0, LSL #+2]
@@ -175,35 +174,28 @@ FTM_ISR:
 //   53 {
 LPLD_FTM_Init:
         PUSH     {R0-R3}
-        PUSH     {R1-R5,LR}
+        PUSH     {R4,LR}
+        SUB      SP,SP,#+16
 //   54   uint8 result, i;
 //   55   //参数检查
 //   56   ASSERT( ftm_init_structure.FTM_Mode & 
 //   57          (FTM_MODE_PWM|FTM_MODE_IC|FTM_MODE_QD|FTM_MODE_DEC));  //判断模式选择
-        LDRB     R0,[SP, #+28]
-        MOVS     R1,#+15
-        TST      R0,R1
-        BNE.N    ??LPLD_FTM_Init_0
-        MOVS     R1,#+57
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //   58   
 //   59   // 使能FTM时钟模块
 //   60   if(ftm_init_structure.FTM_Ftmx == FTM0)
-??LPLD_FTM_Init_0:
-        LDR      R0,[SP, #+24]
-        LDR.W    R1,??DataTable10_3  ;; 0x40038000
-        CMP      R0,R1
-        BNE.N    ??LPLD_FTM_Init_1
+        LDR      R1,[SP, #+24]
+        LDR.W    R2,??DataTable8_2  ;; 0x40038000
+        CMP      R1,R2
+        BNE.N    ??LPLD_FTM_Init_0
 //   61   {
 //   62     i=0; 
-        MOVS     R5,#+0
+        MOVS     R4,#+0
 //   63     SIM->SCGC6 |= SIM_SCGC6_FTM0_MASK;
-        LDR.W    R0,??DataTable10_4  ;; 0x4004803c
-        LDR      R0,[R0, #+0]
-        ORRS     R0,R0,#0x1000000
-        LDR.W    R1,??DataTable10_4  ;; 0x4004803c
-        STR      R0,[R1, #+0]
+        LDR.W    R1,??DataTable8_3  ;; 0x4004803c
+        LDR      R1,[R1, #+0]
+        ORRS     R1,R1,#0x1000000
+        LDR.W    R2,??DataTable8_3  ;; 0x4004803c
+        STR      R1,[R2, #+0]
 //   64   }
 //   65   else if(ftm_init_structure.FTM_Ftmx == FTM1)
 //   66   {
@@ -228,10 +220,10 @@ LPLD_FTM_Init:
 //   85   }
 //   86   
 //   87   if(ftm_init_structure.FTM_Mode & FTM_MODE_PWM)
-??LPLD_FTM_Init_2:
-        LDRB     R0,[SP, #+28]
-        LSLS     R0,R0,#+31
-        BPL.N    ??LPLD_FTM_Init_3
+??LPLD_FTM_Init_1:
+        LDRB     R1,[SP, #+28]
+        LSLS     R1,R1,#+31
+        BPL.N    ??LPLD_FTM_Init_2
 //   88   {
 //   89     result = LPLD_FTM_PWM_Init(ftm_init_structure);
         ADD      R1,SP,#+24
@@ -241,41 +233,40 @@ LPLD_FTM_Init:
         BL       __aeabi_memcpy4
         POP      {R0-R3}
         BL       LPLD_FTM_PWM_Init
-        MOVS     R4,R0
-        B.N      ??LPLD_FTM_Init_4
+        B.N      ??LPLD_FTM_Init_3
 //   90   }
-??LPLD_FTM_Init_1:
-        LDR      R0,[SP, #+24]
-        LDR.W    R1,??DataTable10_5  ;; 0x40039000
-        CMP      R0,R1
+??LPLD_FTM_Init_0:
+        LDR      R1,[SP, #+24]
+        LDR.W    R2,??DataTable8_4  ;; 0x40039000
+        CMP      R1,R2
+        BNE.N    ??LPLD_FTM_Init_4
+        MOVS     R4,#+1
+        LDR.W    R1,??DataTable8_3  ;; 0x4004803c
+        LDR      R1,[R1, #+0]
+        ORRS     R1,R1,#0x2000000
+        LDR.W    R2,??DataTable8_3  ;; 0x4004803c
+        STR      R1,[R2, #+0]
+        B.N      ??LPLD_FTM_Init_1
+??LPLD_FTM_Init_4:
+        LDR      R1,[SP, #+24]
+        LDR.W    R2,??DataTable8_5  ;; 0x400b8000
+        CMP      R1,R2
         BNE.N    ??LPLD_FTM_Init_5
-        MOVS     R5,#+1
-        LDR.W    R0,??DataTable10_4  ;; 0x4004803c
-        LDR      R0,[R0, #+0]
-        ORRS     R0,R0,#0x2000000
-        LDR.W    R1,??DataTable10_4  ;; 0x4004803c
-        STR      R0,[R1, #+0]
-        B.N      ??LPLD_FTM_Init_2
+        MOVS     R4,#+2
+        LDR.W    R1,??DataTable8_6  ;; 0x40048030
+        LDR      R1,[R1, #+0]
+        ORRS     R1,R1,#0x1000000
+        LDR.W    R2,??DataTable8_6  ;; 0x40048030
+        STR      R1,[R2, #+0]
+        B.N      ??LPLD_FTM_Init_1
 ??LPLD_FTM_Init_5:
-        LDR      R0,[SP, #+24]
-        LDR.W    R1,??DataTable10_6  ;; 0x400b8000
-        CMP      R0,R1
-        BNE.N    ??LPLD_FTM_Init_6
-        MOVS     R5,#+2
-        LDR.W    R0,??DataTable10_7  ;; 0x40048030
-        LDR      R0,[R0, #+0]
-        ORRS     R0,R0,#0x1000000
-        LDR.W    R1,??DataTable10_7  ;; 0x40048030
-        STR      R0,[R1, #+0]
-        B.N      ??LPLD_FTM_Init_2
-??LPLD_FTM_Init_6:
         MOVS     R0,#+0
-        B.N      ??LPLD_FTM_Init_7
+        B.N      ??LPLD_FTM_Init_6
 //   91   else if(ftm_init_structure.FTM_Mode & FTM_MODE_IC)
-??LPLD_FTM_Init_3:
-        LDRB     R0,[SP, #+28]
-        LSLS     R0,R0,#+30
-        BPL.N    ??LPLD_FTM_Init_8
+??LPLD_FTM_Init_2:
+        LDRB     R1,[SP, #+28]
+        LSLS     R1,R1,#+30
+        BPL.N    ??LPLD_FTM_Init_7
 //   92   {
 //   93     result = LPLD_FTM_IC_Init(ftm_init_structure);
         ADD      R1,SP,#+24
@@ -285,14 +276,13 @@ LPLD_FTM_Init:
         BL       __aeabi_memcpy4
         POP      {R0-R3}
         BL       LPLD_FTM_IC_Init
-        MOVS     R4,R0
-        B.N      ??LPLD_FTM_Init_4
+        B.N      ??LPLD_FTM_Init_3
 //   94   }
 //   95   else if(ftm_init_structure.FTM_Mode & FTM_MODE_QD)
-??LPLD_FTM_Init_8:
-        LDRB     R0,[SP, #+28]
-        LSLS     R0,R0,#+29
-        BPL.N    ??LPLD_FTM_Init_9
+??LPLD_FTM_Init_7:
+        LDRB     R1,[SP, #+28]
+        LSLS     R1,R1,#+29
+        BPL.N    ??LPLD_FTM_Init_8
 //   96   {
 //   97     result = LPLD_FTM_QD_Init(ftm_init_structure);
         ADD      R1,SP,#+24
@@ -302,14 +292,13 @@ LPLD_FTM_Init:
         BL       __aeabi_memcpy4
         POP      {R0-R3}
         BL       LPLD_FTM_QD_Init
-        MOVS     R4,R0
-        B.N      ??LPLD_FTM_Init_4
+        B.N      ??LPLD_FTM_Init_3
 //   98   }
 //   99   else if(ftm_init_structure.FTM_Mode & FTM_MODE_DEC)
-??LPLD_FTM_Init_9:
-        LDRB     R0,[SP, #+28]
-        LSLS     R0,R0,#+28
-        BPL.N    ??LPLD_FTM_Init_4
+??LPLD_FTM_Init_8:
+        LDRB     R1,[SP, #+28]
+        LSLS     R1,R1,#+28
+        BPL.N    ??LPLD_FTM_Init_3
 //  100   {
 //  101     result = LPLD_FTM_DEC_Init(ftm_init_structure);
         ADD      R1,SP,#+24
@@ -319,47 +308,46 @@ LPLD_FTM_Init:
         BL       __aeabi_memcpy4
         POP      {R0-R3}
         BL       LPLD_FTM_DEC_Init
-        MOVS     R4,R0
 //  102   }
 //  103   
 //  104   if(result == 1)
-??LPLD_FTM_Init_4:
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        CMP      R4,#+1
-        BNE.N    ??LPLD_FTM_Init_10
+??LPLD_FTM_Init_3:
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        CMP      R0,#+1
+        BNE.N    ??LPLD_FTM_Init_9
 //  105   {    
 //  106     //判断是否开启溢出中断
 //  107     if(ftm_init_structure.FTM_Isr!=NULL)
-        LDR      R0,[SP, #+48]
-        CMP      R0,#+0
-        BEQ.N    ??LPLD_FTM_Init_10
+        LDR      R1,[SP, #+48]
+        CMP      R1,#+0
+        BEQ.N    ??LPLD_FTM_Init_9
 //  108     {      
 //  109       FTM_ISR[i] = ftm_init_structure.FTM_Isr;
-        LDR      R0,[SP, #+48]
-        LDR.W    R1,??DataTable10_8
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        STR      R0,[R1, R5, LSL #+2]
+        LDR      R1,[SP, #+48]
+        LDR.W    R2,??DataTable8_7
+        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+        STR      R1,[R2, R4, LSL #+2]
 //  110       if(ftm_init_structure.FTM_ToiEnable == TRUE)
-        LDRB     R0,[SP, #+44]
-        CMP      R0,#+1
-        BNE.N    ??LPLD_FTM_Init_10
+        LDRB     R1,[SP, #+44]
+        CMP      R1,#+1
+        BNE.N    ??LPLD_FTM_Init_9
 //  111       {
 //  112         ftm_init_structure.FTM_Ftmx->SC |= FTM_SC_TOIE_MASK;
-        LDR      R0,[SP, #+24]
-        LDR      R0,[R0, #+0]
-        ORRS     R0,R0,#0x40
         LDR      R1,[SP, #+24]
-        STR      R0,[R1, #+0]
+        LDR      R1,[R1, #+0]
+        ORRS     R1,R1,#0x40
+        LDR      R2,[SP, #+24]
+        STR      R1,[R2, #+0]
 //  113       }
 //  114     }
 //  115   }
 //  116   
 //  117   return result;
-??LPLD_FTM_Init_10:
-        MOVS     R0,R4
+??LPLD_FTM_Init_9:
         UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-??LPLD_FTM_Init_7:
-        POP      {R1-R5}
+??LPLD_FTM_Init_6:
+        ADD      SP,SP,#+16
+        POP      {R4}
         LDR      PC,[SP], #+20    ;; return
 //  118 }
 //  119 
@@ -385,15 +373,15 @@ LPLD_FTM_Deinit:
         PUSH     {R5-R7,LR}
 //  134   if(ftm_init_structure.FTM_Ftmx == FTM0)
         LDR      R0,[SP, #+16]
-        LDR.W    R1,??DataTable10_3  ;; 0x40038000
+        LDR.W    R1,??DataTable8_2  ;; 0x40038000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_Deinit_0
 //  135   {
 //  136     SIM->SCGC6 &= ~SIM_SCGC6_FTM0_MASK;
-        LDR.W    R0,??DataTable10_4  ;; 0x4004803c
+        LDR.W    R0,??DataTable8_3  ;; 0x4004803c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x1000000
-        LDR.W    R1,??DataTable10_4  ;; 0x4004803c
+        LDR.W    R1,??DataTable8_3  ;; 0x4004803c
         STR      R0,[R1, #+0]
 //  137   }
 //  138   else if(ftm_init_structure.FTM_Ftmx == FTM1)
@@ -429,24 +417,24 @@ LPLD_FTM_Deinit:
         LDR      PC,[SP], #+20    ;; return
 ??LPLD_FTM_Deinit_0:
         LDR      R0,[SP, #+16]
-        LDR.W    R1,??DataTable10_5  ;; 0x40039000
+        LDR.W    R1,??DataTable8_4  ;; 0x40039000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_Deinit_3
-        LDR.W    R0,??DataTable10_4  ;; 0x4004803c
+        LDR.W    R0,??DataTable8_3  ;; 0x4004803c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x2000000
-        LDR.W    R1,??DataTable10_4  ;; 0x4004803c
+        LDR.W    R1,??DataTable8_3  ;; 0x4004803c
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_Deinit_1
 ??LPLD_FTM_Deinit_3:
         LDR      R0,[SP, #+16]
-        LDR.W    R1,??DataTable10_6  ;; 0x400b8000
+        LDR.W    R1,??DataTable8_5  ;; 0x400b8000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_Deinit_4
-        LDR.W    R0,??DataTable10_7  ;; 0x40048030
+        LDR.W    R0,??DataTable8_6  ;; 0x40048030
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x1000000
-        LDR.W    R1,??DataTable10_7  ;; 0x40048030
+        LDR.W    R1,??DataTable8_6  ;; 0x40048030
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_Deinit_1
 ??LPLD_FTM_Deinit_4:
@@ -517,44 +505,37 @@ LPLD_FTM_Deinit:
 //  217 uint8 LPLD_FTM_PWM_Enable(FTM_Type *ftmx, FtmChnEnum_Type chn, uint32 duty, PortPinsEnum_Type pin, uint8 align)
 //  218 {
 LPLD_FTM_PWM_Enable:
-        PUSH     {R3-R7,LR}
+        PUSH     {R4-R6,LR}
+        SUB      SP,SP,#+8
         MOVS     R4,R0
         MOVS     R5,R1
         MOVS     R6,R2
-        MOVS     R7,R3
+        MOVS     R2,R3
 //  219   uint32 cv;
 //  220   vuint32 mod;
 //  221   
 //  222   //参数检查
 //  223   ASSERT( duty <= 10000 );                  //判断占空比
-        MOVW     R0,#+10001
-        CMP      R6,R0
-        BCC.N    ??LPLD_FTM_PWM_Enable_0
-        MOVS     R1,#+223
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //  224   
 //  225   if(!LPLD_FTM_PinInit(ftmx, chn, pin))
-??LPLD_FTM_PWM_Enable_0:
-        MOVS     R2,R7
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         MOVS     R1,R5
         UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
         MOVS     R0,R4
         BL       LPLD_FTM_PinInit
         CMP      R0,#+0
-        BNE.N    ??LPLD_FTM_PWM_Enable_1
+        BNE.N    ??LPLD_FTM_PWM_Enable_0
 //  226     return 0;
         MOVS     R0,#+0
-        B.N      ??LPLD_FTM_PWM_Enable_2
-??LPLD_FTM_PWM_Enable_1:
+        B.N      ??LPLD_FTM_PWM_Enable_1
+??LPLD_FTM_PWM_Enable_0:
         LDR      R0,[SP, #+24]
 //  227   
 //  228   //如果是右对齐，100%-占空比
 //  229   if(align == ALIGN_RIGHT)
         UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
         CMP      R0,#+36
-        BNE.N    ??LPLD_FTM_PWM_Enable_3
+        BNE.N    ??LPLD_FTM_PWM_Enable_2
 //  230   {
 //  231     duty = 10000 - duty;
         MOVW     R1,#+10000
@@ -563,7 +544,7 @@ LPLD_FTM_PWM_Enable:
 //  233   
 //  234   //占空比 = (CnV-CNTIN)/(MOD-CNTIN+1)
 //  235   mod = ftmx->MOD;
-??LPLD_FTM_PWM_Enable_3:
+??LPLD_FTM_PWM_Enable_2:
         LDR      R1,[R4, #+8]
         STR      R1,[SP, #+0]
 //  236   cv = (duty*(mod-0+1)+0)/10000;
@@ -589,8 +570,8 @@ LPLD_FTM_PWM_Enable:
 //  244   
 //  245   return 1;
         MOVS     R0,#+1
-??LPLD_FTM_PWM_Enable_2:
-        POP      {R1,R4-R7,PC}    ;; return
+??LPLD_FTM_PWM_Enable_1:
+        POP      {R1,R2,R4-R6,PC}  ;; return
 //  246 }
 //  247 
 //  248 /*
@@ -627,58 +608,48 @@ LPLD_FTM_PWM_Enable:
 //  276 uint8 LPLD_FTM_PWM_ChangeDuty(FTM_Type *ftmx, FtmChnEnum_Type chn, uint32 duty)
 //  277 {
 LPLD_FTM_PWM_ChangeDuty:
-        PUSH     {R4-R6,LR}
-        SUB      SP,SP,#+8
-        MOVS     R4,R0
-        MOVS     R5,R1
-        MOVS     R6,R2
+        SUB      SP,SP,#+4
 //  278   uint32 cv;
 //  279   vuint32 mod;
 //  280   
 //  281   //参数检查
 //  282   ASSERT( duty <= 10000 );                  //判断占空比
-        MOVW     R0,#+10001
-        CMP      R6,R0
-        BCC.N    ??LPLD_FTM_PWM_ChangeDuty_0
-        MOV      R1,#+282
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //  283     
 //  284   //如果是右对齐，100%-占空比
 //  285   if(ftmx->CONTROLS[chn].CnSC & FTM_CnSC_ELSA_MASK)
-??LPLD_FTM_PWM_ChangeDuty_0:
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        ADDS     R0,R4,R5, LSL #+3
-        LDR      R0,[R0, #+12]
-        LSLS     R0,R0,#+29
-        BPL.N    ??LPLD_FTM_PWM_ChangeDuty_1
+        UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+        ADDS     R3,R0,R1, LSL #+3
+        LDR      R3,[R3, #+12]
+        LSLS     R3,R3,#+29
+        BPL.N    ??LPLD_FTM_PWM_ChangeDuty_0
 //  286   {
 //  287     duty = 10000 - duty;
-        MOVW     R0,#+10000
-        SUBS     R6,R0,R6
+        MOVW     R3,#+10000
+        SUBS     R2,R3,R2
 //  288   }
 //  289   
 //  290   //占空比 = (CnV-CNTIN)/(MOD-CNTIN+1)
 //  291   mod = ftmx->MOD;
-??LPLD_FTM_PWM_ChangeDuty_1:
-        LDR      R0,[R4, #+8]
-        STR      R0,[SP, #+0]
+??LPLD_FTM_PWM_ChangeDuty_0:
+        LDR      R3,[R0, #+8]
+        STR      R3,[SP, #+0]
 //  292   cv = (duty*(mod-0+1)+0)/10000;
-        LDR      R0,[SP, #+0]
-        ADDS     R0,R0,#+1
-        MUL      R0,R0,R6
-        MOVW     R1,#+10000
-        UDIV     R0,R0,R1
+        LDR      R3,[SP, #+0]
+        ADDS     R3,R3,#+1
+        MULS     R2,R3,R2
+        MOVW     R3,#+10000
+        UDIV     R2,R2,R3
 //  293  
 //  294   // 配置FTM通道值
 //  295   ftmx->CONTROLS[chn].CnV = cv;
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        ADDS     R1,R4,R5, LSL #+3
-        STR      R0,[R1, #+16]
+        UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+        ADDS     R0,R0,R1, LSL #+3
+        STR      R2,[R0, #+16]
 //  296   
 //  297   return 1;
         MOVS     R0,#+1
-        POP      {R1,R2,R4-R6,PC}  ;; return
+        ADD      SP,SP,#+4
+        BX       LR               ;; return
 //  298 }
 //  299 
 //  300 /*
@@ -1181,7 +1152,7 @@ LPLD_FTM_EnableIrq:
         LDR      R0,[SP, #+8]
 //  630   
 //  631   if(ftmx == FTM0)
-        LDR.W    R1,??DataTable10_3  ;; 0x40038000
+        LDR.W    R1,??DataTable8_2  ;; 0x40038000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_EnableIrq_0
 //  632     i=0;
@@ -1209,13 +1180,13 @@ LPLD_FTM_EnableIrq:
         POP      {R1}
         LDR      PC,[SP], #+20    ;; return
 ??LPLD_FTM_EnableIrq_0:
-        LDR.W    R1,??DataTable10_5  ;; 0x40039000
+        LDR.W    R1,??DataTable8_4  ;; 0x40039000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_EnableIrq_3
         MOVS     R0,#+1
         B.N      ??LPLD_FTM_EnableIrq_1
 ??LPLD_FTM_EnableIrq_3:
-        LDR.W    R1,??DataTable10_6  ;; 0x400b8000
+        LDR.W    R1,??DataTable8_5  ;; 0x400b8000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_EnableIrq_4
         MOVS     R0,#+2
@@ -1251,7 +1222,7 @@ LPLD_FTM_DisableIrq:
         LDR      R0,[SP, #+8]
 //  666   
 //  667   if(ftmx == FTM0)
-        LDR.W    R1,??DataTable10_3  ;; 0x40038000
+        LDR.W    R1,??DataTable8_2  ;; 0x40038000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_DisableIrq_0
 //  668     i=0;
@@ -1279,13 +1250,13 @@ LPLD_FTM_DisableIrq:
         POP      {R1}
         LDR      PC,[SP], #+20    ;; return
 ??LPLD_FTM_DisableIrq_0:
-        LDR.W    R1,??DataTable10_5  ;; 0x40039000
+        LDR.W    R1,??DataTable8_4  ;; 0x40039000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_DisableIrq_3
         MOVS     R0,#+1
         B.N      ??LPLD_FTM_DisableIrq_1
 ??LPLD_FTM_DisableIrq_3:
-        LDR.W    R1,??DataTable10_6  ;; 0x400b8000
+        LDR.W    R1,??DataTable8_5  ;; 0x400b8000
         CMP      R0,R1
         BNE.N    ??LPLD_FTM_DisableIrq_4
         MOVS     R0,#+2
@@ -1417,138 +1388,125 @@ LPLD_FTM_QD_Disable:
 //  746 {
 LPLD_FTM_PWM_Init:
         PUSH     {R0-R3}
-        PUSH     {R4-R8,LR}
+        PUSH     {R4-R7,LR}
 //  747   uint32 bus_clk_hz;
 //  748   uint32 mod, mod2;
 //  749   uint8 ps;
 //  750   uint32 freq = ftm_init_structure.FTM_PwmFreq;
-        LDR      R4,[SP, #+32]
+        LDR      R0,[SP, #+28]
 //  751   uint32 dt_en = ftm_init_structure.FTM_PwmDeadtimeCfg;
-        LDR      R5,[SP, #+36]
+        LDR      R1,[SP, #+32]
 //  752   uint8 dt_div = ftm_init_structure.FTM_PwmDeadtimeDiv;
-        LDRB     R6,[SP, #+40]
+        LDRB     R2,[SP, #+36]
 //  753   uint8 dt_val = ftm_init_structure.FTM_PwmDeadtimeVal;
-        LDRB     R7,[SP, #+41]
+        LDRB     R3,[SP, #+37]
 //  754   FTM_Type *ftmx = ftm_init_structure.FTM_Ftmx;
-        LDR      R8,[SP, #+24]
+        LDR      R4,[SP, #+20]
 //  755   
 //  756   //参数检查
 //  757   ASSERT( freq );                  //判断频率
-        CMP      R4,#+0
-        BNE.N    ??LPLD_FTM_PWM_Init_0
-        MOVW     R1,#+757
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //  758   ASSERT( dt_val<=63 );            //判断死区插入值
-??LPLD_FTM_PWM_Init_0:
-        UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-        CMP      R7,#+64
-        BLT.N    ??LPLD_FTM_PWM_Init_1
-        MOVW     R1,#+758
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //  759   
 //  760   bus_clk_hz = g_bus_clock;
-??LPLD_FTM_PWM_Init_1:
-        LDR.W    R0,??DataTable14
-        LDR      R0,[R0, #+0]
+        LDR.W    R5,??DataTable12
+        LDR      R5,[R5, #+0]
 //  761   
 //  762   if(freq>bus_clk_hz) return 0;
-        CMP      R0,R4
-        BCS.N    ??LPLD_FTM_PWM_Init_2
+        CMP      R5,R0
+        BCS.N    ??LPLD_FTM_PWM_Init_0
         MOVS     R0,#+0
-        B.N      ??LPLD_FTM_PWM_Init_3
+        B.N      ??LPLD_FTM_PWM_Init_1
 //  763   
 //  764   if((mod=bus_clk_hz/(freq*128)) < 0xFFFFu)
-??LPLD_FTM_PWM_Init_2:
-        MOVS     R1,#+128
-        MUL      R1,R1,R4
-        UDIV     R3,R0,R1
-        MOVW     R1,#+65535
-        CMP      R3,R1
-        BCS.N    ??LPLD_FTM_PWM_Init_4
+??LPLD_FTM_PWM_Init_0:
+        MOVS     R6,#+128
+        MUL      R6,R6,R0
+        UDIV     R12,R5,R6
+        MOVW     R6,#+65535
+        CMP      R12,R6
+        BCS.N    ??LPLD_FTM_PWM_Init_2
 //  765   {
 //  766     ps = 7;
-        MOVS     R1,#+7
+        MOVS     R6,#+7
 //  767     mod2=mod;
-        MOVS     R2,R3
+        MOV      R7,R12
 //  768     if((mod=bus_clk_hz/(freq*64)) < 0xFFFFu)
-        MOVS     R3,#+64
-        MUL      R3,R3,R4
-        UDIV     R3,R0,R3
-        MOVW     R12,#+65535
-        CMP      R3,R12
-        BCS.N    ??LPLD_FTM_PWM_Init_5
+        MOVS     R12,#+64
+        MUL      R12,R12,R0
+        UDIV     R12,R5,R12
+        MOVW     LR,#+65535
+        CMP      R12,LR
+        BCS.N    ??LPLD_FTM_PWM_Init_3
 //  769     {
 //  770       ps = 6;  
-        MOVS     R1,#+6
+        MOVS     R6,#+6
 //  771       mod2=mod;  
-        MOVS     R2,R3
+        MOV      R7,R12
 //  772       if((mod=bus_clk_hz/(freq*32)) < 0xFFFFu)
-        LSLS     R3,R4,#+5
-        UDIV     R3,R0,R3
-        MOVW     R12,#+65535
-        CMP      R3,R12
-        BCS.N    ??LPLD_FTM_PWM_Init_5
+        LSLS     R12,R0,#+5
+        UDIV     R12,R5,R12
+        MOVW     LR,#+65535
+        CMP      R12,LR
+        BCS.N    ??LPLD_FTM_PWM_Init_3
 //  773       {
 //  774         ps = 5;  
-        MOVS     R1,#+5
+        MOVS     R6,#+5
 //  775         mod2=mod;
-        MOVS     R2,R3
+        MOV      R7,R12
 //  776         if((mod=bus_clk_hz/(freq*16)) < 0xFFFFu)
-        LSLS     R3,R4,#+4
-        UDIV     R3,R0,R3
-        MOVW     R12,#+65535
-        CMP      R3,R12
-        BCS.N    ??LPLD_FTM_PWM_Init_5
+        LSLS     R12,R0,#+4
+        UDIV     R12,R5,R12
+        MOVW     LR,#+65535
+        CMP      R12,LR
+        BCS.N    ??LPLD_FTM_PWM_Init_3
 //  777         {
 //  778           ps = 4;  
-        MOVS     R1,#+4
+        MOVS     R6,#+4
 //  779           mod2=mod;   
-        MOVS     R2,R3
+        MOV      R7,R12
 //  780           if((mod=bus_clk_hz/(freq*8)) < 0xFFFFu)
-        LSLS     R3,R4,#+3
-        UDIV     R3,R0,R3
-        MOVW     R12,#+65535
-        CMP      R3,R12
-        BCS.N    ??LPLD_FTM_PWM_Init_5
+        LSLS     R12,R0,#+3
+        UDIV     R12,R5,R12
+        MOVW     LR,#+65535
+        CMP      R12,LR
+        BCS.N    ??LPLD_FTM_PWM_Init_3
 //  781           {
 //  782             ps = 3;
-        MOVS     R1,#+3
+        MOVS     R6,#+3
 //  783             mod2=mod;
-        MOVS     R2,R3
+        MOV      R7,R12
 //  784             if((mod=bus_clk_hz/(freq*4)) < 0xFFFFu)
-        LSLS     R3,R4,#+2
-        UDIV     R3,R0,R3
-        MOVW     R12,#+65535
-        CMP      R3,R12
-        BCS.N    ??LPLD_FTM_PWM_Init_5
+        LSLS     R12,R0,#+2
+        UDIV     R12,R5,R12
+        MOVW     LR,#+65535
+        CMP      R12,LR
+        BCS.N    ??LPLD_FTM_PWM_Init_3
 //  785             {
 //  786               ps = 2;
-        MOVS     R1,#+2
+        MOVS     R6,#+2
 //  787               mod2=mod;
-        MOVS     R2,R3
+        MOV      R7,R12
 //  788               if((mod=bus_clk_hz/(freq*2)) < 0xFFFFu)
-        LSLS     R3,R4,#+1
-        UDIV     R3,R0,R3
-        MOVW     R12,#+65535
-        CMP      R3,R12
-        BCS.N    ??LPLD_FTM_PWM_Init_5
+        LSLS     R12,R0,#+1
+        UDIV     R12,R5,R12
+        MOVW     LR,#+65535
+        CMP      R12,LR
+        BCS.N    ??LPLD_FTM_PWM_Init_3
 //  789               {
 //  790                 ps = 1;
-        MOVS     R1,#+1
+        MOVS     R6,#+1
 //  791                 mod2=mod;
-        MOVS     R2,R3
+        MOV      R7,R12
 //  792                 if((mod=bus_clk_hz/(freq*1)) < 0xFFFFu)
-        UDIV     R3,R0,R4
+        UDIV     R12,R5,R0
         MOVW     R0,#+65535
-        CMP      R3,R0
-        BCS.N    ??LPLD_FTM_PWM_Init_5
+        CMP      R12,R0
+        BCS.N    ??LPLD_FTM_PWM_Init_3
 //  793                 {
 //  794                   ps = 0;
-        MOVS     R1,#+0
+        MOVS     R6,#+0
 //  795                   mod2=mod;
-        MOVS     R2,R3
+        MOV      R7,R12
 //  796                 }
 //  797               }
 //  798             }
@@ -1563,50 +1521,50 @@ LPLD_FTM_PWM_Init:
 //  807   }
 //  808   
 //  809   ftmx->SC = 0;
-??LPLD_FTM_PWM_Init_5:
+??LPLD_FTM_PWM_Init_3:
         MOVS     R0,#+0
-        STR      R0,[R8, #+0]
+        STR      R0,[R4, #+0]
 //  810   
 //  811   // 设置PWM周期及占空比
 //  812   //    PWM周期 = (MOD-CNTIN+1)*FTM时钟周期 :
 //  813   // 配置FTM计数初始值
 //  814   ftmx->CNT = 0;
         MOVS     R0,#+0
-        STR      R0,[R8, #+4]
+        STR      R0,[R4, #+4]
 //  815   ftmx->CNTIN = 0;
         MOVS     R0,#+0
-        STR      R0,[R8, #+76]
+        STR      R0,[R4, #+76]
 //  816   // 配置FTM计数MOD值
 //  817   ftmx->MOD = mod2;
-        STR      R2,[R8, #+8]
+        STR      R7,[R4, #+8]
 //  818   
 //  819   ftmx->DEADTIME = FTM_DEADTIME_DTPS(dt_div) | FTM_DEADTIME_DTVAL(dt_val);
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        LSLS     R0,R6,#+6
+        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+        LSLS     R0,R2,#+6
         ANDS     R0,R0,#0xC0
-        UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-        ANDS     R2,R7,#0x3F
+        UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+        ANDS     R2,R3,#0x3F
         ORRS     R0,R2,R0
-        STR      R0,[R8, #+104]
+        STR      R0,[R4, #+104]
 //  820   ftmx->COMBINE = dt_en;        //使能死区
-        STR      R5,[R8, #+100]
+        STR      R1,[R4, #+100]
 //  821   
 //  822   // 配置FTM控制寄存器
 //  823   // 禁用中断, 加计数模式, 时钟源:System clock（Bus Clk）, 分频系数:8
 //  824   // 假设SysClk = 50MHz, SC_PS=3, FTM Clk = 50MHz/2^3 = 6.25MHz
 //  825   ftmx->SC = FTM_SC_CLKS(1)|FTM_SC_PS(ps);
-        UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
-        ANDS     R0,R1,#0x7
+        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+        ANDS     R0,R6,#0x7
         ORRS     R0,R0,#0x8
-        STR      R0,[R8, #+0]
+        STR      R0,[R4, #+0]
 //  826   
 //  827   return 1;
         MOVS     R0,#+1
-        B.N      ??LPLD_FTM_PWM_Init_3
-??LPLD_FTM_PWM_Init_4:
+        B.N      ??LPLD_FTM_PWM_Init_1
+??LPLD_FTM_PWM_Init_2:
         MOVS     R0,#+0
-??LPLD_FTM_PWM_Init_3:
-        POP      {R4-R8}
+??LPLD_FTM_PWM_Init_1:
+        POP      {R4-R7}
         LDR      PC,[SP], #+20    ;; return
 //  828 }
 //  829 
@@ -1621,78 +1579,70 @@ LPLD_FTM_PWM_Init:
 //  835 {
 LPLD_FTM_IC_Init:
         PUSH     {R0-R3}
-        PUSH     {R4-R6,LR}
 //  836   uint8 i;
 //  837   uint8 ps = ftm_init_structure.FTM_ClkDiv;
-        LDRB     R5,[SP, #+35]
+        LDRB     R2,[SP, #+19]
 //  838   FTM_ISR_CALLBACK isr_func = ftm_init_structure.FTM_Isr;
-        LDR      R4,[SP, #+40]
+        LDR      R0,[SP, #+24]
 //  839   FTM_Type *ftmx = ftm_init_structure.FTM_Ftmx;
-        LDR      R6,[SP, #+16]
+        LDR      R1,[SP, #+0]
 //  840   
 //  841   //参数检查
 //  842   ASSERT( ps <= 7);             //时钟分频系数
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        CMP      R5,#+8
-        BLT.N    ??LPLD_FTM_IC_Init_0
-        MOVW     R1,#+842
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //  843   
 //  844   ftmx->CONF=FTM_CONF_BDMMODE(0x3);
-??LPLD_FTM_IC_Init_0:
-        MOVS     R0,#+192
-        STR      R0,[R6, #+132]
+        MOVS     R3,#+192
+        STR      R3,[R1, #+132]
 //  845   
 //  846   ftmx->SC = 0;
-        MOVS     R0,#+0
-        STR      R0,[R6, #+0]
+        MOVS     R3,#+0
+        STR      R3,[R1, #+0]
 //  847   
 //  848   ftmx->CNT = 0;
-        MOVS     R0,#+0
-        STR      R0,[R6, #+4]
+        MOVS     R3,#+0
+        STR      R3,[R1, #+4]
 //  849   ftmx->CNTIN = 0;
-        MOVS     R0,#+0
-        STR      R0,[R6, #+76]
+        MOVS     R3,#+0
+        STR      R3,[R1, #+76]
 //  850   ftmx->MOD = 0;                           
-        MOVS     R0,#+0
-        STR      R0,[R6, #+8]
+        MOVS     R3,#+0
+        STR      R3,[R1, #+8]
 //  851   ftmx->QDCTRL = (~FTM_QDCTRL_QUADEN_MASK); //关闭正交解码
-        MVNS     R0,#+1
-        STR      R0,[R6, #+128]
+        MVNS     R3,#+1
+        STR      R3,[R1, #+128]
 //  852   ftmx->FILTER = 0x00;                      //关过虑器
-        MOVS     R0,#+0
-        STR      R0,[R6, #+120]
+        MOVS     R3,#+0
+        STR      R3,[R1, #+120]
 //  853   
 //  854   // 配置FTM控制寄存器
 //  855   // 将FTM Counter配置成Free Counter
 //  856   // 禁用中断, 加计数模式, 时钟源:System clock（Bus Clk）, 分频系数:PS
 //  857   // 假设SysClk = 50MHz, SC_PS=3, FTM Clk = 50MHz/2^3 = 6.25MHz
 //  858   ftmx->SC |= FTM_SC_CLKS(1)|FTM_SC_PS(ps);
-        LDR      R0,[R6, #+0]
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        ANDS     R1,R5,#0x7
-        ORRS     R1,R1,#0x8
-        ORRS     R0,R1,R0
-        STR      R0,[R6, #+0]
+        LDR      R3,[R1, #+0]
+        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+        ANDS     R2,R2,#0x7
+        ORRS     R2,R2,#0x8
+        ORRS     R2,R2,R3
+        STR      R2,[R1, #+0]
 //  859   //ftmx->SC |= FTM_SC_TOIE_MASK;             //使能计数溢出中断
 //  860   ftmx->SC &= (~FTM_SC_CPWMS_MASK);         //FTM加计数
-        LDR      R0,[R6, #+0]
-        BICS     R0,R0,#0x20
-        STR      R0,[R6, #+0]
+        LDR      R2,[R1, #+0]
+        BICS     R2,R2,#0x20
+        STR      R2,[R1, #+0]
 //  861 
 //  862   //设置中断函数入口地址并开启中断
 //  863   if(isr_func!=NULL)
-        MOVS     R0,R4
-        CMP      R0,#+0
-        BEQ.N    ??LPLD_FTM_IC_Init_1
+        MOVS     R2,R0
+        CMP      R2,#+0
+        BEQ.N    ??LPLD_FTM_IC_Init_0
 //  864   {
 //  865     if(ftmx == FTM0)
-        LDR.W    R0,??DataTable10_3  ;; 0x40038000
-        CMP      R6,R0
-        BNE.N    ??LPLD_FTM_IC_Init_2
+        LDR.W    R2,??DataTable8_2  ;; 0x40038000
+        CMP      R1,R2
+        BNE.N    ??LPLD_FTM_IC_Init_1
 //  866       i=0;
-        MOVS     R0,#+0
+        MOVS     R1,#+0
 //  867     else if(ftmx == FTM1)
 //  868       i=1;
 //  869     else if(ftmx == FTM2)
@@ -1704,33 +1654,33 @@ LPLD_FTM_IC_Init:
 //  875     else
 //  876       return 0;
 //  877     FTM_ISR[i] = isr_func;
-??LPLD_FTM_IC_Init_3:
-        LDR.W    R1,??DataTable10_8
-        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-        STR      R4,[R1, R0, LSL #+2]
+??LPLD_FTM_IC_Init_2:
+        LDR.W    R2,??DataTable8_7
+        UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+        STR      R0,[R2, R1, LSL #+2]
 //  878   }
 //  879 
 //  880   return 1;
+??LPLD_FTM_IC_Init_0:
+        MOVS     R0,#+1
+??LPLD_FTM_IC_Init_3:
+        ADD      SP,SP,#+16
+        BX       LR               ;; return
 ??LPLD_FTM_IC_Init_1:
-        MOVS     R0,#+1
+        LDR.W    R2,??DataTable8_4  ;; 0x40039000
+        CMP      R1,R2
+        BNE.N    ??LPLD_FTM_IC_Init_4
+        MOVS     R1,#+1
+        B.N      ??LPLD_FTM_IC_Init_2
 ??LPLD_FTM_IC_Init_4:
-        POP      {R4-R6}
-        LDR      PC,[SP], #+20    ;; return
-??LPLD_FTM_IC_Init_2:
-        LDR.W    R0,??DataTable10_5  ;; 0x40039000
-        CMP      R6,R0
+        LDR.W    R2,??DataTable8_5  ;; 0x400b8000
+        CMP      R1,R2
         BNE.N    ??LPLD_FTM_IC_Init_5
-        MOVS     R0,#+1
-        B.N      ??LPLD_FTM_IC_Init_3
+        MOVS     R1,#+2
+        B.N      ??LPLD_FTM_IC_Init_2
 ??LPLD_FTM_IC_Init_5:
-        LDR.W    R0,??DataTable10_6  ;; 0x400b8000
-        CMP      R6,R0
-        BNE.N    ??LPLD_FTM_IC_Init_6
-        MOVS     R0,#+2
-        B.N      ??LPLD_FTM_IC_Init_3
-??LPLD_FTM_IC_Init_6:
         MOVS     R0,#+0
-        B.N      ??LPLD_FTM_IC_Init_4
+        B.N      ??LPLD_FTM_IC_Init_3
 //  881 }
 //  882 
 //  883 /*
@@ -1745,7 +1695,7 @@ LPLD_FTM_IC_Init:
 //  889   //根据ftmx使能相应pin的ftm功能
 //  890   if(ftmx == FTM0)
 LPLD_FTM_PinInit:
-        LDR.W    R3,??DataTable14_1  ;; 0x40038000
+        LDR.W    R3,??DataTable12_1  ;; 0x40038000
         CMP      R0,R3
         BNE.W    ??LPLD_FTM_PinInit_0
 //  891   {
@@ -1773,11 +1723,11 @@ LPLD_FTM_PinInit:
         CMP      R2,#+3
         BNE.N    ??LPLD_FTM_PinInit_10
 //  896         PORTA->PCR[3] = PORTA->PCR[3] & ~PORT_PCR_MUX_MASK | PORT_PCR_MUX(3); 
-        LDR.W    R0,??DataTable14_2  ;; 0x4004900c
+        LDR.W    R0,??DataTable12_2  ;; 0x4004900c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_2  ;; 0x4004900c
+        LDR.W    R1,??DataTable12_2  ;; 0x4004900c
         STR      R0,[R1, #+0]
 //  897       else if(pin == PTC1)
 //  898         PORTC->PCR[1] = PORTC->PCR[1] & ~PORT_PCR_MUX_MASK | PORT_PCR_MUX(4);
@@ -2020,11 +1970,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+61
         BNE.N    ??LPLD_FTM_PinInit_14
-        LDR.W    R0,??DataTable14_3  ;; 0x4004b004
+        LDR.W    R0,??DataTable12_3  ;; 0x4004b004
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x400
-        LDR.W    R1,??DataTable14_3  ;; 0x4004b004
+        LDR.W    R1,??DataTable12_3  ;; 0x4004b004
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_11
 ??LPLD_FTM_PinInit_14:
@@ -2034,11 +1984,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+4
         BNE.N    ??LPLD_FTM_PinInit_15
-        LDR.W    R0,??DataTable14_4  ;; 0x40049010
+        LDR.W    R0,??DataTable12_4  ;; 0x40049010
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_4  ;; 0x40049010
+        LDR.W    R1,??DataTable12_4  ;; 0x40049010
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_16:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2046,11 +1996,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+62
         BNE.N    ??LPLD_FTM_PinInit_17
-        LDR.W    R0,??DataTable14_5  ;; 0x4004b008
+        LDR.W    R0,??DataTable12_5  ;; 0x4004b008
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x400
-        LDR.W    R1,??DataTable14_5  ;; 0x4004b008
+        LDR.W    R1,??DataTable12_5  ;; 0x4004b008
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_16
 ??LPLD_FTM_PinInit_17:
@@ -2060,11 +2010,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+5
         BNE.N    ??LPLD_FTM_PinInit_18
-        LDR.W    R0,??DataTable14_6  ;; 0x40049014
+        LDR.W    R0,??DataTable12_6  ;; 0x40049014
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_6  ;; 0x40049014
+        LDR.W    R1,??DataTable12_6  ;; 0x40049014
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_19:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2072,11 +2022,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+63
         BNE.N    ??LPLD_FTM_PinInit_20
-        LDR.W    R0,??DataTable14_7  ;; 0x4004b00c
+        LDR.W    R0,??DataTable12_7  ;; 0x4004b00c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x400
-        LDR.W    R1,??DataTable14_7  ;; 0x4004b00c
+        LDR.W    R1,??DataTable12_7  ;; 0x4004b00c
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_19
 ??LPLD_FTM_PinInit_20:
@@ -2086,11 +2036,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+6
         BNE.N    ??LPLD_FTM_PinInit_21
-        LDR.W    R0,??DataTable14_8  ;; 0x40049018
+        LDR.W    R0,??DataTable12_8  ;; 0x40049018
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_8  ;; 0x40049018
+        LDR.W    R1,??DataTable12_8  ;; 0x40049018
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_22:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2098,11 +2048,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+64
         BNE.N    ??LPLD_FTM_PinInit_23
-        LDR.W    R0,??DataTable14_9  ;; 0x4004b010
+        LDR.W    R0,??DataTable12_9  ;; 0x4004b010
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x400
-        LDR.W    R1,??DataTable14_9  ;; 0x4004b010
+        LDR.W    R1,??DataTable12_9  ;; 0x4004b010
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_22
 ??LPLD_FTM_PinInit_23:
@@ -2112,11 +2062,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+7
         BNE.N    ??LPLD_FTM_PinInit_24
-        LDR.W    R0,??DataTable14_10  ;; 0x4004901c
+        LDR.W    R0,??DataTable12_10  ;; 0x4004901c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_10  ;; 0x4004901c
+        LDR.W    R1,??DataTable12_10  ;; 0x4004901c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_25:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2124,11 +2074,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+96
         BNE.N    ??LPLD_FTM_PinInit_26
-        LDR.W    R0,??DataTable14_11  ;; 0x4004c010
+        LDR.W    R0,??DataTable12_11  ;; 0x4004c010
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x400
-        LDR.W    R1,??DataTable14_11  ;; 0x4004c010
+        LDR.W    R1,??DataTable12_11  ;; 0x4004c010
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_25
 ??LPLD_FTM_PinInit_26:
@@ -2138,11 +2088,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+0
         BNE.N    ??LPLD_FTM_PinInit_27
-        LDR.W    R0,??DataTable14_12  ;; 0x40049000
+        LDR.W    R0,??DataTable12_12  ;; 0x40049000
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_12  ;; 0x40049000
+        LDR.W    R1,??DataTable12_12  ;; 0x40049000
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_28:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2150,11 +2100,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+97
         BNE.N    ??LPLD_FTM_PinInit_29
-        LDR.W    R0,??DataTable14_13  ;; 0x4004c014
+        LDR.W    R0,??DataTable12_13  ;; 0x4004c014
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x400
-        LDR.W    R1,??DataTable14_13  ;; 0x4004c014
+        LDR.W    R1,??DataTable12_13  ;; 0x4004c014
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_28
 ??LPLD_FTM_PinInit_29:
@@ -2164,11 +2114,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+1
         BNE.N    ??LPLD_FTM_PinInit_30
-        LDR.W    R0,??DataTable14_14  ;; 0x40049004
+        LDR.W    R0,??DataTable12_14  ;; 0x40049004
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_14  ;; 0x40049004
+        LDR.W    R1,??DataTable12_14  ;; 0x40049004
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_31:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2176,11 +2126,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+98
         BNE.N    ??LPLD_FTM_PinInit_32
-        LDR.W    R0,??DataTable14_15  ;; 0x4004c018
+        LDR.W    R0,??DataTable12_15  ;; 0x4004c018
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x400
-        LDR.W    R1,??DataTable14_15  ;; 0x4004c018
+        LDR.W    R1,??DataTable12_15  ;; 0x4004c018
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_31
 ??LPLD_FTM_PinInit_32:
@@ -2190,11 +2140,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+2
         BNE.N    ??LPLD_FTM_PinInit_33
-        LDR.W    R0,??DataTable14_16  ;; 0x40049008
+        LDR.W    R0,??DataTable12_16  ;; 0x40049008
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_16  ;; 0x40049008
+        LDR.W    R1,??DataTable12_16  ;; 0x40049008
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_34:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2202,11 +2152,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+99
         BNE.N    ??LPLD_FTM_PinInit_35
-        LDR.W    R0,??DataTable14_17  ;; 0x4004c01c
+        LDR.W    R0,??DataTable12_17  ;; 0x4004c01c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x400
-        LDR.W    R1,??DataTable14_17  ;; 0x4004c01c
+        LDR.W    R1,??DataTable12_17  ;; 0x4004c01c
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_34
 ??LPLD_FTM_PinInit_35:
@@ -2216,7 +2166,7 @@ LPLD_FTM_PinInit:
         MOVS     R0,#+0
         B.N      ??LPLD_FTM_PinInit_13
 ??LPLD_FTM_PinInit_0:
-        LDR.W    R3,??DataTable14_18  ;; 0x40039000
+        LDR.W    R3,??DataTable12_18  ;; 0x40039000
         CMP      R0,R3
         BNE.W    ??LPLD_FTM_PinInit_36
         UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
@@ -2233,11 +2183,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+8
         BNE.N    ??LPLD_FTM_PinInit_42
-        LDR.W    R0,??DataTable14_19  ;; 0x40049020
+        LDR.W    R0,??DataTable12_19  ;; 0x40049020
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_19  ;; 0x40049020
+        LDR.W    R1,??DataTable12_19  ;; 0x40049020
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_43:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2245,22 +2195,22 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+12
         BNE.N    ??LPLD_FTM_PinInit_44
-        LDR.W    R0,??DataTable14_20  ;; 0x40049030
+        LDR.W    R0,??DataTable12_20  ;; 0x40049030
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_20  ;; 0x40049030
+        LDR.W    R1,??DataTable12_20  ;; 0x40049030
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_43
 ??LPLD_FTM_PinInit_44:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+32
         BNE.N    ??LPLD_FTM_PinInit_45
-        LDR.W    R0,??DataTable14_21  ;; 0x4004a000
+        LDR.W    R0,??DataTable12_21  ;; 0x4004a000
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_21  ;; 0x4004a000
+        LDR.W    R1,??DataTable12_21  ;; 0x4004a000
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_43
 ??LPLD_FTM_PinInit_45:
@@ -2270,11 +2220,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+9
         BNE.N    ??LPLD_FTM_PinInit_46
-        LDR.W    R0,??DataTable14_22  ;; 0x40049024
+        LDR.W    R0,??DataTable12_22  ;; 0x40049024
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_22  ;; 0x40049024
+        LDR.W    R1,??DataTable12_22  ;; 0x40049024
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_47:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2282,22 +2232,22 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+13
         BNE.N    ??LPLD_FTM_PinInit_48
-        LDR.W    R0,??DataTable14_23  ;; 0x40049034
+        LDR.W    R0,??DataTable12_23  ;; 0x40049034
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_23  ;; 0x40049034
+        LDR.W    R1,??DataTable12_23  ;; 0x40049034
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_47
 ??LPLD_FTM_PinInit_48:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+33
         BNE.N    ??LPLD_FTM_PinInit_49
-        LDR.W    R0,??DataTable14_24  ;; 0x4004a004
+        LDR.W    R0,??DataTable12_24  ;; 0x4004a004
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_24  ;; 0x4004a004
+        LDR.W    R1,??DataTable12_24  ;; 0x4004a004
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_47
 ??LPLD_FTM_PinInit_49:
@@ -2307,11 +2257,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+8
         BNE.N    ??LPLD_FTM_PinInit_50
-        LDR.W    R0,??DataTable14_19  ;; 0x40049020
+        LDR.W    R0,??DataTable12_19  ;; 0x40049020
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x600
-        LDR.W    R1,??DataTable14_19  ;; 0x40049020
+        LDR.W    R1,??DataTable12_19  ;; 0x40049020
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_51:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2319,21 +2269,21 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+12
         BNE.N    ??LPLD_FTM_PinInit_52
-        LDR.W    R0,??DataTable14_20  ;; 0x40049030
+        LDR.W    R0,??DataTable12_20  ;; 0x40049030
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x700
-        LDR.W    R1,??DataTable14_20  ;; 0x40049030
+        LDR.W    R1,??DataTable12_20  ;; 0x40049030
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_51
 ??LPLD_FTM_PinInit_52:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+32
         BNE.N    ??LPLD_FTM_PinInit_53
-        LDR.W    R0,??DataTable14_21  ;; 0x4004a000
+        LDR.W    R0,??DataTable12_21  ;; 0x4004a000
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x600
-        LDR.W    R1,??DataTable14_21  ;; 0x4004a000
+        LDR.W    R1,??DataTable12_21  ;; 0x4004a000
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_51
 ??LPLD_FTM_PinInit_53:
@@ -2343,11 +2293,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+9
         BNE.N    ??LPLD_FTM_PinInit_54
-        LDR.W    R0,??DataTable14_22  ;; 0x40049024
+        LDR.W    R0,??DataTable12_22  ;; 0x40049024
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x600
-        LDR.W    R1,??DataTable14_22  ;; 0x40049024
+        LDR.W    R1,??DataTable12_22  ;; 0x40049024
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_41:
         MOVS     R0,#+0
@@ -2356,28 +2306,28 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+13
         BNE.N    ??LPLD_FTM_PinInit_55
-        LDR.W    R0,??DataTable14_23  ;; 0x40049034
+        LDR.W    R0,??DataTable12_23  ;; 0x40049034
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x700
-        LDR.W    R1,??DataTable14_23  ;; 0x40049034
+        LDR.W    R1,??DataTable12_23  ;; 0x40049034
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_41
 ??LPLD_FTM_PinInit_55:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+33
         BNE.N    ??LPLD_FTM_PinInit_56
-        LDR.W    R0,??DataTable14_24  ;; 0x4004a004
+        LDR.W    R0,??DataTable12_24  ;; 0x4004a004
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x600
-        LDR.W    R1,??DataTable14_24  ;; 0x4004a004
+        LDR.W    R1,??DataTable12_24  ;; 0x4004a004
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_41
 ??LPLD_FTM_PinInit_56:
         MOVS     R0,#+0
         B.N      ??LPLD_FTM_PinInit_13
 ??LPLD_FTM_PinInit_36:
-        LDR.N    R3,??DataTable10_6  ;; 0x400b8000
+        LDR.N    R3,??DataTable8_5  ;; 0x400b8000
         CMP      R0,R3
         BNE.W    ??LPLD_FTM_PinInit_57
         UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
@@ -2394,11 +2344,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+10
         BNE.N    ??LPLD_FTM_PinInit_63
-        LDR.W    R0,??DataTable14_25  ;; 0x40049028
+        LDR.W    R0,??DataTable12_25  ;; 0x40049028
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_25  ;; 0x40049028
+        LDR.W    R1,??DataTable12_25  ;; 0x40049028
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_64:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2406,11 +2356,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+50
         BNE.N    ??LPLD_FTM_PinInit_65
-        LDR.W    R0,??DataTable14_26  ;; 0x4004a048
+        LDR.W    R0,??DataTable12_26  ;; 0x4004a048
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_26  ;; 0x4004a048
+        LDR.W    R1,??DataTable12_26  ;; 0x4004a048
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_64
 ??LPLD_FTM_PinInit_65:
@@ -2420,11 +2370,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+11
         BNE.N    ??LPLD_FTM_PinInit_66
-        LDR.W    R0,??DataTable14_27  ;; 0x4004902c
+        LDR.W    R0,??DataTable12_27  ;; 0x4004902c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_27  ;; 0x4004902c
+        LDR.W    R1,??DataTable12_27  ;; 0x4004902c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_67:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2432,11 +2382,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+51
         BNE.N    ??LPLD_FTM_PinInit_68
-        LDR.W    R0,??DataTable14_28  ;; 0x4004a04c
+        LDR.W    R0,??DataTable12_28  ;; 0x4004a04c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x300
-        LDR.W    R1,??DataTable14_28  ;; 0x4004a04c
+        LDR.W    R1,??DataTable12_28  ;; 0x4004a04c
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_67
 ??LPLD_FTM_PinInit_68:
@@ -2446,11 +2396,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+10
         BNE.N    ??LPLD_FTM_PinInit_69
-        LDR.W    R0,??DataTable14_25  ;; 0x40049028
+        LDR.W    R0,??DataTable12_25  ;; 0x40049028
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x600
-        LDR.W    R1,??DataTable14_25  ;; 0x40049028
+        LDR.W    R1,??DataTable12_25  ;; 0x40049028
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_70:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2458,11 +2408,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+50
         BNE.N    ??LPLD_FTM_PinInit_71
-        LDR.W    R0,??DataTable14_26  ;; 0x4004a048
+        LDR.W    R0,??DataTable12_26  ;; 0x4004a048
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x600
-        LDR.W    R1,??DataTable14_26  ;; 0x4004a048
+        LDR.W    R1,??DataTable12_26  ;; 0x4004a048
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_70
 ??LPLD_FTM_PinInit_71:
@@ -2472,11 +2422,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+11
         BNE.N    ??LPLD_FTM_PinInit_72
-        LDR.W    R0,??DataTable14_27  ;; 0x4004902c
+        LDR.W    R0,??DataTable12_27  ;; 0x4004902c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x600
-        LDR.W    R1,??DataTable14_27  ;; 0x4004902c
+        LDR.W    R1,??DataTable12_27  ;; 0x4004902c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinInit_73:
         B.N      ??LPLD_FTM_PinInit_12
@@ -2484,11 +2434,11 @@ LPLD_FTM_PinInit:
         UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
         CMP      R2,#+51
         BNE.N    ??LPLD_FTM_PinInit_74
-        LDR.W    R0,??DataTable14_28  ;; 0x4004a04c
+        LDR.W    R0,??DataTable12_28  ;; 0x4004a04c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x700
         ORRS     R0,R0,#0x600
-        LDR.W    R1,??DataTable14_28  ;; 0x4004a04c
+        LDR.W    R1,??DataTable12_28  ;; 0x4004a04c
         STR      R0,[R1, #+0]
         B.N      ??LPLD_FTM_PinInit_73
 ??LPLD_FTM_PinInit_74:
@@ -2505,55 +2455,49 @@ LPLD_FTM_PinInit:
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10:
+??DataTable8:
         DC32     0xe000e100
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_1:
+??DataTable8_1:
         DC32     0xe000e180
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_2:
-        DC32     ?_0
-
-        SECTION `.text`:CODE:NOROOT(2)
-        SECTION_TYPE SHT_PROGBITS, 0
-        DATA
-??DataTable10_3:
+??DataTable8_2:
         DC32     0x40038000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_4:
+??DataTable8_3:
         DC32     0x4004803c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_5:
+??DataTable8_4:
         DC32     0x40039000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_6:
+??DataTable8_5:
         DC32     0x400b8000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_7:
+??DataTable8_6:
         DC32     0x40048030
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_8:
+??DataTable8_7:
         DC32     FTM_ISR
 // 1130 
 // 1131 /*
@@ -2568,7 +2512,7 @@ LPLD_FTM_PinInit:
 // 1137   //根据ftmx禁用相应pin的ftm功能，回复到默认功能
 // 1138   if(ftmx == FTM0)
 LPLD_FTM_PinDeinit:
-        LDR.W    R2,??DataTable14_1  ;; 0x40038000
+        LDR.W    R2,??DataTable12_1  ;; 0x40038000
         CMP      R0,R2
         BNE.W    ??LPLD_FTM_PinDeinit_0
 // 1139   {
@@ -2592,25 +2536,25 @@ LPLD_FTM_PinDeinit:
 // 1142     case FTM_Ch0:
 // 1143       if((PORTA->PCR[3]& PORT_PCR_MUX_MASK) == PORT_PCR_MUX(3))
 ??LPLD_FTM_PinDeinit_1:
-        LDR.W    R0,??DataTable14_2  ;; 0x4004900c
+        LDR.W    R0,??DataTable12_2  ;; 0x4004900c
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_10
 // 1144         PORTA->PCR[3] = PORT_PCR_MUX(0); 
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_2  ;; 0x4004900c
+        LDR.W    R1,??DataTable12_2  ;; 0x4004900c
         STR      R0,[R1, #+0]
 // 1145       if((PORTC->PCR[1]& PORT_PCR_MUX_MASK) == PORT_PCR_MUX(4))
 ??LPLD_FTM_PinDeinit_10:
-        LDR.W    R0,??DataTable14_3  ;; 0x4004b004
+        LDR.W    R0,??DataTable12_3  ;; 0x4004b004
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1024
         BNE.N    ??LPLD_FTM_PinDeinit_11
 // 1146         PORTC->PCR[1] = PORT_PCR_MUX(0);
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_3  ;; 0x4004b004
+        LDR.W    R1,??DataTable12_3  ;; 0x4004b004
         STR      R0,[R1, #+0]
 // 1147       break;
 // 1148     case FTM_Ch1:
@@ -2800,142 +2744,142 @@ LPLD_FTM_PinDeinit:
 ??LPLD_FTM_PinDeinit_13:
         BX       LR               ;; return
 ??LPLD_FTM_PinDeinit_3:
-        LDR.W    R0,??DataTable14_4  ;; 0x40049010
+        LDR.W    R0,??DataTable12_4  ;; 0x40049010
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_14
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_4  ;; 0x40049010
+        LDR.W    R1,??DataTable12_4  ;; 0x40049010
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_14:
-        LDR.W    R0,??DataTable14_5  ;; 0x4004b008
+        LDR.W    R0,??DataTable12_5  ;; 0x4004b008
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1024
         BNE.N    ??LPLD_FTM_PinDeinit_15
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_5  ;; 0x4004b008
+        LDR.W    R1,??DataTable12_5  ;; 0x4004b008
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_15:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_2:
-        LDR.W    R0,??DataTable14_6  ;; 0x40049014
+        LDR.W    R0,??DataTable12_6  ;; 0x40049014
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_16
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_6  ;; 0x40049014
+        LDR.W    R1,??DataTable12_6  ;; 0x40049014
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_16:
-        LDR.W    R0,??DataTable14_7  ;; 0x4004b00c
+        LDR.W    R0,??DataTable12_7  ;; 0x4004b00c
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1024
         BNE.N    ??LPLD_FTM_PinDeinit_17
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_7  ;; 0x4004b00c
+        LDR.W    R1,??DataTable12_7  ;; 0x4004b00c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_17:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_5:
-        LDR.W    R0,??DataTable14_8  ;; 0x40049018
+        LDR.W    R0,??DataTable12_8  ;; 0x40049018
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_18
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_8  ;; 0x40049018
+        LDR.W    R1,??DataTable12_8  ;; 0x40049018
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_18:
-        LDR.W    R0,??DataTable14_9  ;; 0x4004b010
+        LDR.W    R0,??DataTable12_9  ;; 0x4004b010
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1024
         BNE.N    ??LPLD_FTM_PinDeinit_19
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_9  ;; 0x4004b010
+        LDR.W    R1,??DataTable12_9  ;; 0x4004b010
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_19:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_4:
-        LDR.W    R0,??DataTable14_10  ;; 0x4004901c
+        LDR.W    R0,??DataTable12_10  ;; 0x4004901c
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_20
         MOVS     R0,#+0
-        LDR.W    R1,??DataTable14_10  ;; 0x4004901c
+        LDR.W    R1,??DataTable12_10  ;; 0x4004901c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_20:
-        LDR.N    R0,??DataTable14_11  ;; 0x4004c010
+        LDR.W    R0,??DataTable12_11  ;; 0x4004c010
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1024
         BNE.N    ??LPLD_FTM_PinDeinit_21
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_11  ;; 0x4004c010
+        LDR.N    R1,??DataTable12_11  ;; 0x4004c010
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_21:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_7:
-        LDR.N    R0,??DataTable14_12  ;; 0x40049000
+        LDR.N    R0,??DataTable12_12  ;; 0x40049000
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_22
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_12  ;; 0x40049000
+        LDR.N    R1,??DataTable12_12  ;; 0x40049000
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_22:
-        LDR.N    R0,??DataTable14_13  ;; 0x4004c014
+        LDR.N    R0,??DataTable12_13  ;; 0x4004c014
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1024
         BNE.N    ??LPLD_FTM_PinDeinit_23
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_13  ;; 0x4004c014
+        LDR.N    R1,??DataTable12_13  ;; 0x4004c014
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_23:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_6:
-        LDR.N    R0,??DataTable14_14  ;; 0x40049004
+        LDR.N    R0,??DataTable12_14  ;; 0x40049004
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_24
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_14  ;; 0x40049004
+        LDR.N    R1,??DataTable12_14  ;; 0x40049004
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_24:
-        LDR.N    R0,??DataTable14_15  ;; 0x4004c018
+        LDR.N    R0,??DataTable12_15  ;; 0x4004c018
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1024
         BNE.N    ??LPLD_FTM_PinDeinit_25
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_15  ;; 0x4004c018
+        LDR.N    R1,??DataTable12_15  ;; 0x4004c018
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_25:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_8:
-        LDR.N    R0,??DataTable14_16  ;; 0x40049008
+        LDR.N    R0,??DataTable12_16  ;; 0x40049008
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_26
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_16  ;; 0x40049008
+        LDR.N    R1,??DataTable12_16  ;; 0x40049008
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_26:
-        LDR.N    R0,??DataTable14_17  ;; 0x4004c01c
+        LDR.N    R0,??DataTable12_17  ;; 0x4004c01c
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1024
         BNE.N    ??LPLD_FTM_PinDeinit_27
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_17  ;; 0x4004c01c
+        LDR.N    R1,??DataTable12_17  ;; 0x4004c01c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_27:
         B.N      ??LPLD_FTM_PinDeinit_12
@@ -2943,7 +2887,7 @@ LPLD_FTM_PinDeinit:
         MOVS     R0,#+0
         B.N      ??LPLD_FTM_PinDeinit_13
 ??LPLD_FTM_PinDeinit_0:
-        LDR.N    R2,??DataTable14_18  ;; 0x40039000
+        LDR.N    R2,??DataTable12_18  ;; 0x40039000
         CMP      R0,R2
         BNE.W    ??LPLD_FTM_PinDeinit_28
         UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
@@ -2957,118 +2901,118 @@ LPLD_FTM_PinDeinit:
         BEQ.N    ??LPLD_FTM_PinDeinit_32
         B.N      ??LPLD_FTM_PinDeinit_33
 ??LPLD_FTM_PinDeinit_29:
-        LDR.N    R0,??DataTable14_19  ;; 0x40049020
+        LDR.N    R0,??DataTable12_19  ;; 0x40049020
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_34
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_19  ;; 0x40049020
+        LDR.N    R1,??DataTable12_19  ;; 0x40049020
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_34:
-        LDR.N    R0,??DataTable14_20  ;; 0x40049030
+        LDR.N    R0,??DataTable12_20  ;; 0x40049030
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_35
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_20  ;; 0x40049030
+        LDR.N    R1,??DataTable12_20  ;; 0x40049030
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_35:
-        LDR.N    R0,??DataTable14_21  ;; 0x4004a000
+        LDR.N    R0,??DataTable12_21  ;; 0x4004a000
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_36
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_21  ;; 0x4004a000
+        LDR.N    R1,??DataTable12_21  ;; 0x4004a000
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_36:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_30:
-        LDR.N    R0,??DataTable14_22  ;; 0x40049024
+        LDR.N    R0,??DataTable12_22  ;; 0x40049024
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_37
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_22  ;; 0x40049024
+        LDR.N    R1,??DataTable12_22  ;; 0x40049024
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_37:
-        LDR.N    R0,??DataTable14_23  ;; 0x40049034
+        LDR.N    R0,??DataTable12_23  ;; 0x40049034
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_38
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_23  ;; 0x40049034
+        LDR.N    R1,??DataTable12_23  ;; 0x40049034
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_38:
-        LDR.N    R0,??DataTable14_24  ;; 0x4004a004
+        LDR.N    R0,??DataTable12_24  ;; 0x4004a004
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_39
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_24  ;; 0x4004a004
+        LDR.N    R1,??DataTable12_24  ;; 0x4004a004
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_39:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_31:
-        LDR.N    R0,??DataTable14_19  ;; 0x40049020
+        LDR.N    R0,??DataTable12_19  ;; 0x40049020
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1536
         BNE.N    ??LPLD_FTM_PinDeinit_40
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_19  ;; 0x40049020
+        LDR.N    R1,??DataTable12_19  ;; 0x40049020
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_40:
-        LDR.N    R0,??DataTable14_20  ;; 0x40049030
+        LDR.N    R0,??DataTable12_20  ;; 0x40049030
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1792
         BNE.N    ??LPLD_FTM_PinDeinit_41
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_20  ;; 0x40049030
+        LDR.N    R1,??DataTable12_20  ;; 0x40049030
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_41:
-        LDR.N    R0,??DataTable14_21  ;; 0x4004a000
+        LDR.N    R0,??DataTable12_21  ;; 0x4004a000
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1536
         BNE.N    ??LPLD_FTM_PinDeinit_42
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_21  ;; 0x4004a000
+        LDR.N    R1,??DataTable12_21  ;; 0x4004a000
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_42:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_32:
-        LDR.N    R0,??DataTable14_22  ;; 0x40049024
+        LDR.N    R0,??DataTable12_22  ;; 0x40049024
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1536
         BNE.N    ??LPLD_FTM_PinDeinit_43
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_22  ;; 0x40049024
+        LDR.N    R1,??DataTable12_22  ;; 0x40049024
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_43:
-        LDR.N    R0,??DataTable14_23  ;; 0x40049034
+        LDR.N    R0,??DataTable12_23  ;; 0x40049034
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1792
         BNE.N    ??LPLD_FTM_PinDeinit_44
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_23  ;; 0x40049034
+        LDR.N    R1,??DataTable12_23  ;; 0x40049034
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_44:
-        LDR.N    R0,??DataTable14_24  ;; 0x4004a004
+        LDR.N    R0,??DataTable12_24  ;; 0x4004a004
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1536
         BNE.N    ??LPLD_FTM_PinDeinit_45
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_24  ;; 0x4004a004
+        LDR.N    R1,??DataTable12_24  ;; 0x4004a004
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_45:
         B.N      ??LPLD_FTM_PinDeinit_12
@@ -3076,7 +3020,7 @@ LPLD_FTM_PinDeinit:
         MOVS     R0,#+0
         B.N      ??LPLD_FTM_PinDeinit_13
 ??LPLD_FTM_PinDeinit_28:
-        LDR.N    R2,??DataTable14_29  ;; 0x400b8000
+        LDR.N    R2,??DataTable10  ;; 0x400b8000
         CMP      R0,R2
         BNE.N    ??LPLD_FTM_PinDeinit_46
         UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
@@ -3090,82 +3034,82 @@ LPLD_FTM_PinDeinit:
         BEQ.N    ??LPLD_FTM_PinDeinit_50
         B.N      ??LPLD_FTM_PinDeinit_51
 ??LPLD_FTM_PinDeinit_47:
-        LDR.N    R0,??DataTable14_25  ;; 0x40049028
+        LDR.N    R0,??DataTable12_25  ;; 0x40049028
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_52
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_25  ;; 0x40049028
+        LDR.N    R1,??DataTable12_25  ;; 0x40049028
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_52:
-        LDR.N    R0,??DataTable14_26  ;; 0x4004a048
+        LDR.N    R0,??DataTable12_26  ;; 0x4004a048
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_53
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_26  ;; 0x4004a048
+        LDR.N    R1,??DataTable12_26  ;; 0x4004a048
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_53:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_48:
-        LDR.N    R0,??DataTable14_27  ;; 0x4004902c
+        LDR.N    R0,??DataTable12_27  ;; 0x4004902c
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_54
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_27  ;; 0x4004902c
+        LDR.N    R1,??DataTable12_27  ;; 0x4004902c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_54:
-        LDR.N    R0,??DataTable14_28  ;; 0x4004a04c
+        LDR.N    R0,??DataTable12_28  ;; 0x4004a04c
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+768
         BNE.N    ??LPLD_FTM_PinDeinit_55
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_28  ;; 0x4004a04c
+        LDR.N    R1,??DataTable12_28  ;; 0x4004a04c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_55:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_49:
-        LDR.N    R0,??DataTable14_25  ;; 0x40049028
+        LDR.N    R0,??DataTable12_25  ;; 0x40049028
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1536
         BNE.N    ??LPLD_FTM_PinDeinit_56
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_25  ;; 0x40049028
+        LDR.N    R1,??DataTable12_25  ;; 0x40049028
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_56:
-        LDR.N    R0,??DataTable14_26  ;; 0x4004a048
+        LDR.N    R0,??DataTable12_26  ;; 0x4004a048
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1536
         BNE.N    ??LPLD_FTM_PinDeinit_57
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_26  ;; 0x4004a048
+        LDR.N    R1,??DataTable12_26  ;; 0x4004a048
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_57:
         B.N      ??LPLD_FTM_PinDeinit_12
 ??LPLD_FTM_PinDeinit_50:
-        LDR.N    R0,??DataTable14_27  ;; 0x4004902c
+        LDR.N    R0,??DataTable12_27  ;; 0x4004902c
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1536
         BNE.N    ??LPLD_FTM_PinDeinit_58
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_27  ;; 0x4004902c
+        LDR.N    R1,??DataTable12_27  ;; 0x4004902c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_58:
-        LDR.N    R0,??DataTable14_28  ;; 0x4004a04c
+        LDR.N    R0,??DataTable12_28  ;; 0x4004a04c
         LDR      R0,[R0, #+0]
         ANDS     R0,R0,#0x700
         CMP      R0,#+1536
         BNE.N    ??LPLD_FTM_PinDeinit_59
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable14_28  ;; 0x4004a04c
+        LDR.N    R1,??DataTable12_28  ;; 0x4004a04c
         STR      R0,[R1, #+0]
 ??LPLD_FTM_PinDeinit_59:
         B.N      ??LPLD_FTM_PinDeinit_12
@@ -3258,7 +3202,7 @@ FTM0_IRQHandler:
 // 1370 #endif
 // 1371   
 // 1372   FTM_ISR[0]();
-        LDR.N    R0,??DataTable14_30
+        LDR.N    R0,??DataTable12_29
         LDR      R0,[R0, #+0]
         BLX      R0
 // 1373   
@@ -3267,6 +3211,12 @@ FTM0_IRQHandler:
 // 1376 #endif
 // 1377 }
         POP      {R0,PC}          ;; return
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable10:
+        DC32     0x400b8000
 // 1378 
 
         SECTION `.text`:CODE:NOROOT(1)
@@ -3283,7 +3233,7 @@ FTM1_IRQHandler:
 // 1386 #endif
 // 1387   
 // 1388   FTM_ISR[1]();
-        LDR.N    R0,??DataTable14_30
+        LDR.N    R0,??DataTable12_29
         LDR      R0,[R0, #+4]
         BLX      R0
 // 1389   
@@ -3308,7 +3258,7 @@ FTM2_IRQHandler:
 // 1402 #endif
 // 1403   
 // 1404   FTM_ISR[2]();
-        LDR.N    R0,??DataTable14_30
+        LDR.N    R0,??DataTable12_29
         LDR      R0,[R0, #+8]
         BLX      R0
 // 1405   
@@ -3321,187 +3271,181 @@ FTM2_IRQHandler:
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14:
+??DataTable12:
         DC32     g_bus_clock
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_1:
+??DataTable12_1:
         DC32     0x40038000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_2:
+??DataTable12_2:
         DC32     0x4004900c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_3:
+??DataTable12_3:
         DC32     0x4004b004
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_4:
+??DataTable12_4:
         DC32     0x40049010
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_5:
+??DataTable12_5:
         DC32     0x4004b008
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_6:
+??DataTable12_6:
         DC32     0x40049014
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_7:
+??DataTable12_7:
         DC32     0x4004b00c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_8:
+??DataTable12_8:
         DC32     0x40049018
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_9:
+??DataTable12_9:
         DC32     0x4004b010
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_10:
+??DataTable12_10:
         DC32     0x4004901c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_11:
+??DataTable12_11:
         DC32     0x4004c010
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_12:
+??DataTable12_12:
         DC32     0x40049000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_13:
+??DataTable12_13:
         DC32     0x4004c014
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_14:
+??DataTable12_14:
         DC32     0x40049004
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_15:
+??DataTable12_15:
         DC32     0x4004c018
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_16:
+??DataTable12_16:
         DC32     0x40049008
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_17:
+??DataTable12_17:
         DC32     0x4004c01c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_18:
+??DataTable12_18:
         DC32     0x40039000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_19:
+??DataTable12_19:
         DC32     0x40049020
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_20:
+??DataTable12_20:
         DC32     0x40049030
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_21:
+??DataTable12_21:
         DC32     0x4004a000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_22:
+??DataTable12_22:
         DC32     0x40049024
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_23:
+??DataTable12_23:
         DC32     0x40049034
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_24:
+??DataTable12_24:
         DC32     0x4004a004
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_25:
+??DataTable12_25:
         DC32     0x40049028
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_26:
+??DataTable12_26:
         DC32     0x4004a048
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_27:
+??DataTable12_27:
         DC32     0x4004902c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_28:
+??DataTable12_28:
         DC32     0x4004a04c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable14_29:
-        DC32     0x400b8000
-
-        SECTION `.text`:CODE:NOROOT(2)
-        SECTION_TYPE SHT_PROGBITS, 0
-        DATA
-??DataTable14_30:
+??DataTable12_29:
         DC32     FTM_ISR
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
@@ -3514,17 +3458,6 @@ FTM2_IRQHandler:
 
         SECTION __DLIB_PERTHREAD_init:DATA:REORDER:NOROOT(0)
         SECTION_TYPE SHT_PROGBITS, 0
-
-        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
-?_0:
-        DATA
-        DC8 45H, 3AH, 5CH, 67H, 69H, 74H, 50H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 5CH, 4DH, 79H
-        DC8 65H, 42H, 45H, 53H, 54H, 5CH, 70H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 53H, 6EH, 61H
-        DC8 6BH, 65H, 5CH, 6CH, 69H, 62H, 5CH, 4CH
-        DC8 50H, 4CH, 44H, 5CH, 48H, 57H, 5CH, 48H
-        DC8 57H, 5FH, 46H, 54H, 4DH, 2EH, 63H, 0
 
         END
 // 1410 
@@ -3547,12 +3480,10 @@ FTM2_IRQHandler:
 // 1427 #endif
 // 
 //    12 bytes in section .bss
-//    56 bytes in section .rodata
-// 3 938 bytes in section .text
+// 3 800 bytes in section .text
 // 
-// 3 938 bytes of CODE  memory
-//    56 bytes of CONST memory
-//    12 bytes of DATA  memory
+// 3 800 bytes of CODE memory
+//    12 bytes of DATA memory
 //
 //Errors: none
 //Warnings: none

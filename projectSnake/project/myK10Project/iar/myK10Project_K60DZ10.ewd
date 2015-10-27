@@ -1390,7 +1390,7 @@
         </option>
         <option>
           <name>MemFile</name>
-          <state>$TOOLKIT_DIR$\CONFIG\debugger\Freescale\MK60DN512Zxxx10.ddf</state>
+          <state>$TOOLKIT_DIR$\CONFIG\debugger\Freescale\MK60DN512xxx10.ddf</state>
         </option>
         <option>
           <name>RunToEnable</name>
@@ -2053,7 +2053,7 @@
         </option>
         <option>
           <name>IjetSelectedCPUBehaviour</name>
-          <state>0</state>
+          <state></state>
         </option>
         <option>
           <name>ICpuName</name>
@@ -2171,7 +2171,7 @@
         </option>
         <option>
           <name>CCJLinkInterfaceRadio</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>OCJLinkAttachSlave</name>

@@ -21,9 +21,14 @@
 
 void main (void)
 {
+  OLED_Init();
+  //OLED_Clear();
+  
   while(1)
   {
-
+    OLED_WriteChar(0, 0, 'a', 0);
+    OLED_Refresh_Gram();
   }
 }
+
 

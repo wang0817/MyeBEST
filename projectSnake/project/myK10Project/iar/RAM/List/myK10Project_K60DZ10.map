@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V7.20.2.7424/W32 for ARM                 25/Oct/2015  00:13:24
+# IAR ELF Linker V7.20.2.7424/W32 for ARM                 26/Oct/2015  19:35:37
 # Copyright 2007-2014 IAR Systems AB.
 #
 #    Output file  =  
@@ -72,113 +72,61 @@ __SystemLibrary = DLib
   .noinit              ro code  0x1fff0420     0x4  startup_K60DZ10.o [1]
                               - 0x1fff0424    0x14
 
-"P1", part 2 of 2:                          0x1d24
-  .text                ro code  0x1fff0424   0x718  HW_UART.o [1]
-  .text                ro code  0x1fff0b3c   0x614  system_MK60.o [1]
-  .text                ro code  0x1fff1150    0xa0  relocate.o [1]
-  .text                ro code  0x1fff11f0   0x1a0  HW_MCG.o [1]
-  .text                ro code  0x1fff1390    0x56  ABImemcpy_unaligned.o [4]
-  .text                ro code  0x1fff13e6    0x22  zero_init3.o [4]
-  .text                ro code  0x1fff1408   0x4e4  printf.o [1]
-  .text                ro code  0x1fff18ec    0x1c  stdlib.o [1]
-  .text                ro code  0x1fff1908   0x168  HW_DMA.o [1]
-  .text                ro code  0x1fff1a70    0x74  HW_GPIO.o [1]
-  .text                ro code  0x1fff1ae4    0x6c  HW_PIT.o [1]
-  CodeRelocate                  0x1fff1b50    0x4c  <Block>
-    Initializer bytes  ro data  0x1fff1b50    0x4c  <for CodeRelocateRam-1>
-  .rodata              const    0x1fff1b9c    0x48  system_MK60.o [1]
-  .rodata              const    0x1fff1be4    0x44  system_MK60.o [1]
-  .rodata              const    0x1fff1c28    0x44  system_MK60.o [1]
-  .rodata              const    0x1fff1c6c    0x30  system_MK60.o [1]
-  .rodata              const    0x1fff1c9c    0x30  system_MK60.o [1]
-  .rodata              const    0x1fff1ccc    0x28  system_MK60.o [1]
-  .text                ro code  0x1fff1cf4    0x28  data_init.o [4]
-  .rodata              const    0x1fff1d1c    0x24  system_MK60.o [1]
-  .rodata              const    0x1fff1d40    0x24  system_MK60.o [1]
-  .text                ro code  0x1fff1d64    0x24  HW_FTM.o [1]
-  .iar.init_table      const    0x1fff1d88    0x10  - Linker created -
-  .rodata              const    0x1fff1d98    0x20  system_MK60.o [1]
-  .rodata              const    0x1fff1db8    0x20  system_MK60.o [1]
-  .rodata              const    0x1fff1dd8    0x20  system_MK60.o [1]
-  .rodata              const    0x1fff1df8    0x20  system_MK60.o [1]
-  .rodata              const    0x1fff1e18    0x1c  system_MK60.o [1]
-  .rodata              const    0x1fff1e34    0x1c  system_MK60.o [1]
-  .rodata              const    0x1fff1e50    0x1c  system_MK60.o [1]
-  .text                ro code  0x1fff1e6c    0x1c  HW_ADC.o [1]
-  .text                ro code  0x1fff1e88    0x1a  cmain.o [4]
-  .text                ro code  0x1fff1ea2     0x4  low_level_init.o [3]
-  .text                ro code  0x1fff1ea6     0x2  myK10Project.o [1]
-  .text                ro code  0x1fff1ea8     0x4  exit.o [3]
-  .text                ro code  0x1fff1eac     0xa  cexit.o [4]
-  .text                ro code  0x1fff1eb8    0x14  exit.o [5]
-  .rodata              const    0x1fff1ecc    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1ee4    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1efc    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1f14    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1f2c    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1f44    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1f5c    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1f74    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1f8c    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1fa4    0x18  system_MK60.o [1]
-  .rodata              const    0x1fff1fbc    0x14  system_MK60.o [1]
-  .rodata              const    0x1fff1fd0    0x14  system_MK60.o [1]
-  .rodata              const    0x1fff1fe4    0x14  system_MK60.o [1]
-  .rodata              const    0x1fff1ff8    0x14  system_MK60.o [1]
-  .rodata              const    0x1fff200c    0x14  system_MK60.o [1]
-  .rodata              const    0x1fff2020    0x14  system_MK60.o [1]
-  .text                ro code  0x1fff2034    0x14  io.o [1]
-  .data_init                    0x1fff2048    0x14  <Block>
-    Initializer bytes  ro data  0x1fff2048    0x14  <for .data-1>
-  .rodata              const    0x1fff205c    0x10  system_MK60.o [1]
-  .rodata              const    0x1fff206c    0x10  system_MK60.o [1]
-  .rodata              const    0x1fff207c    0x10  system_MK60.o [1]
-  .rodata              const    0x1fff208c     0xc  system_MK60.o [1]
-  .rodata              const    0x1fff2098     0xc  system_MK60.o [1]
-  .text                ro code  0x1fff20a4     0xc  cstartup_M.o [4]
-  .rodata              const    0x1fff20b0     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20b8     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20c0     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20c8     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20d0     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20d8     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20e0     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20e8     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20f0     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff20f8     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2100     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2108     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2110     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2118     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2120     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2128     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2130     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2138     0x8  system_MK60.o [1]
-  .rodata              const    0x1fff2140     0x8  system_MK60.o [1]
-                              - 0x1fff2148  0x1d24
+"P1", part 2 of 2:                          0x1928
+  .text                ro code  0x1fff0424   0x70c  HW_UART.o [1]
+  .data_init                    0x1fff0b30   0x478  <Block>
+    Initializer bytes  ro data  0x1fff0b30   0x478  <for .data-1>
+  .text                ro code  0x1fff0fa8   0x348  DEV_OLED.o [1]
+  .text                ro code  0x1fff12f0     0xc  Card_Config.o [1]
+  .text                ro code  0x1fff12fc    0x56  ABImemcpy_unaligned.o [4]
+  .text                ro code  0x1fff1352    0x22  zero_init3.o [4]
+  .text                ro code  0x1fff1374   0x15c  HW_GPIO.o [1]
+  .rodata              const    0x1fff14d0   0x240  DEV_OLED.o [1]
+  .text                ro code  0x1fff1710   0x1a0  HW_MCG.o [1]
+  .text                ro code  0x1fff18b0   0x168  HW_DMA.o [1]
+  .text                ro code  0x1fff1a18   0x100  system_MK60.o [1]
+  .text                ro code  0x1fff1b18    0xa0  relocate.o [1]
+  .text                ro code  0x1fff1bb8    0x6c  HW_PIT.o [1]
+  CodeRelocate                  0x1fff1c24    0x4c  <Block>
+    Initializer bytes  ro data  0x1fff1c24    0x4c  <for CodeRelocateRam-1>
+  .text                ro code  0x1fff1c70    0x28  data_init.o [4]
+  .text                ro code  0x1fff1c98    0x24  HW_FTM.o [1]
+  .iar.init_table      const    0x1fff1cbc    0x10  - Linker created -
+  .text                ro code  0x1fff1ccc    0x1a  cmain.o [4]
+  .text                ro code  0x1fff1ce6     0x4  low_level_init.o [3]
+  .text                ro code  0x1fff1cea    0x18  myK10Project.o [1]
+  .text                ro code  0x1fff1d02     0x4  exit.o [3]
+  .text                ro code  0x1fff1d08     0xa  cexit.o [4]
+  .text                ro code  0x1fff1d14    0x14  exit.o [5]
+  .text                ro code  0x1fff1d28    0x18  HW_ADC.o [1]
+  .text                ro code  0x1fff1d40     0xc  cstartup_M.o [4]
+                              - 0x1fff1d4c  0x1928
 
-"P2":                                        0x508
-  CodeRelocateRam               0x1fff2148    0x4c  <Block>
-    CodeRelocateRam-1           0x1fff2148    0x4c  <Init block>
-      .textrw          inited   0x1fff2148    0x4c  HW_MCG.o [1]
-  .data                         0x1fff2194    0x14  <Block>
-    .data-1                     0x1fff2194    0x14  <Init block>
-      .data            inited   0x1fff2194     0x4  HW_MCG.o [1]
-      .data            inited   0x1fff2198     0x4  HW_MCG.o [1]
-      .data            inited   0x1fff219c     0x4  HW_MCG.o [1]
-      .data            inited   0x1fff21a0     0x4  HW_MCG.o [1]
-      .data            inited   0x1fff21a4     0x4  system_MK60.o [1]
-  .bss                          0x1fff21a8    0xa8  <Block>
-    .bss               zero     0x1fff21a8     0x8  HW_ADC.o [1]
-    .bss               zero     0x1fff21b0    0x40  HW_DMA.o [1]
-    .bss               zero     0x1fff21f0     0xc  HW_FTM.o [1]
-    .bss               zero     0x1fff21fc    0x14  HW_GPIO.o [1]
-    .bss               zero     0x1fff2210    0x10  HW_PIT.o [1]
-    .bss               zero     0x1fff2220    0x18  HW_UART.o [1]
-    .bss               zero     0x1fff2238    0x18  HW_UART.o [1]
-  CSTACK                        0x1fff2250   0x400  <Block>
-    CSTACK             uninit   0x1fff2250   0x400  <Block tail>
-                              - 0x1fff2650   0x508
+"P2":                                        0x96c
+  .data                         0x1fff1d4c   0x478  <Block>
+    .data-1                     0x1fff1d4c   0x478  <Init block>
+      .data            inited   0x1fff1d4c    0x60  Card_Config.o [1]
+      .data            inited   0x1fff1dac     0x4  Card_Config.o [1]
+      .data            inited   0x1fff1db0   0x400  DEV_OLED.o [1]
+      .data            inited   0x1fff21b0     0x4  HW_MCG.o [1]
+      .data            inited   0x1fff21b4     0x4  HW_MCG.o [1]
+      .data            inited   0x1fff21b8     0x4  HW_MCG.o [1]
+      .data            inited   0x1fff21bc     0x4  HW_MCG.o [1]
+      .data            inited   0x1fff21c0     0x4  system_MK60.o [1]
+  CodeRelocateRam               0x1fff21c4    0x4c  <Block>
+    CodeRelocateRam-1           0x1fff21c4    0x4c  <Init block>
+      .textrw          inited   0x1fff21c4    0x4c  HW_MCG.o [1]
+  .bss                          0x1fff2210    0xa8  <Block>
+    .bss               zero     0x1fff2210     0x8  HW_ADC.o [1]
+    .bss               zero     0x1fff2218    0x40  HW_DMA.o [1]
+    .bss               zero     0x1fff2258     0xc  HW_FTM.o [1]
+    .bss               zero     0x1fff2264    0x14  HW_GPIO.o [1]
+    .bss               zero     0x1fff2278    0x10  HW_PIT.o [1]
+    .bss               zero     0x1fff2288    0x18  HW_UART.o [1]
+    .bss               zero     0x1fff22a0    0x18  HW_UART.o [1]
+  CSTACK                        0x1fff22b8   0x400  <Block>
+    CSTACK             uninit   0x1fff22b8   0x400  <Block tail>
+                              - 0x1fff26b8   0x96c
 
 
 *******************************************************************************
@@ -189,7 +137,7 @@ __SystemLibrary = DLib
           -------     ----
 Zero (__iar_zero_init3)
     1 destination range, total size 0xa8:
-          0x1fff21a8  0xa8
+          0x1fff2210  0xa8
 
 
 
@@ -200,22 +148,21 @@ Zero (__iar_zero_init3)
     Module                 ro code  rw code  ro data  rw data
     ------                 -------  -------  -------  -------
 E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\RAM\Obj: [1]
-    HW_ADC.o                    28                          8
+    Card_Config.o               12               100      100
+    DEV_OLED.o                 840             1 600    1 024
+    HW_ADC.o                    24                          8
     HW_DMA.o                   360                         64
     HW_FTM.o                    36                         12
-    HW_GPIO.o                  116                         20
+    HW_GPIO.o                  348                         20
     HW_MCG.o                   416       76       92       16
     HW_PIT.o                   108                         16
-    HW_UART.o                1 816                         48
-    io.o                        20
-    myK10Project.o               2
-    printf.o                 1 252
+    HW_UART.o                1 804                         48
+    myK10Project.o              24
     relocate.o                 160
     startup_K60DZ10.o        1 044
-    stdlib.o                    28
-    system_MK60.o            1 556             1 216        4
+    system_MK60.o              256                 4        4
     ---------------------------------------------------------
-    Total:                   6 942       76    1 308      188
+    Total:                   5 432       76    1 796    1 312
 
 command line: [2]
     ---------------------------------------------------------
@@ -242,10 +189,10 @@ shb_l.a: [5]
     ---------------------------------------------------------
     Total:                      20
 
-    Gaps                         2
+    Gaps                         4
     Linker created                                16    1 024
 -------------------------------------------------------------
-    Grand Total:             7 180       76    1 324    1 212
+    Grand Total:             5 672       76    1 812    2 336
 
 
 *******************************************************************************
@@ -254,81 +201,93 @@ shb_l.a: [5]
 
 Entry                      Address   Size  Type      Object
 -----                      -------   ----  ----      ------
-.bss$$Base              0x1fff21a8          --   Gb  - Linker created -
-.bss$$Limit             0x1fff2250          --   Gb  - Linker created -
-.data$$Base             0x1fff2194          --   Gb  - Linker created -
-.data$$Limit            0x1fff21a8          --   Gb  - Linker created -
-.data_init$$Base        0x1fff2048          --   Gb  - Linker created -
-.data_init$$Limit       0x1fff205c          --   Gb  - Linker created -
-?main                   0x1fff1e89         Code  Gb  cmain.o [4]
-ADC0_IRQHandler         0x1fff1e6d    0xa  Code  Gb  HW_ADC.o [1]
-ADC1_IRQHandler         0x1fff1e77    0xa  Code  Gb  HW_ADC.o [1]
-ADC_ISR                 0x1fff21a8    0x8  Data  Gb  HW_ADC.o [1]
-CSTACK$$Base            0x1fff2250          --   Gb  - Linker created -
-CSTACK$$Limit           0x1fff2650          --   Gb  - Linker created -
-CodeRelocate$$Base      0x1fff1b50          --   Gb  - Linker created -
-CodeRelocate$$Limit     0x1fff1b9c          --   Gb  - Linker created -
-CodeRelocateRam$$Base   0x1fff2148          --   Gb  - Linker created -
-CodeRelocateRam$$Limit  0x1fff2194          --   Gb  - Linker created -
-DMA0_IRQHandler         0x1fff1909   0x16  Code  Gb  HW_DMA.o [1]
-DMA10_IRQHandler        0x1fff19e5   0x16  Code  Gb  HW_DMA.o [1]
-DMA11_IRQHandler        0x1fff19fb   0x16  Code  Gb  HW_DMA.o [1]
-DMA12_IRQHandler        0x1fff1a11   0x16  Code  Gb  HW_DMA.o [1]
-DMA13_IRQHandler        0x1fff1a27   0x16  Code  Gb  HW_DMA.o [1]
-DMA14_IRQHandler        0x1fff1a3d   0x16  Code  Gb  HW_DMA.o [1]
-DMA15_IRQHandler        0x1fff1a53   0x16  Code  Gb  HW_DMA.o [1]
-DMA1_IRQHandler         0x1fff191f   0x16  Code  Gb  HW_DMA.o [1]
-DMA2_IRQHandler         0x1fff1935   0x16  Code  Gb  HW_DMA.o [1]
-DMA3_IRQHandler         0x1fff194b   0x16  Code  Gb  HW_DMA.o [1]
-DMA4_IRQHandler         0x1fff1961   0x16  Code  Gb  HW_DMA.o [1]
-DMA5_IRQHandler         0x1fff1977   0x16  Code  Gb  HW_DMA.o [1]
-DMA6_IRQHandler         0x1fff198d   0x16  Code  Gb  HW_DMA.o [1]
-DMA7_IRQHandler         0x1fff19a3   0x16  Code  Gb  HW_DMA.o [1]
-DMA8_IRQHandler         0x1fff19b9   0x16  Code  Gb  HW_DMA.o [1]
-DMA9_IRQHandler         0x1fff19cf   0x16  Code  Gb  HW_DMA.o [1]
-DMA_ISR                 0x1fff21b0   0x40  Data  Gb  HW_DMA.o [1]
-DefaultISR              0x1fff0cb3   0x18  Code  Gb  system_MK60.o [1]
-Diagnostic_Reset_Source
-                        0x1fff0f69   0x82  Code  Lc  system_MK60.o [1]
-FTM0_IRQHandler         0x1fff1d65    0xa  Code  Gb  HW_FTM.o [1]
-FTM1_IRQHandler         0x1fff1d6f    0xa  Code  Gb  HW_FTM.o [1]
-FTM2_IRQHandler         0x1fff1d79    0xa  Code  Gb  HW_FTM.o [1]
-FTM_ISR                 0x1fff21f0    0xc  Data  Gb  HW_FTM.o [1]
-GPIO_ISR                0x1fff21fc   0x14  Data  Gb  HW_GPIO.o [1]
-HardFault_Handler       0x1fff0ca7    0xc  Code  Gb  system_MK60.o [1]
-LPLD_PLL_Setup          0x1fff11f1  0x1a0  Code  Gb  HW_MCG.o [1]
-LPLD_Set_SYS_DIV        0x1fff2149   0x4c  Code  Gb  HW_MCG.o [1]
+.bss$$Base              0x1fff2210          --   Gb  - Linker created -
+.bss$$Limit             0x1fff22b8          --   Gb  - Linker created -
+.data$$Base             0x1fff1d4c          --   Gb  - Linker created -
+.data$$Limit            0x1fff21c4          --   Gb  - Linker created -
+.data_init$$Base        0x1fff0b30          --   Gb  - Linker created -
+.data_init$$Limit       0x1fff0fa8          --   Gb  - Linker created -
+?main                   0x1fff1ccd         Code  Gb  cmain.o [4]
+ADC0_IRQHandler         0x1fff1d29    0xa  Code  Gb  HW_ADC.o [1]
+ADC1_IRQHandler         0x1fff1d33    0xa  Code  Gb  HW_ADC.o [1]
+ADC_ISR                 0x1fff2210    0x8  Data  Gb  HW_ADC.o [1]
+ASCII_0608              0x1fff14d0  0x240  Data  Gb  DEV_OLED.o [1]
+CSTACK$$Base            0x1fff22b8          --   Gb  - Linker created -
+CSTACK$$Limit           0x1fff26b8          --   Gb  - Linker created -
+CodeRelocate$$Base      0x1fff1c24          --   Gb  - Linker created -
+CodeRelocate$$Limit     0x1fff1c70          --   Gb  - Linker created -
+CodeRelocateRam$$Base   0x1fff21c4          --   Gb  - Linker created -
+CodeRelocateRam$$Limit  0x1fff2210          --   Gb  - Linker created -
+DMA0_IRQHandler         0x1fff18b1   0x16  Code  Gb  HW_DMA.o [1]
+DMA10_IRQHandler        0x1fff198d   0x16  Code  Gb  HW_DMA.o [1]
+DMA11_IRQHandler        0x1fff19a3   0x16  Code  Gb  HW_DMA.o [1]
+DMA12_IRQHandler        0x1fff19b9   0x16  Code  Gb  HW_DMA.o [1]
+DMA13_IRQHandler        0x1fff19cf   0x16  Code  Gb  HW_DMA.o [1]
+DMA14_IRQHandler        0x1fff19e5   0x16  Code  Gb  HW_DMA.o [1]
+DMA15_IRQHandler        0x1fff19fb   0x16  Code  Gb  HW_DMA.o [1]
+DMA1_IRQHandler         0x1fff18c7   0x16  Code  Gb  HW_DMA.o [1]
+DMA2_IRQHandler         0x1fff18dd   0x16  Code  Gb  HW_DMA.o [1]
+DMA3_IRQHandler         0x1fff18f3   0x16  Code  Gb  HW_DMA.o [1]
+DMA4_IRQHandler         0x1fff1909   0x16  Code  Gb  HW_DMA.o [1]
+DMA5_IRQHandler         0x1fff191f   0x16  Code  Gb  HW_DMA.o [1]
+DMA6_IRQHandler         0x1fff1935   0x16  Code  Gb  HW_DMA.o [1]
+DMA7_IRQHandler         0x1fff194b   0x16  Code  Gb  HW_DMA.o [1]
+DMA8_IRQHandler         0x1fff1961   0x16  Code  Gb  HW_DMA.o [1]
+DMA9_IRQHandler         0x1fff1977   0x16  Code  Gb  HW_DMA.o [1]
+DMA_ISR                 0x1fff2218   0x40  Data  Gb  HW_DMA.o [1]
+DefaultISR              0x1fff1b17    0x2  Code  Gb  system_MK60.o [1]
+FTM0_IRQHandler         0x1fff1c99    0xa  Code  Gb  HW_FTM.o [1]
+FTM1_IRQHandler         0x1fff1ca5    0xa  Code  Gb  HW_FTM.o [1]
+FTM2_IRQHandler         0x1fff1caf    0xa  Code  Gb  HW_FTM.o [1]
+FTM_ISR                 0x1fff2258    0xc  Data  Gb  HW_FTM.o [1]
+GPIO_ISR                0x1fff2264   0x14  Data  Gb  HW_GPIO.o [1]
+GetOledConfig           0x1fff12f1    0xc  Code  Gb  Card_Config.o [1]
+HardFault_Handler       0x1fff1b15    0x2  Code  Gb  system_MK60.o [1]
+LPLD_GPIO_Init          0x1fff1375   0xa6  Code  Gb  HW_GPIO.o [1]
+LPLD_GPIO_Output_b      0x1fff141b   0x18  Code  Gb  HW_GPIO.o [1]
+LPLD_PLL_Setup          0x1fff1711  0x1a0  Code  Gb  HW_MCG.o [1]
+LPLD_Set_SYS_DIV        0x1fff21c5   0x4c  Code  Gb  HW_MCG.o [1]
 LPLD_UART_Init          0x1fff0425  0x410  Code  Gb  HW_UART.o [1]
-LPLD_UART_PutChar       0x1fff0835    0xa  Code  Gb  HW_UART.o [1]
-PIT0_IRQHandler         0x1fff1ae5   0x16  Code  Gb  HW_PIT.o [1]
-PIT1_IRQHandler         0x1fff1afb   0x16  Code  Gb  HW_PIT.o [1]
-PIT2_IRQHandler         0x1fff1b11   0x16  Code  Gb  HW_PIT.o [1]
-PIT3_IRQHandler         0x1fff1b27   0x16  Code  Gb  HW_PIT.o [1]
-PIT_ISR                 0x1fff2210   0x10  Data  Gb  HW_PIT.o [1]
-PORTA_IRQHandler        0x1fff1a71   0x12  Code  Gb  HW_GPIO.o [1]
-PORTB_IRQHandler        0x1fff1a83   0x12  Code  Gb  HW_GPIO.o [1]
-PORTC_IRQHandler        0x1fff1a95   0x12  Code  Gb  HW_GPIO.o [1]
-PORTD_IRQHandler        0x1fff1aa7   0x12  Code  Gb  HW_GPIO.o [1]
-PORTE_IRQHandler        0x1fff1ab9   0x12  Code  Gb  HW_GPIO.o [1]
-Region$$Table$$Base     0x1fff1d88          --   Gb  - Linker created -
-Region$$Table$$Limit    0x1fff1d98          --   Gb  - Linker created -
-SystemCoreClock         0x1fff21a4    0x4  Data  Gb  system_MK60.o [1]
-SystemCoreClockUpdate   0x1fff0c79   0x2e  Code  Gb  system_MK60.o [1]
-SystemInit              0x1fff0b3d  0x13c  Code  Gb  system_MK60.o [1]
-UART0_ERR_IRQHandler    0x1fff0b31    0x2  Code  Gb  HW_UART.o [1]
-UART0_IRQHandler        0x1fff083f   0x58  Code  Gb  HW_UART.o [1]
-UART1_ERR_IRQHandler    0x1fff0b33    0x2  Code  Gb  HW_UART.o [1]
-UART1_IRQHandler        0x1fff0897   0x58  Code  Gb  HW_UART.o [1]
-UART2_ERR_IRQHandler    0x1fff0b35    0x2  Code  Gb  HW_UART.o [1]
-UART2_IRQHandler        0x1fff08ef   0x58  Code  Gb  HW_UART.o [1]
-UART3_ERR_IRQHandler    0x1fff0b37    0x2  Code  Gb  HW_UART.o [1]
-UART3_IRQHandler        0x1fff0947   0x58  Code  Gb  HW_UART.o [1]
-UART4_ERR_IRQHandler    0x1fff0b39    0x2  Code  Gb  HW_UART.o [1]
-UART4_IRQHandler        0x1fff099f   0x58  Code  Gb  HW_UART.o [1]
-UART5_ERR_IRQHandler    0x1fff0b3b    0x2  Code  Gb  HW_UART.o [1]
-UART5_IRQHandler        0x1fff09f7   0x58  Code  Gb  HW_UART.o [1]
-UART_R_ISR              0x1fff2220   0x18  Data  Gb  HW_UART.o [1]
-UART_T_ISR              0x1fff2238   0x18  Data  Gb  HW_UART.o [1]
+OLED_DcSet              0x1fff1031   0x2e  Code  Lc  DEV_OLED.o [1]
+OLED_IO_Init            0x1fff105f   0x64  Code  Gb  DEV_OLED.o [1]
+OLED_Init               0x1fff11b9   0xc4  Code  Gb  DEV_OLED.o [1]
+OLED_Refresh_Gram       0x1fff114b   0x42  Code  Gb  DEV_OLED.o [1]
+OLED_RstSet             0x1fff1003   0x2e  Code  Lc  DEV_OLED.o [1]
+OLED_SclSet             0x1fff0fa9   0x2c  Code  Lc  DEV_OLED.o [1]
+OLED_SdaSet             0x1fff0fd5   0x2e  Code  Lc  DEV_OLED.o [1]
+OLED_SetPos             0x1fff118d   0x2c  Code  Gb  DEV_OLED.o [1]
+OLED_WrCmd              0x1fff1109   0x42  Code  Lc  DEV_OLED.o [1]
+OLED_WrDat              0x1fff10c5   0x42  Code  Lc  DEV_OLED.o [1]
+OLED_WriteChar          0x1fff127d   0x6a  Code  Gb  DEV_OLED.o [1]
+PIT0_IRQHandler         0x1fff1bb9   0x16  Code  Gb  HW_PIT.o [1]
+PIT1_IRQHandler         0x1fff1bcf   0x16  Code  Gb  HW_PIT.o [1]
+PIT2_IRQHandler         0x1fff1be5   0x16  Code  Gb  HW_PIT.o [1]
+PIT3_IRQHandler         0x1fff1bfb   0x16  Code  Gb  HW_PIT.o [1]
+PIT_ISR                 0x1fff2278   0x10  Data  Gb  HW_PIT.o [1]
+PORTA_IRQHandler        0x1fff1433   0x12  Code  Gb  HW_GPIO.o [1]
+PORTB_IRQHandler        0x1fff1445   0x12  Code  Gb  HW_GPIO.o [1]
+PORTC_IRQHandler        0x1fff1457   0x12  Code  Gb  HW_GPIO.o [1]
+PORTD_IRQHandler        0x1fff1469   0x12  Code  Gb  HW_GPIO.o [1]
+PORTE_IRQHandler        0x1fff147b   0x12  Code  Gb  HW_GPIO.o [1]
+Region$$Table$$Base     0x1fff1cbc          --   Gb  - Linker created -
+Region$$Table$$Limit    0x1fff1ccc          --   Gb  - Linker created -
+SystemCoreClock         0x1fff21c0    0x4  Data  Gb  system_MK60.o [1]
+SystemCoreClockUpdate   0x1fff1ab9   0x26  Code  Gb  system_MK60.o [1]
+SystemInit              0x1fff1a19   0xa0  Code  Gb  system_MK60.o [1]
+UART0_ERR_IRQHandler    0x1fff0b25    0x2  Code  Gb  HW_UART.o [1]
+UART0_IRQHandler        0x1fff0835   0x58  Code  Gb  HW_UART.o [1]
+UART1_ERR_IRQHandler    0x1fff0b27    0x2  Code  Gb  HW_UART.o [1]
+UART1_IRQHandler        0x1fff088d   0x58  Code  Gb  HW_UART.o [1]
+UART2_ERR_IRQHandler    0x1fff0b29    0x2  Code  Gb  HW_UART.o [1]
+UART2_IRQHandler        0x1fff08e5   0x58  Code  Gb  HW_UART.o [1]
+UART3_ERR_IRQHandler    0x1fff0b2b    0x2  Code  Gb  HW_UART.o [1]
+UART3_IRQHandler        0x1fff093d   0x58  Code  Gb  HW_UART.o [1]
+UART4_ERR_IRQHandler    0x1fff0b2d    0x2  Code  Gb  HW_UART.o [1]
+UART4_IRQHandler        0x1fff0995   0x58  Code  Gb  HW_UART.o [1]
+UART5_ERR_IRQHandler    0x1fff0b2f    0x2  Code  Gb  HW_UART.o [1]
+UART5_IRQHandler        0x1fff09ed   0x58  Code  Gb  HW_UART.o [1]
+UART_R_ISR              0x1fff2288   0x18  Data  Gb  HW_UART.o [1]
+UART_T_ISR              0x1fff22a0   0x18  Data  Gb  HW_UART.o [1]
 __BOOT_STACK_ADDRESS {Abs}
                         0x2000fff8          --   Gb  command line/config [2]
 __VECTOR_RAM {Abs}      0x1fff0000          --   Gb  command line/config [2]
@@ -338,38 +297,32 @@ __Vectors_End           0x1fff0400         Data  Gb  startup_K60DZ10.o [1]
 __Vectors_Size {Abs}    0x00000400          --   Gb  startup_K60DZ10.o [1]
 __as_entries_start      0xffffffff          --   Gb  command line/config [2]
 __as_table_start        0xffffffff          --   Gb  command line/config [2]
-__cmain                 0x1fff1e89         Code  Gb  cmain.o [4]
-__exit                  0x1fff1eb9   0x14  Code  Gb  exit.o [5]
-__iar_data_init3        0x1fff1cf5   0x28  Code  Gb  data_init.o [4]
-__iar_program_start     0x1fff20a5         Code  Gb  cstartup_M.o [4]
+__cmain                 0x1fff1ccd         Code  Gb  cmain.o [4]
+__exit                  0x1fff1d15   0x14  Code  Gb  exit.o [5]
+__iar_data_init3        0x1fff1c71   0x28  Code  Gb  data_init.o [4]
+__iar_program_start     0x1fff1d41         Code  Gb  cstartup_M.o [4]
 __iar_unaligned___aeabi_memcpy4
-                        0x1fff1391         Code  Gb  ABImemcpy_unaligned.o [4]
+                        0x1fff12fd         Code  Gb  ABImemcpy_unaligned.o [4]
 __iar_unaligned___aeabi_memcpy8
-                        0x1fff1391         Code  Gb  ABImemcpy_unaligned.o [4]
-__iar_zero_init3        0x1fff13e7   0x22  Code  Gb  zero_init3.o [4]
-__low_level_init        0x1fff1ea3    0x4  Code  Gb  low_level_init.o [3]
+                        0x1fff12fd         Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_zero_init3        0x1fff1353   0x22  Code  Gb  zero_init3.o [4]
+__low_level_init        0x1fff1ce7    0x4  Code  Gb  low_level_init.o [3]
 __vector_table          0x1fff0000         Data  Gb  startup_K60DZ10.o [1]
 __vector_table_0x1c     0x1fff001c         Data  Gb  startup_K60DZ10.o [1]
-_call_main              0x1fff1e95         Code  Gb  cmain.o [4]
-_exit                   0x1fff1ead         Code  Gb  cexit.o [4]
-_main                   0x1fff1e9f         Code  Gb  cmain.o [4]
-common_relocate         0x1fff1151   0xa0  Code  Gb  relocate.o [1]
-cpu_identify            0x1fff0cd1  0x1f2  Code  Lc  system_MK60.o [1]
-exit                    0x1fff1ea9    0x4  Code  Gb  exit.o [3]
-flash_identify          0x1fff0ec3   0xa6  Code  Lc  system_MK60.o [1]
-g_bus_clock             0x1fff2198    0x4  Data  Gb  HW_MCG.o [1]
-g_core_clock            0x1fff2194    0x4  Data  Gb  HW_MCG.o [1]
-g_flash_clock           0x1fff219c    0x4  Data  Gb  HW_MCG.o [1]
-g_flexbus_clock         0x1fff21a0    0x4  Data  Gb  HW_MCG.o [1]
-main                    0x1fff1ea7    0x2  Code  Gb  myK10Project.o [1]
-out_char                0x1fff2035    0xe  Code  Gb  io.o [1]
-printf                  0x1fff18c9   0x1e  Code  Gb  printf.o [1]
-printk                  0x1fff14e1  0x3e8  Code  Gb  printf.o [1]
-printk_mknumstr         0x1fff1435   0x70  Code  Lc  printf.o [1]
-printk_pad_space        0x1fff14c3   0x1e  Code  Lc  printf.o [1]
-printk_pad_zero         0x1fff14a5   0x1e  Code  Lc  printf.o [1]
-printk_putc             0x1fff1409   0x2c  Code  Lc  printf.o [1]
-strlen                  0x1fff18ed   0x1c  Code  Gb  stdlib.o [1]
+_call_main              0x1fff1cd9         Code  Gb  cmain.o [4]
+_exit                   0x1fff1d09         Code  Gb  cexit.o [4]
+_main                   0x1fff1ce3         Code  Gb  cmain.o [4]
+common_relocate         0x1fff1b19   0xa0  Code  Gb  relocate.o [1]
+displayGRAM             0x1fff1db0  0x400  Data  Gb  DEV_OLED.o [1]
+exit                    0x1fff1d03    0x4  Code  Gb  exit.o [3]
+g_HardWareConfig_MK10VLL10
+                        0x1fff1dac    0x4  Data  Gb  Card_Config.o [1]
+g_OLEDConfig_Demo       0x1fff1d4c   0x60  Data  Gb  Card_Config.o [1]
+g_bus_clock             0x1fff21b4    0x4  Data  Gb  HW_MCG.o [1]
+g_core_clock            0x1fff21b0    0x4  Data  Gb  HW_MCG.o [1]
+g_flash_clock           0x1fff21b8    0x4  Data  Gb  HW_MCG.o [1]
+g_flexbus_clock         0x1fff21bc    0x4  Data  Gb  HW_MCG.o [1]
+main                    0x1fff1ceb   0x18  Code  Gb  myK10Project.o [1]
 
 
 [1] = E:\gitProject\MyeBEST\projectSnake\project\myK10Project\iar\RAM\Obj
@@ -378,10 +331,10 @@ strlen                  0x1fff18ed   0x1c  Code  Gb  stdlib.o [1]
 [4] = rt7M_tl.a
 [5] = shb_l.a
 
-  7 180 bytes of readonly  code memory
+  5 672 bytes of readonly  code memory
      76 bytes of readwrite code memory
-  1 324 bytes of readonly  data memory
-  1 212 bytes of readwrite data memory
+  1 812 bytes of readonly  data memory
+  2 336 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

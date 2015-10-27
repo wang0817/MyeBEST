@@ -1056,7 +1056,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>MK60DN512Zxxx10	Freescale MK60DN512Zxxx10</state>
+          <state>MK60DN512xxx10	Freescale MK60DN512xxx10</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -1130,7 +1130,7 @@
         <option>
           <name>CCDefines</name>
           <state>LPLD_K60</state>
-          <state>USE_K60DZ10</state>
+          <state>USE_K60D10</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -1191,7 +1191,7 @@
         <option>
           <name>CCAllowList</name>
           <version>1</version>
-          <state>00000000</state>
+          <state>11111110</state>
         </option>
         <option>
           <name>CCDebugInfo</name>
@@ -1261,6 +1261,7 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\app</state>
           <state>$PROJ_DIR$\..\..\..\lib\CPU</state>
+          <state>$PROJ_DIR$\..\..\..\lib\config</state>
           <state>$PROJ_DIR$\..\..\..\lib\common</state>
           <state>$PROJ_DIR$\..\..\..\lib\LPLD</state>
           <state>$PROJ_DIR$\..\..\..\lib\LPLD\HW</state>
@@ -1293,7 +1294,7 @@
         </option>
         <option>
           <name>CCOptLevel</name>
-          <state>1</state>
+          <state>3</state>
         </option>
         <option>
           <name>CCOptStrategy</name>
@@ -1302,7 +1303,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>1</state>
+          <state>3</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -1683,7 +1684,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$PROJ_DIR$\..\..\..\lib\iar_config_files\LPLD_K60DN512_FLASH.icf</state>
+          <state>E:\gitProject\MyeBEST\projectSnake\lib\iar_config_files\LPLD_K60DN512_FLASH.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:03:58
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  14:59:52
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -104,7 +104,7 @@
 in_char:
         PUSH     {R7,LR}
 //   31 	return LPLD_UART_GetChar(TERM_PORT);
-        LDR.N    R0,??DataTable2  ;; 0x400eb000
+        LDR.N    R0,??DataTable2  ;; 0x4006a000
         BL       LPLD_UART_GetChar
         POP      {R1,PC}          ;; return
 //   32 }
@@ -119,7 +119,7 @@ out_char:
 //   36 	LPLD_UART_PutChar(TERM_PORT, ch);
         MOVS     R1,R0
         SXTB     R1,R1            ;; SignExt  R1,R1,#+24,#+24
-        LDR.N    R0,??DataTable2  ;; 0x400eb000
+        LDR.N    R0,??DataTable2  ;; 0x4006a000
         BL       LPLD_UART_PutChar
 //   37 }
         POP      {R0,PC}          ;; return
@@ -132,7 +132,7 @@ out_char:
 char_present:
         PUSH     {R7,LR}
 //   41 	return LPLD_UART_GetChar_Present(TERM_PORT);
-        LDR.N    R0,??DataTable2  ;; 0x400eb000
+        LDR.N    R0,??DataTable2  ;; 0x4006a000
         BL       LPLD_UART_GetChar_Present
         POP      {R1,PC}          ;; return
 //   42 }
@@ -141,7 +141,7 @@ char_present:
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
 ??DataTable2:
-        DC32     0x400eb000
+        DC32     0x4006a000
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0

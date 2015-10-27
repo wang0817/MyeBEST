@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:03:56
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  14:59:50
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -59,8 +59,6 @@
 
         #define SHT_PROGBITS 0x1
 
-        EXTERN assert_failed
-
         PUBLIC ADC0_IRQHandler
         PUBLIC ADC1_IRQHandler
         PUBLIC ADC_ISR
@@ -105,7 +103,7 @@ NVIC_EnableIRQ:
         MOVS     R1,#+1
         ANDS     R2,R0,#0x1F
         LSLS     R1,R1,R2
-        LDR.W    R2,??DataTable10  ;; 0xe000e100
+        LDR.W    R2,??DataTable8  ;; 0xe000e100
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         LSRS     R0,R0,#+5
         STR      R1,[R2, R0, LSL #+2]
@@ -118,7 +116,7 @@ NVIC_DisableIRQ:
         MOVS     R1,#+1
         ANDS     R2,R0,#0x1F
         LSLS     R1,R1,R2
-        LDR.W    R2,??DataTable10_1  ;; 0xe000e180
+        LDR.W    R2,??DataTable8_1  ;; 0xe000e180
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         LSRS     R0,R0,#+5
         STR      R1,[R2, R0, LSL #+2]
@@ -161,18 +159,18 @@ LPLD_ADC_Init:
 //   48   ADC_Type *adcx = adc_init_structure.ADC_Adcx;
         LDR      R4,[SP, #+40]
 //   49   uint8 diff = adc_init_structure.ADC_DiffMode;
-        LDRB     R5,[SP, #+44]
+        LDRB     R0,[SP, #+44]
+        STRB     R0,[SP, #+2]
 //   50   uint8 mode = adc_init_structure.ADC_BitMode;
         LDRB     R0,[SP, #+45]
-        STRB     R0,[SP, #+2]
-//   51   uint8 time = adc_init_structure.ADC_SampleTimeCfg;
-        LDRB     R6,[SP, #+46]
-//   52   uint8 ltime = adc_init_structure.ADC_LongSampleTimeSel;
-        LDRB     R0,[SP, #+47]
         STRB     R0,[SP, #+1]
-//   53   uint8 avg = adc_init_structure.ADC_HwAvgSel;
-        LDRB     R0,[SP, #+48]
+//   51   uint8 time = adc_init_structure.ADC_SampleTimeCfg;
+        LDRB     R0,[SP, #+46]
         STRB     R0,[SP, #+0]
+//   52   uint8 ltime = adc_init_structure.ADC_LongSampleTimeSel;
+        LDRB     R5,[SP, #+47]
+//   53   uint8 avg = adc_init_structure.ADC_HwAvgSel;
+        LDRB     R6,[SP, #+48]
 //   54   uint8 muxab = adc_init_structure.ADC_MuxSel;
         LDRB     R7,[SP, #+50]
 //   55   uint8 pga = adc_init_structure.ADC_PgaGain;
@@ -184,86 +182,26 @@ LPLD_ADC_Init:
 //   58   
 //   59   //参数检查
 //   60   ASSERT( (diff==ADC_SE)||(diff==ADC_DIFF) );  //判断模式选择
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        CMP      R5,#+0
-        BEQ.N    ??LPLD_ADC_Init_0
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        CMP      R5,#+32
-        BEQ.N    ??LPLD_ADC_Init_0
-        MOVS     R1,#+60
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //   61   ASSERT( mode<=SE_16BIT );       //判断精度选择
-??LPLD_ADC_Init_0:
-        LDRB     R0,[SP, #+2]
-        CMP      R0,#+4
-        BLT.N    ??LPLD_ADC_Init_1
-        MOVS     R1,#+61
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //   62   ASSERT( (time==SAMTIME_SHORT)||(time==SAMTIME_LONG) );  //判断采样时间选择
-??LPLD_ADC_Init_1:
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        CMP      R6,#+0
-        BEQ.N    ??LPLD_ADC_Init_2
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        CMP      R6,#+16
-        BEQ.N    ??LPLD_ADC_Init_2
-        MOVS     R1,#+62
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //   63   ASSERT( ltime<=LSAMTIME_2EX );  //判断长采样时间
-??LPLD_ADC_Init_2:
-        LDRB     R0,[SP, #+1]
-        CMP      R0,#+4
-        BLT.N    ??LPLD_ADC_Init_3
-        MOVS     R1,#+63
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //   64   ASSERT( (avg&0x3)<=(HW_32AVG&0x3) );  //判断硬件平均
-??LPLD_ADC_Init_3:
-        LDRB     R0,[SP, #+0]
-        ANDS     R0,R0,#0x3
-        CMP      R0,#+4
-        BCC.N    ??LPLD_ADC_Init_4
-        MOVS     R1,#+64
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //   65   ASSERT( (muxab==MUX_ADXXA)||(muxab==MUX_ADXXB) );  //判断ADC复用AB选择
-??LPLD_ADC_Init_4:
-        UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-        CMP      R7,#+0
-        BEQ.N    ??LPLD_ADC_Init_5
-        UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-        CMP      R7,#+16
-        BEQ.N    ??LPLD_ADC_Init_5
-        MOVS     R1,#+65
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //   66   ASSERT( (pga&0x7)<=(LSAMTIME_2EX&0x7));  //判断PGA
-??LPLD_ADC_Init_5:
-        UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
-        ANDS     R0,R8,#0x7
-        CMP      R0,#+4
-        BLT.N    ??LPLD_ADC_Init_6
-        MOVS     R1,#+66
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //   67   
 //   68   //配置ADC时钟
 //   69   if(adcx == ADC0)
-??LPLD_ADC_Init_6:
-        LDR.W    R0,??DataTable10_3  ;; 0x4003b000
+        LDR.W    R0,??DataTable8_2  ;; 0x4003b000
         CMP      R4,R0
-        BNE.N    ??LPLD_ADC_Init_7
+        BNE.N    ??LPLD_ADC_Init_0
 //   70   {
 //   71     i=0;
         MOVS     R11,#+0
 //   72     SIM->SCGC6 |= SIM_SCGC6_ADC0_MASK;   // 开启ADC0时钟
-        LDR.W    R0,??DataTable10_4  ;; 0x4004803c
+        LDR.W    R0,??DataTable8_3  ;; 0x4004803c
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x8000000
-        LDR.W    R1,??DataTable10_4  ;; 0x4004803c
+        LDR.W    R1,??DataTable8_3  ;; 0x4004803c
         STR      R0,[R1, #+0]
 //   73   }
 //   74   else if(adcx == ADC1)
@@ -289,10 +227,10 @@ LPLD_ADC_Init:
 //   94   }
 //   95 
 //   96   if(adc_init_structure.ADC_CalEnable == TRUE)
-??LPLD_ADC_Init_8:
+??LPLD_ADC_Init_1:
         LDRB     R0,[SP, #+51]
         CMP      R0,#+1
-        BNE.N    ??LPLD_ADC_Init_9
+        BNE.N    ??LPLD_ADC_Init_2
 //   97     LPLD_ADC_Cal(adcx);  //进行ADC校准
         MOVS     R0,R4
         BL       LPLD_ADC_Cal
@@ -303,12 +241,12 @@ LPLD_ADC_Init:
 //  102                   | time                           // 设置长短时间采样模式
 //  103                   | ADC_CFG1_ADICLK(ADICLK_BUS_2)  // ADC输入时钟源为 BusClk
 //  104                   | ADC_CFG1_MODE(mode);           //设置ADC转换精度
-??LPLD_ADC_Init_9:
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        LDRB     R0,[SP, #+2]
-        LSLS     R0,R0,#+2
-        ANDS     R0,R0,#0xC
-        ORRS     R0,R0,R6
+??LPLD_ADC_Init_2:
+        LDRB     R0,[SP, #+0]
+        LDRB     R1,[SP, #+1]
+        LSLS     R1,R1,#+2
+        ANDS     R1,R1,#0xC
+        ORRS     R0,R1,R0
         ORRS     R0,R0,#0x1
         STR      R0,[R4, #+8]
 //  105 
@@ -318,8 +256,8 @@ LPLD_ADC_Init:
 //  109                  | ADC_CFG2_ADHSC_MASK        // 高速转换
 //  110                  | ADC_CFG2_ADLSTS(ltime);    // 长采样时间时钟周期选择
         UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-        LDRB     R0,[SP, #+1]
-        ANDS     R0,R0,#0x3
+        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+        ANDS     R0,R5,#0x3
         ORRS     R0,R0,R7
         ORRS     R0,R0,#0x4
         STR      R0,[R4, #+12]
@@ -346,7 +284,7 @@ LPLD_ADC_Init:
 //  123   if(adc_init_structure.ADC_DmaEnable == TRUE) 
         LDRB     R0,[SP, #+53]
         CMP      R0,#+1
-        BNE.N    ??LPLD_ADC_Init_10
+        BNE.N    ??LPLD_ADC_Init_3
 //  124     adcx->SC2  |= ADC_SC2_DMAEN_MASK;   //使能DMA
         LDR      R0,[R4, #+32]
         ORRS     R0,R0,#0x4
@@ -355,9 +293,9 @@ LPLD_ADC_Init:
 //  126   adcx->SC3  = 0 & (~ADC_SC3_CAL_MASK)          //关闭校准
 //  127                  & (~ADC_SC3_ADCO_MASK)         //选择一次转换
 //  128                  |  avg;        //硬件平均
-??LPLD_ADC_Init_10:
-        LDRB     R0,[SP, #+0]
-        STR      R0,[R4, #+36]
+??LPLD_ADC_Init_3:
+        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+        STR      R6,[R4, #+36]
 //  129   
 //  130   adcx->PGA  = pga<<ADC_PGA_PGAG_SHIFT; 
         UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
@@ -367,42 +305,42 @@ LPLD_ADC_Init:
 //  132   //校准完毕后再重新初始化ADC寄存器
 //  133   //adcx->SC1[0] = ADC_SC1_ADCH(AD31);    //复位SC1
 //  134   adcx->SC1[hwtrg & 0x01] = diff;         //设置单端、差分输入
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+        LDRB     R0,[SP, #+2]
         UXTB     R9,R9            ;; ZeroExt  R9,R9,#+24,#+24
-        ANDS     R0,R9,#0x1
-        STR      R5,[R4, R0, LSL #+2]
+        ANDS     R1,R9,#0x1
+        STR      R0,[R4, R1, LSL #+2]
 //  135   
 //  136   if(isr_func!= NULL)
         MOV      R0,R10
         CMP      R0,#+0
-        BEQ.N    ??LPLD_ADC_Init_11
+        BEQ.N    ??LPLD_ADC_Init_4
 //  137   {
 //  138     ADC_ISR[i] = isr_func;
-        LDR.W    R0,??DataTable10_5
+        LDR.W    R0,??DataTable8_4
         UXTB     R11,R11          ;; ZeroExt  R11,R11,#+24,#+24
         STR      R10,[R0, R11, LSL #+2]
 //  139   }
 //  140   
 //  141   return 1;
-??LPLD_ADC_Init_11:
+??LPLD_ADC_Init_4:
         MOVS     R0,#+1
-??LPLD_ADC_Init_12:
+??LPLD_ADC_Init_5:
         POP      {R1,R4-R11}
         LDR      PC,[SP], #+20    ;; return
-??LPLD_ADC_Init_7:
-        LDR.W    R0,??DataTable10_6  ;; 0x400bb000
+??LPLD_ADC_Init_0:
+        LDR.W    R0,??DataTable8_5  ;; 0x400bb000
         CMP      R4,R0
-        BNE.N    ??LPLD_ADC_Init_13
+        BNE.N    ??LPLD_ADC_Init_6
         MOVS     R11,#+1
-        LDR.W    R0,??DataTable10_7  ;; 0x40048030
+        LDR.W    R0,??DataTable8_6  ;; 0x40048030
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x8000000
-        LDR.W    R1,??DataTable10_7  ;; 0x40048030
+        LDR.W    R1,??DataTable8_6  ;; 0x40048030
         STR      R0,[R1, #+0]
-        B.N      ??LPLD_ADC_Init_8
-??LPLD_ADC_Init_13:
+        B.N      ??LPLD_ADC_Init_1
+??LPLD_ADC_Init_6:
         MOVS     R0,#+0
-        B.N      ??LPLD_ADC_Init_12
+        B.N      ??LPLD_ADC_Init_5
 //  142 }
 //  143 
 //  144 /*
@@ -437,15 +375,15 @@ LPLD_ADC_Deinit:
 //  162   
 //  163   //配置ADC时钟
 //  164   if(adcx == ADC0)
-        LDR.W    R1,??DataTable10_3  ;; 0x4003b000
+        LDR.W    R1,??DataTable8_2  ;; 0x4003b000
         CMP      R0,R1
         BNE.N    ??LPLD_ADC_Deinit_0
 //  165   {
 //  166     SIM->SCGC6 &= ~(SIM_SCGC6_ADC0_MASK);   // 关闭ADC0时钟
-        LDR.W    R0,??DataTable10_4  ;; 0x4004803c
+        LDR.W    R0,??DataTable8_3  ;; 0x4004803c
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x8000000
-        LDR.W    R1,??DataTable10_4  ;; 0x4004803c
+        LDR.W    R1,??DataTable8_3  ;; 0x4004803c
         STR      R0,[R1, #+0]
 //  167   }
 //  168   else if(adcx == ADC1)
@@ -474,13 +412,13 @@ LPLD_ADC_Deinit:
         ADD      SP,SP,#+16
         BX       LR               ;; return
 ??LPLD_ADC_Deinit_0:
-        LDR.W    R1,??DataTable10_6  ;; 0x400bb000
+        LDR.W    R1,??DataTable8_5  ;; 0x400bb000
         CMP      R0,R1
         BNE.N    ??LPLD_ADC_Deinit_3
-        LDR.W    R0,??DataTable10_7  ;; 0x40048030
+        LDR.W    R0,??DataTable8_6  ;; 0x40048030
         LDR      R0,[R0, #+0]
         BICS     R0,R0,#0x8000000
-        LDR.W    R1,??DataTable10_7  ;; 0x40048030
+        LDR.W    R1,??DataTable8_6  ;; 0x40048030
         STR      R0,[R1, #+0]
         B.N      ??LPLD_ADC_Deinit_1
 ??LPLD_ADC_Deinit_3:
@@ -677,59 +615,40 @@ LPLD_ADC_Get:
         THUMB
 //  351 void LPLD_ADC_EnableConversion(ADC_Type *adcx, AdcChnEnum_Type chn, uint8 ab, boolean irq)
 //  352 {
-LPLD_ADC_EnableConversion:
-        PUSH     {R3-R7,LR}
-        MOVS     R4,R0
-        MOVS     R5,R1
-        MOVS     R6,R2
-        MOVS     R7,R3
 //  353   //参数检查
 //  354   ASSERT( ab<=1 );  //判断AB控制寄存器
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        CMP      R6,#+2
-        BLT.N    ??LPLD_ADC_EnableConversion_0
-        MOV      R1,#+354
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //  355   ASSERT( irq<=1 );  //判断是否使能中断
-??LPLD_ADC_EnableConversion_0:
-        UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-        CMP      R7,#+2
-        BLT.N    ??LPLD_ADC_EnableConversion_1
-        MOVW     R1,#+355
-        LDR.W    R0,??DataTable10_2
-        BL       assert_failed
 //  356   if(irq == TRUE)
-??LPLD_ADC_EnableConversion_1:
-        UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-        CMP      R7,#+1
-        BNE.N    ??LPLD_ADC_EnableConversion_2
+LPLD_ADC_EnableConversion:
+        UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+        CMP      R3,#+1
+        BNE.N    ??LPLD_ADC_EnableConversion_0
 //  357   {
 //  358     adcx->SC1[ab] |= (ADC_SC1_AIEN_MASK);
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        LDR      R0,[R4, R6, LSL #+2]
-        ORRS     R0,R0,#0x40
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        STR      R0,[R4, R6, LSL #+2]
+        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+        LDR      R3,[R0, R2, LSL #+2]
+        ORRS     R3,R3,#0x40
+        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+        STR      R3,[R0, R2, LSL #+2]
 //  359   }
 //  360   adcx->SC1[ab] &= ~(ADC_SC1_ADCH_MASK);
-??LPLD_ADC_EnableConversion_2:
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        LDR      R0,[R4, R6, LSL #+2]
-        LSRS     R0,R0,#+5
-        LSLS     R0,R0,#+5
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        STR      R0,[R4, R6, LSL #+2]
+??LPLD_ADC_EnableConversion_0:
+        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+        LDR      R3,[R0, R2, LSL #+2]
+        LSRS     R3,R3,#+5
+        LSLS     R3,R3,#+5
+        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+        STR      R3,[R0, R2, LSL #+2]
 //  361   adcx->SC1[ab] |= ADC_SC1_ADCH(chn);
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        LDR      R0,[R4, R6, LSL #+2]
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        ANDS     R1,R5,#0x1F
-        ORRS     R0,R1,R0
-        UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-        STR      R0,[R4, R6, LSL #+2]
+        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+        LDR      R3,[R0, R2, LSL #+2]
+        UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+        ANDS     R1,R1,#0x1F
+        ORRS     R1,R1,R3
+        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+        STR      R1,[R0, R2, LSL #+2]
 //  362 }
-        POP      {R0,R4-R7,PC}    ;; return
+        BX       LR               ;; return
 //  363 
 //  364 /*
 //  365  * LPLD_ADC_GetResult
@@ -755,25 +674,15 @@ LPLD_ADC_EnableConversion:
         THUMB
 //  383 uint16 LPLD_ADC_GetResult(ADC_Type *adcx, uint8 ab)
 //  384 {
-LPLD_ADC_GetResult:
-        PUSH     {R3-R5,LR}
-        MOVS     R4,R0
-        MOVS     R5,R1
 //  385   //参数检查
 //  386   ASSERT( ab<=1 );  //判断AB控制寄存器
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        CMP      R5,#+2
-        BLT.N    ??LPLD_ADC_GetResult_0
-        MOV      R1,#+386
-        LDR.N    R0,??DataTable10_2
-        BL       assert_failed
 //  387   return adcx->R[ab];
-??LPLD_ADC_GetResult_0:
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        ADDS     R0,R4,R5, LSL #+2
+LPLD_ADC_GetResult:
+        UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+        ADDS     R0,R0,R1, LSL #+2
         LDR      R0,[R0, #+16]
         UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
-        POP      {R1,R4,R5,PC}    ;; return
+        BX       LR               ;; return
 //  388 }
 //  389 
 //  390 /*
@@ -847,7 +756,7 @@ LPLD_ADC_EnableIrq:
         LDR      R0,[SP, #+8]
 //  433   
 //  434   if(adcx == ADC0)
-        LDR.N    R1,??DataTable10_3  ;; 0x4003b000
+        LDR.N    R1,??DataTable8_2  ;; 0x4003b000
         CMP      R0,R1
         BNE.N    ??LPLD_ADC_EnableIrq_0
 //  435     i=0;
@@ -875,7 +784,7 @@ LPLD_ADC_EnableIrq:
         POP      {R1}
         LDR      PC,[SP], #+20    ;; return
 ??LPLD_ADC_EnableIrq_0:
-        LDR.N    R1,??DataTable10_6  ;; 0x400bb000
+        LDR.N    R1,??DataTable8_5  ;; 0x400bb000
         CMP      R0,R1
         BNE.N    ??LPLD_ADC_EnableIrq_3
         MOVS     R0,#+1
@@ -911,7 +820,7 @@ LPLD_ADC_DisableIrq:
         LDR      R0,[SP, #+8]
 //  469   
 //  470   if(adcx == ADC0)
-        LDR.N    R1,??DataTable10_3  ;; 0x4003b000
+        LDR.N    R1,??DataTable8_2  ;; 0x4003b000
         CMP      R0,R1
         BNE.N    ??LPLD_ADC_DisableIrq_0
 //  471     i=0;
@@ -939,7 +848,7 @@ LPLD_ADC_DisableIrq:
         POP      {R1}
         LDR      PC,[SP], #+20    ;; return
 ??LPLD_ADC_DisableIrq_0:
-        LDR.N    R1,??DataTable10_6  ;; 0x400bb000
+        LDR.N    R1,??DataTable8_5  ;; 0x400bb000
         CMP      R0,R1
         BNE.N    ??LPLD_ADC_DisableIrq_3
         MOVS     R0,#+1
@@ -1098,7 +1007,7 @@ LPLD_ADC_Chn_Enable:
 //  623   //不同的通道对应不同的引脚，因此需要判断并配置
 //  624   if(adcx == ADC0)
 ??LPLD_ADC_Chn_Enable_0:
-        LDR.N    R3,??DataTable10_3  ;; 0x4003b000
+        LDR.N    R3,??DataTable8_2  ;; 0x4003b000
         CMP      R0,R3
         BNE.N    ??LPLD_ADC_Chn_Enable_2
 //  625   {
@@ -1366,7 +1275,7 @@ LPLD_ADC_Chn_Enable:
         CMP      R2,#+1
         BNE.N    ??LPLD_ADC_Chn_Enable_16
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable10_8  ;; 0x4004b008
+        LDR.N    R1,??DataTable8_7  ;; 0x4004b008
         STR      R0,[R1, #+0]
 ??LPLD_ADC_Chn_Enable_16:
         B.N      ??LPLD_ADC_Chn_Enable_15
@@ -1375,7 +1284,7 @@ LPLD_ADC_Chn_Enable:
         CMP      R2,#+1
         BNE.N    ??LPLD_ADC_Chn_Enable_17
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable10_9  ;; 0x4004c004
+        LDR.N    R1,??DataTable8_8  ;; 0x4004c004
         STR      R0,[R1, #+0]
 ??LPLD_ADC_Chn_Enable_17:
         B.N      ??LPLD_ADC_Chn_Enable_15
@@ -1439,7 +1348,7 @@ LPLD_ADC_Chn_Enable:
         MOVS     R0,#+0
         B.N      ??LPLD_ADC_Chn_Enable_1
 ??LPLD_ADC_Chn_Enable_2:
-        LDR.N    R3,??DataTable10_6  ;; 0x400bb000
+        LDR.N    R3,??DataTable8_5  ;; 0x400bb000
         CMP      R0,R3
         BNE.N    ??LPLD_ADC_Chn_Enable_19
         UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
@@ -1525,7 +1434,7 @@ LPLD_ADC_Chn_Enable:
         B.N      ??LPLD_ADC_Chn_Enable_15
 ??LPLD_ADC_Chn_Enable_26:
         MOVS     R0,#+0
-        LDR.N    R2,??DataTable10_10  ;; 0x40049000
+        LDR.N    R2,??DataTable8_9  ;; 0x40049000
         UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
         STR      R0,[R2, R1, LSL #+2]
         B.N      ??LPLD_ADC_Chn_Enable_15
@@ -1722,7 +1631,7 @@ ADC0_IRQHandler:
 //  939   
 //  940   //调用用户自定义中断服务
 //  941   ADC_ISR[0]();  
-        LDR.N    R0,??DataTable10_5
+        LDR.N    R0,??DataTable8_4
         LDR      R0,[R0, #+0]
         BLX      R0
 //  942   
@@ -1748,7 +1657,7 @@ ADC1_IRQHandler:
 //  956   
 //  957   //调用用户自定义中断服务
 //  958   ADC_ISR[1]();  
-        LDR.N    R0,??DataTable10_5
+        LDR.N    R0,??DataTable8_4
         LDR      R0,[R0, #+4]
         BLX      R0
 //  959   
@@ -1761,67 +1670,61 @@ ADC1_IRQHandler:
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10:
+??DataTable8:
         DC32     0xe000e100
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_1:
+??DataTable8_1:
         DC32     0xe000e180
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_2:
-        DC32     ?_0
-
-        SECTION `.text`:CODE:NOROOT(2)
-        SECTION_TYPE SHT_PROGBITS, 0
-        DATA
-??DataTable10_3:
+??DataTable8_2:
         DC32     0x4003b000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_4:
+??DataTable8_3:
         DC32     0x4004803c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_5:
+??DataTable8_4:
         DC32     ADC_ISR
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_6:
+??DataTable8_5:
         DC32     0x400bb000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_7:
+??DataTable8_6:
         DC32     0x40048030
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_8:
+??DataTable8_7:
         DC32     0x4004b008
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_9:
+??DataTable8_8:
         DC32     0x4004c004
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable10_10:
+??DataTable8_9:
         DC32     0x40049000
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
@@ -1834,17 +1737,6 @@ ADC1_IRQHandler:
 
         SECTION __DLIB_PERTHREAD_init:DATA:REORDER:NOROOT(0)
         SECTION_TYPE SHT_PROGBITS, 0
-
-        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
-?_0:
-        DATA
-        DC8 45H, 3AH, 5CH, 67H, 69H, 74H, 50H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 5CH, 4DH, 79H
-        DC8 65H, 42H, 45H, 53H, 54H, 5CH, 70H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 53H, 6EH, 61H
-        DC8 6BH, 65H, 5CH, 6CH, 69H, 62H, 5CH, 4CH
-        DC8 50H, 4CH, 44H, 5CH, 48H, 57H, 5CH, 48H
-        DC8 57H, 5FH, 41H, 44H, 43H, 2EH, 63H, 0
 
         END
 //  964 
@@ -1886,12 +1778,10 @@ ADC1_IRQHandler:
 // 1000 
 // 
 //     8 bytes in section .bss
-//    56 bytes in section .rodata
-// 1 526 bytes in section .text
+// 1 308 bytes in section .text
 // 
-// 1 526 bytes of CODE  memory
-//    56 bytes of CONST memory
-//     8 bytes of DATA  memory
+// 1 308 bytes of CODE memory
+//     8 bytes of DATA memory
 //
 //Errors: none
 //Warnings: none

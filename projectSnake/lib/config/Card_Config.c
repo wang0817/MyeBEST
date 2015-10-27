@@ -2,10 +2,22 @@
 
 OledConfig g_OLEDConfig_Demo = 
 {
-  .SCL_Pin = {PTB, 20, DIR_OUTPUT, OUTPUT_L, },
-  .SDA_Pin = {PTB, 18, DIR_OUTPUT, OUTPUT_L, },
-  .DC_Pin = {PTB, 21, DIR_OUTPUT, OUTPUT_L, },
-  .RST_Pin = {PTB, 19, DIR_OUTPUT, OUTPUT_L, }
+  .SCL_Pin = {
+    .gpioPins = {PTB, GPIO_Pin22,OUTPUT_DSL | IRQC_DIS, DIR_OUTPUT, OUTPUT_L, NULL},
+    .pinNum = 22,
+  },
+  .SDA_Pin = {
+    .gpioPins = {PTB, GPIO_Pin20,OUTPUT_DSL | IRQC_DIS, DIR_OUTPUT, OUTPUT_L, NULL},
+    .pinNum = 20,
+  },
+  .DC_Pin = {
+    .gpioPins = {PTB, GPIO_Pin16,OUTPUT_DSL | IRQC_DIS, DIR_OUTPUT, OUTPUT_L, NULL},
+    .pinNum = 16,
+  },
+  .RST_Pin = {
+    .gpioPins = {PTB, GPIO_Pin18,OUTPUT_DSL | IRQC_DIS, DIR_OUTPUT, OUTPUT_L, NULL},
+    .pinNum = 18,
+  }
 };
 
 HardWareConfig g_HardWareConfig_MK10VLL10 = 

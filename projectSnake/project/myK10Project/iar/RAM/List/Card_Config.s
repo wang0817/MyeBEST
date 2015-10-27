@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:06:47
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  19:20:53
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -72,37 +72,50 @@
 //    3 OledConfig g_OLEDConfig_Demo = 
 g_OLEDConfig_Demo:
         DATA
-        DC32 400FF040H, 20, 1
-        DC8 0, 0, 0, 0, 0, 0, 0, 0
-        DC32 400FF040H, 18, 1
-        DC8 0, 0, 0, 0, 0, 0, 0, 0
-        DC32 400FF040H, 21, 1
-        DC8 0, 0, 0, 0, 0, 0, 0, 0
-        DC32 400FF040H, 19, 1
-        DC8 0, 0, 0, 0, 0, 0, 0, 0
+        DC32 400FF040H, 4194304, 0
+        DC8 1, 0, 0, 0
+        DC32 0H, 22, 400FF040H, 1048576, 0
+        DC8 1, 0, 0, 0
+        DC32 0H, 20, 400FF040H, 65536, 0
+        DC8 1, 0, 0, 0
+        DC32 0H, 16, 400FF040H, 262144, 0
+        DC8 1, 0, 0, 0
+        DC32 0H, 18
 //    4 {
-//    5   .SCL_Pin = {PTB, 20, DIR_OUTPUT, OUTPUT_L, },
-//    6   .SDA_Pin = {PTB, 18, DIR_OUTPUT, OUTPUT_L, },
-//    7   .DC_Pin = {PTB, 21, DIR_OUTPUT, OUTPUT_L, },
-//    8   .RST_Pin = {PTB, 19, DIR_OUTPUT, OUTPUT_L, }
-//    9 };
-//   10 
+//    5   .SCL_Pin = {
+//    6     .gpioPins = {PTB, GPIO_Pin22,OUTPUT_DSL | IRQC_DIS, DIR_OUTPUT, OUTPUT_L, NULL},
+//    7     .pinNum = 22,
+//    8   },
+//    9   .SDA_Pin = {
+//   10     .gpioPins = {PTB, GPIO_Pin20,OUTPUT_DSL | IRQC_DIS, DIR_OUTPUT, OUTPUT_L, NULL},
+//   11     .pinNum = 20,
+//   12   },
+//   13   .DC_Pin = {
+//   14     .gpioPins = {PTB, GPIO_Pin16,OUTPUT_DSL | IRQC_DIS, DIR_OUTPUT, OUTPUT_L, NULL},
+//   15     .pinNum = 16,
+//   16   },
+//   17   .RST_Pin = {
+//   18     .gpioPins = {PTB, GPIO_Pin18,OUTPUT_DSL | IRQC_DIS, DIR_OUTPUT, OUTPUT_L, NULL},
+//   19     .pinNum = 18,
+//   20   }
+//   21 };
+//   22 
 
         SECTION `.data`:DATA:REORDER:NOROOT(2)
-//   11 HardWareConfig g_HardWareConfig_MK10VLL10 = 
+//   23 HardWareConfig g_HardWareConfig_MK10VLL10 = 
 g_HardWareConfig_MK10VLL10:
         DATA
         DC32 g_OLEDConfig_Demo
-//   12 {
-//   13   .pOledConfig = &g_OLEDConfig_Demo
-//   14 };
-//   15 
+//   24 {
+//   25   .pOledConfig = &g_OLEDConfig_Demo
+//   26 };
+//   27 
 
         SECTION `.text`:CODE:NOROOT(2)
         THUMB
-//   16 void* GetOledConfig(void)
-//   17 {
-//   18   return g_HardWareConfig_MK10VLL10.pOledConfig;
+//   28 void* GetOledConfig(void)
+//   29 {
+//   30   return g_HardWareConfig_MK10VLL10.pOledConfig;
 GetOledConfig:
         LDR.N    R0,??GetOledConfig_0
         LDR      R0,[R0, #+0]
@@ -111,7 +124,7 @@ GetOledConfig:
         DATA
 ??GetOledConfig_0:
         DC32     g_HardWareConfig_MK10VLL10
-//   19 }
+//   31 }
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
@@ -126,11 +139,11 @@ GetOledConfig:
 
         END
 // 
-// 84 bytes in section .data
-// 12 bytes in section .text
+// 100 bytes in section .data
+//  12 bytes in section .text
 // 
-// 12 bytes of CODE memory
-// 84 bytes of DATA memory
+//  12 bytes of CODE memory
+// 100 bytes of DATA memory
 //
 //Errors: none
 //Warnings: none

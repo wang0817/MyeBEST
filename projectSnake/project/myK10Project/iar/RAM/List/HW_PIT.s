@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:03:58
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  14:59:51
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -59,7 +59,6 @@
 
         #define SHT_PROGBITS 0x1
 
-        EXTERN assert_failed
         EXTERN g_bus_clock
 
         PUBLIC LPLD_PIT_Deinit
@@ -103,7 +102,7 @@ NVIC_EnableIRQ:
         MOVS     R1,#+1
         ANDS     R2,R0,#0x1F
         LSLS     R1,R1,R2
-        LDR.N    R2,??DataTable9  ;; 0xe000e100
+        LDR.N    R2,??DataTable7  ;; 0xe000e100
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         LSRS     R0,R0,#+5
         STR      R1,[R2, R0, LSL #+2]
@@ -116,7 +115,7 @@ NVIC_DisableIRQ:
         MOVS     R1,#+1
         ANDS     R2,R0,#0x1F
         LSLS     R1,R1,R2
-        LDR.N    R2,??DataTable9_1  ;; 0xe000e180
+        LDR.N    R2,??DataTable7_1  ;; 0xe000e180
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         LSRS     R0,R0,#+5
         STR      R1,[R2, R0, LSL #+2]
@@ -149,114 +148,102 @@ PIT_ISR:
 //   41 { 
 LPLD_PIT_Init:
         PUSH     {R0-R3}
-        PUSH     {R4-R6,LR}
+        PUSH     {R4}
 //   42   //计算定时加载值
 //   43   uint32 ldval = pit_init_structure.PIT_PeriodUs*(g_bus_clock/1000000)
 //   44                + pit_init_structure.PIT_PeriodMs*1000*(g_bus_clock/1000000)
 //   45                + pit_init_structure.PIT_PeriodS*1000000*(g_bus_clock/1000000);
-        LDR      R0,[SP, #+20]
-        LDR.N    R1,??DataTable9_2
+        LDR      R0,[SP, #+8]
+        LDR.N    R1,??DataTable7_2
         LDR      R1,[R1, #+0]
-        LDR.N    R2,??DataTable9_3  ;; 0xf4240
+        LDR.N    R2,??DataTable7_3  ;; 0xf4240
         UDIV     R1,R1,R2
-        LDR      R2,[SP, #+24]
-        LDR.N    R3,??DataTable9_2
+        LDR      R2,[SP, #+12]
+        LDR.N    R3,??DataTable7_2
         LDR      R3,[R3, #+0]
-        LDR.N    R4,??DataTable9_3  ;; 0xf4240
+        LDR.N    R4,??DataTable7_3  ;; 0xf4240
         UDIV     R3,R3,R4
         MULS     R2,R3,R2
         MOV      R3,#+1000
         MULS     R2,R3,R2
         MLA      R0,R1,R0,R2
-        LDR      R1,[SP, #+28]
-        LDR.N    R2,??DataTable9_2
+        LDR      R1,[SP, #+16]
+        LDR.N    R2,??DataTable7_2
         LDR      R2,[R2, #+0]
-        LDR.N    R3,??DataTable9_3  ;; 0xf4240
+        LDR.N    R3,??DataTable7_3  ;; 0xf4240
         UDIV     R2,R2,R3
         MULS     R1,R2,R1
-        LDR.N    R2,??DataTable9_3  ;; 0xf4240
-        MLA      R4,R2,R1,R0
+        LDR.N    R2,??DataTable7_3  ;; 0xf4240
+        MLA      R1,R2,R1,R0
 //   46   PITx pitx = pit_init_structure.PIT_Pitx;
-        LDRB     R5,[SP, #+16]
+        LDRB     R0,[SP, #+4]
 //   47   PIT_ISR_CALLBACK isr_func = pit_init_structure.PIT_Isr;
-        LDR      R6,[SP, #+32]
+        LDR      R2,[SP, #+20]
 //   48   
 //   49   //参数检查
 //   50   ASSERT( pitx <= PIT3);        //判断模块号
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        CMP      R5,#+4
-        BLT.N    ??LPLD_PIT_Init_0
-        MOVS     R1,#+50
-        LDR.N    R0,??DataTable9_4
-        BL       assert_failed
 //   51   ASSERT( ldval > 0);           //判断时加载值                
-??LPLD_PIT_Init_0:
-        CMP      R4,#+0
-        BNE.N    ??LPLD_PIT_Init_1
-        MOVS     R1,#+51
-        LDR.N    R0,??DataTable9_4
-        BL       assert_failed
 //   52   
 //   53   //开启定时模块时钟
 //   54   SIM->SCGC6 |= SIM_SCGC6_PIT_MASK;
-??LPLD_PIT_Init_1:
-        LDR.N    R0,??DataTable9_5  ;; 0x4004803c
-        LDR      R0,[R0, #+0]
-        ORRS     R0,R0,#0x800000
-        LDR.N    R1,??DataTable9_5  ;; 0x4004803c
-        STR      R0,[R1, #+0]
+        LDR.N    R3,??DataTable7_4  ;; 0x4004803c
+        LDR      R3,[R3, #+0]
+        ORRS     R3,R3,#0x800000
+        LDR.N    R4,??DataTable7_4  ;; 0x4004803c
+        STR      R3,[R4, #+0]
 //   55   
 //   56   // 开启 PIT
 //   57   PIT->MCR = 0x00;
-        MOVS     R0,#+0
-        LDR.N    R1,??DataTable9_6  ;; 0x40037000
-        STR      R0,[R1, #+0]
+        MOVS     R3,#+0
+        LDR.N    R4,??DataTable7_5  ;; 0x40037000
+        STR      R3,[R4, #+0]
 //   58  
 //   59   if(isr_func != NULL){
-        MOVS     R0,R6
-        CMP      R0,#+0
-        BEQ.N    ??LPLD_PIT_Init_2
+        MOVS     R3,R2
+        CMP      R3,#+0
+        BEQ.N    ??LPLD_PIT_Init_0
 //   60     PIT_ISR[pitx] = isr_func;
-        LDR.N    R0,??DataTable9_7
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        STR      R6,[R0, R5, LSL #+2]
+        LDR.N    R3,??DataTable7_6
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        STR      R2,[R3, R0, LSL #+2]
 //   61     //使能中断
 //   62     PIT->CHANNEL[pitx].TCTRL = PIT_TCTRL_TIE_MASK;
-        MOVS     R0,#+2
-        LDR.N    R1,??DataTable9_8  ;; 0x40037100
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        ADDS     R1,R1,R5, LSL #+4
-        STR      R0,[R1, #+8]
+        MOVS     R2,#+2
+        LDR.N    R3,??DataTable7_7  ;; 0x40037100
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        ADDS     R3,R3,R0, LSL #+4
+        STR      R2,[R3, #+8]
 //   63     //在NVIC中使能PIT中断
 //   64     //enable_irq((IRQn_Type)(PIT0_IRQn + (IRQn_Type)pitx)); 
 //   65   }
 //   66   
 //   67   //period = (period_ns/bus_period_ns)-1
 //   68   PIT->CHANNEL[pitx].LDVAL = ldval-1;
-??LPLD_PIT_Init_2:
-        SUBS     R0,R4,#+1
-        LDR.N    R1,??DataTable9_8  ;; 0x40037100
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        LSLS     R2,R5,#+4
-        STR      R0,[R2, R1]
+??LPLD_PIT_Init_0:
+        SUBS     R1,R1,#+1
+        LDR.N    R2,??DataTable7_7  ;; 0x40037100
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R3,R0,#+4
+        STR      R1,[R3, R2]
 //   69   //使能中断
 //   70   //PIT->CHANNEL[pitx].TCTRL = PIT_TCTRL_TIE_MASK;
 //   71   //开始定时
 //   72   PIT->CHANNEL[pitx].TCTRL |= PIT_TCTRL_TEN_MASK;
-        LDR.N    R0,??DataTable9_8  ;; 0x40037100
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        ADDS     R0,R0,R5, LSL #+4
-        LDR      R0,[R0, #+8]
-        ORRS     R0,R0,#0x1
-        LDR.N    R1,??DataTable9_8  ;; 0x40037100
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        ADDS     R1,R1,R5, LSL #+4
-        STR      R0,[R1, #+8]
+        LDR.N    R1,??DataTable7_7  ;; 0x40037100
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        ADDS     R1,R1,R0, LSL #+4
+        LDR      R1,[R1, #+8]
+        ORRS     R1,R1,#0x1
+        LDR.N    R2,??DataTable7_7  ;; 0x40037100
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        ADDS     R0,R2,R0, LSL #+4
+        STR      R1,[R0, #+8]
 //   73   
 //   74   return 1;
         MOVS     R0,#+1
-        POP      {R4-R6}
-        LDR      PC,[SP], #+20    ;; return
+        POP      {R4}
+        ADD      SP,SP,#+16
+        BX       LR               ;; return
 //   75 }
 //   76 
 //   77 /*
@@ -283,15 +270,8 @@ LPLD_PIT_Deinit:
 //   91   
 //   92   //参数检查
 //   93   ASSERT( pitx <= PIT3);        //判断模块号              
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        CMP      R4,#+4
-        BLT.N    ??LPLD_PIT_Deinit_0
-        MOVS     R1,#+93
-        LDR.N    R0,??DataTable9_4
-        BL       assert_failed
 //   94 
 //   95   disable_irq((IRQn_Type)(PIT0_IRQn + (IRQn_Type)pitx)); 
-??LPLD_PIT_Deinit_0:
         ADDS     R0,R4,#+68
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         BL       NVIC_DisableIRQ
@@ -299,7 +279,7 @@ LPLD_PIT_Deinit:
 //   97   //禁用中断\停止定时
 //   98   PIT->CHANNEL[pitx].TCTRL = 0;
         MOVS     R0,#+0
-        LDR.N    R1,??DataTable9_8  ;; 0x40037100
+        LDR.N    R1,??DataTable7_7  ;; 0x40037100
         UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
         ADDS     R1,R1,R4, LSL #+4
         STR      R0,[R1, #+8]
@@ -326,26 +306,19 @@ LPLD_PIT_Deinit:
 //  114 {
 LPLD_PIT_EnableIrq:
         PUSH     {R0-R3}
-        PUSH     {R4,LR}
+        PUSH     {R7,LR}
 //  115   PITx pitx = pit_init_structure.PIT_Pitx;
-        LDRB     R4,[SP, #+8]
+        LDRB     R0,[SP, #+8]
 //  116   
 //  117   //参数检查
 //  118   ASSERT( pitx <= PIT3);                //判断PITx
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        CMP      R4,#+4
-        BLT.N    ??LPLD_PIT_EnableIrq_0
-        MOVS     R1,#+118
-        LDR.N    R0,??DataTable9_4
-        BL       assert_failed
 //  119 
 //  120   enable_irq((IRQn_Type)(PIT0_IRQn + (IRQn_Type)pitx)); 
-??LPLD_PIT_EnableIrq_0:
-        ADDS     R0,R4,#+68
+        ADDS     R0,R0,#+68
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         BL       NVIC_EnableIRQ
 //  121 }
-        POP      {R4}
+        POP      {R0}
         LDR      PC,[SP], #+20    ;; return
 //  122 
 //  123 /*
@@ -367,26 +340,19 @@ LPLD_PIT_EnableIrq:
 //  136 {
 LPLD_PIT_DisableIrq:
         PUSH     {R0-R3}
-        PUSH     {R4,LR}
+        PUSH     {R7,LR}
 //  137   PITx pitx = pit_init_structure.PIT_Pitx;
-        LDRB     R4,[SP, #+8]
+        LDRB     R0,[SP, #+8]
 //  138   
 //  139   //参数检查
 //  140   ASSERT( pitx <= PIT3);                //判断PITx
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        CMP      R4,#+4
-        BLT.N    ??LPLD_PIT_DisableIrq_0
-        MOVS     R1,#+140
-        LDR.N    R0,??DataTable9_4
-        BL       assert_failed
 //  141   
 //  142   disable_irq((IRQn_Type)(PIT0_IRQn + (IRQn_Type)pitx));
-??LPLD_PIT_DisableIrq_0:
-        ADDS     R0,R4,#+68
+        ADDS     R0,R0,#+68
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         BL       NVIC_DisableIRQ
 //  143 }
-        POP      {R4}
+        POP      {R0}
         LDR      PC,[SP], #+20    ;; return
 //  144 
 //  145 
@@ -412,15 +378,15 @@ PIT0_IRQHandler:
 //  160   
 //  161   //调用用户自定义中断服务
 //  162   PIT_ISR[0]();  
-        LDR.N    R0,??DataTable9_7
+        LDR.N    R0,??DataTable7_6
         LDR      R0,[R0, #+0]
         BLX      R0
 //  163   //清除中断标志位
 //  164   PIT->CHANNEL[0].TFLG |= PIT_TFLG_TIF_MASK;
-        LDR.N    R0,??DataTable9_9  ;; 0x4003710c
+        LDR.N    R0,??DataTable7_8  ;; 0x4003710c
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x1
-        LDR.N    R1,??DataTable9_9  ;; 0x4003710c
+        LDR.N    R1,??DataTable7_8  ;; 0x4003710c
         STR      R0,[R1, #+0]
 //  165   
 //  166 #if (UCOS_II > 0u)
@@ -444,15 +410,15 @@ PIT1_IRQHandler:
 //  178   
 //  179   //调用用户自定义中断服务
 //  180   PIT_ISR[1]();  
-        LDR.N    R0,??DataTable9_7
+        LDR.N    R0,??DataTable7_6
         LDR      R0,[R0, #+4]
         BLX      R0
 //  181   //清除中断标志位
 //  182   PIT->CHANNEL[1].TFLG |= PIT_TFLG_TIF_MASK;
-        LDR.N    R0,??DataTable9_10  ;; 0x4003711c
+        LDR.N    R0,??DataTable7_9  ;; 0x4003711c
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x1
-        LDR.N    R1,??DataTable9_10  ;; 0x4003711c
+        LDR.N    R1,??DataTable7_9  ;; 0x4003711c
         STR      R0,[R1, #+0]
 //  183   
 //  184 #if (UCOS_II > 0u)
@@ -476,15 +442,15 @@ PIT2_IRQHandler:
 //  196   
 //  197   //调用用户自定义中断服务
 //  198   PIT_ISR[2]();  
-        LDR.N    R0,??DataTable9_7
+        LDR.N    R0,??DataTable7_6
         LDR      R0,[R0, #+8]
         BLX      R0
 //  199   //清除中断标志位
 //  200   PIT->CHANNEL[2].TFLG |= PIT_TFLG_TIF_MASK;
-        LDR.N    R0,??DataTable9_11  ;; 0x4003712c
+        LDR.N    R0,??DataTable7_10  ;; 0x4003712c
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x1
-        LDR.N    R1,??DataTable9_11  ;; 0x4003712c
+        LDR.N    R1,??DataTable7_10  ;; 0x4003712c
         STR      R0,[R1, #+0]
 //  201   
 //  202 #if (UCOS_II > 0u)
@@ -508,15 +474,15 @@ PIT3_IRQHandler:
 //  214   
 //  215   //调用用户自定义中断服务
 //  216   PIT_ISR[3]();  
-        LDR.N    R0,??DataTable9_7
+        LDR.N    R0,??DataTable7_6
         LDR      R0,[R0, #+12]
         BLX      R0
 //  217   //清除中断标志位
 //  218   PIT->CHANNEL[3].TFLG |= PIT_TFLG_TIF_MASK;
-        LDR.N    R0,??DataTable9_12  ;; 0x4003713c
+        LDR.N    R0,??DataTable7_11  ;; 0x4003713c
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x1
-        LDR.N    R1,??DataTable9_12  ;; 0x4003713c
+        LDR.N    R1,??DataTable7_11  ;; 0x4003713c
         STR      R0,[R1, #+0]
 //  219   
 //  220 #if (UCOS_II > 0u)
@@ -528,79 +494,73 @@ PIT3_IRQHandler:
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9:
+??DataTable7:
         DC32     0xe000e100
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_1:
+??DataTable7_1:
         DC32     0xe000e180
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_2:
+??DataTable7_2:
         DC32     g_bus_clock
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_3:
+??DataTable7_3:
         DC32     0xf4240
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_4:
-        DC32     ?_0
-
-        SECTION `.text`:CODE:NOROOT(2)
-        SECTION_TYPE SHT_PROGBITS, 0
-        DATA
-??DataTable9_5:
+??DataTable7_4:
         DC32     0x4004803c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_6:
+??DataTable7_5:
         DC32     0x40037000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_7:
+??DataTable7_6:
         DC32     PIT_ISR
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_8:
+??DataTable7_7:
         DC32     0x40037100
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_9:
+??DataTable7_8:
         DC32     0x4003710c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_10:
+??DataTable7_9:
         DC32     0x4003711c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_11:
+??DataTable7_10:
         DC32     0x4003712c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_12:
+??DataTable7_11:
         DC32     0x4003713c
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
@@ -614,26 +574,13 @@ PIT3_IRQHandler:
         SECTION __DLIB_PERTHREAD_init:DATA:REORDER:NOROOT(0)
         SECTION_TYPE SHT_PROGBITS, 0
 
-        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
-?_0:
-        DATA
-        DC8 45H, 3AH, 5CH, 67H, 69H, 74H, 50H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 5CH, 4DH, 79H
-        DC8 65H, 42H, 45H, 53H, 54H, 5CH, 70H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 53H, 6EH, 61H
-        DC8 6BH, 65H, 5CH, 6CH, 69H, 62H, 5CH, 4CH
-        DC8 50H, 4CH, 44H, 5CH, 48H, 57H, 5CH, 48H
-        DC8 57H, 5FH, 50H, 49H, 54H, 2EH, 63H, 0
-
         END
 // 
 //  16 bytes in section .bss
-//  56 bytes in section .rodata
-// 484 bytes in section .text
+// 408 bytes in section .text
 // 
-// 484 bytes of CODE  memory
-//  56 bytes of CONST memory
-//  16 bytes of DATA  memory
+// 408 bytes of CODE memory
+//  16 bytes of DATA memory
 //
 //Errors: none
 //Warnings: none

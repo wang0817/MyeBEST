@@ -6,7 +6,7 @@
 #include "common.h"
 #include "Card_Config.h"
 
-uint8 displayGRAM[128][8]={'0'};//显存
+uint8 displayGRAM[128][8];//显存
 /*****************************外部变量声明*************************************/
 //常用ASCII表
 //偏移量32
@@ -121,8 +121,8 @@ static void OLED_SclSet(uint8 status)
   if(NULL == oledConfig)
     return;
   
-  sclInfo = oledConfig->SCL_Pin;
-  LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, sclInfo.GPIO_Pins, status);
+  sclInfo = oledConfig->SCL_Pin.gpioPins;
+  LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, oledConfig->SCL_Pin.pinNum, status);
 }
 
 static void OLED_SdaSet(uint8 status)
@@ -134,8 +134,8 @@ static void OLED_SdaSet(uint8 status)
   if(NULL == oledConfig)
     return;
   
-  sclInfo = oledConfig->SDA_Pin;
-  LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, sclInfo.GPIO_Pins, status);
+  sclInfo = oledConfig->SDA_Pin.gpioPins;
+  LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, oledConfig->SDA_Pin.pinNum, status);
 }
 
 static void OLED_RstSet(uint8 status)
@@ -147,8 +147,8 @@ static void OLED_RstSet(uint8 status)
   if(NULL == oledConfig)
     return;
   
-  sclInfo = oledConfig->RST_Pin;
-  LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, sclInfo.GPIO_Pins, status);
+  sclInfo = oledConfig->RST_Pin.gpioPins;
+  LPLD_GPIO_Output_b(sclInfo.GPIO_PTx,oledConfig->RST_Pin.pinNum , status);
 }
 
 static void OLED_DcSet(uint8 status)
@@ -160,8 +160,8 @@ static void OLED_DcSet(uint8 status)
   if(NULL == oledConfig)
     return;
   
-  sclInfo = oledConfig->DC_Pin;
-  LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, sclInfo.GPIO_Pins, status);
+  sclInfo = oledConfig->DC_Pin.gpioPins;
+  LPLD_GPIO_Output_b(sclInfo.GPIO_PTx, oledConfig->DC_Pin.pinNum, status);
 }
 
 /*
@@ -179,10 +179,10 @@ void OLED_IO_Init(void)
   if(NULL == oledConfig)
     return;
   
-  (void)LPLD_GPIO_Init(oledConfig->SCL_Pin);
-  (void)LPLD_GPIO_Init(oledConfig->SDA_Pin);
-  (void)LPLD_GPIO_Init(oledConfig->DC_Pin);
-  (void)LPLD_GPIO_Init(oledConfig->RST_Pin);
+  (void)LPLD_GPIO_Init(oledConfig->SCL_Pin.gpioPins);
+  (void)LPLD_GPIO_Init(oledConfig->SDA_Pin.gpioPins);
+  (void)LPLD_GPIO_Init(oledConfig->DC_Pin.gpioPins);
+  (void)LPLD_GPIO_Init(oledConfig->RST_Pin.gpioPins);
 }
 
 /*
@@ -256,7 +256,7 @@ void OLED_Refresh_Gram(void)
         OLED_WrCmd(0xB0+i);    //设置页地址（0~7）
         OLED_WrCmd(0x00);      //设置显示位置-列低地址
         OLED_WrCmd(0x10);      //设置显示位置-列高地址   
-        for(n=132;n>0;n--)
+        for(n=127;n>0;n--)
                 OLED_WrDat(displayGRAM[n][i]);
     }
 }
@@ -340,9 +340,9 @@ void OLED_Init(void)
 */
 void OLED_Clear(void)
 {
-      uint8 i,n;  
+      uint8 i,n;
       for(i=0;i<8;i++)
-              for(n=0;n<132;n++)
+              for(n=0;n<127;n++)
                       displayGRAM[n][i]=0x00;  
 }
 

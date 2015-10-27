@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:03:56
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  14:59:50
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -58,8 +58,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
         #define SHT_PROGBITS 0x1
-
-        EXTERN assert_failed
 
         PUBLIC DMA0_IRQHandler
         PUBLIC DMA10_IRQHandler
@@ -163,171 +161,114 @@ DMA_ISR:
 //   44 {
 LPLD_DMA_Init:
         PUSH     {R0-R3}
-        PUSH     {R4-R11,LR}
-        SUB      SP,SP,#+20
+        PUSH     {R3-R11,LR}
 //   45   uint8 chx = dma_init_struct.DMA_CHx;
-        LDRB     R4,[SP, #+56]
+        LDRB     R0,[SP, #+40]
 //   46   uint8 req = dma_init_struct.DMA_Req;
-        LDRB     R5,[SP, #+57]
+        LDRB     R1,[SP, #+41]
+        STRB     R1,[SP, #+1]
 //   47   boolean periodic_trigg = dma_init_struct.DMA_PeriodicTriggerEnable;
-        LDRB     R0,[SP, #+58]
-        STRB     R0,[SP, #+16]
+        LDRB     R1,[SP, #+42]
+        STRB     R1,[SP, #+0]
 //   48   uint16 major_cnt = dma_init_struct.DMA_MajorLoopCnt;
-        LDRH     R6,[SP, #+60]
+        LDRH     R1,[SP, #+44]
 //   49   uint32 minor_cnt = dma_init_struct.DMA_MinorByteCnt;
-        LDR      R0,[SP, #+64]
-        STR      R0,[SP, #+12]
+        LDR      R2,[SP, #+48]
 //   50   uint32 src_addr = dma_init_struct.DMA_SourceAddr;
-        LDR      R7,[SP, #+68]
+        LDR      R9,[SP, #+52]
 //   51   uint8 src_dsize = dma_init_struct.DMA_SourceDataSize;
-        LDRB     R8,[SP, #+72]
+        LDRB     R3,[SP, #+56]
 //   52   int16 src_addroffset = dma_init_struct.DMA_SourceAddrOffset;
-        LDRSH    R0,[SP, #+74]
-        STRH     R0,[SP, #+2]
+        LDRSH    R4,[SP, #+58]
 //   53   int32 src_lastadj = dma_init_struct.DMA_LastSourceAddrAdj;
-        LDR      R0,[SP, #+76]
-        STR      R0,[SP, #+8]
+        LDR      R5,[SP, #+60]
 //   54   uint32 dst_addr = dma_init_struct.DMA_DestAddr;
-        LDR      R9,[SP, #+80]
+        LDR      R6,[SP, #+64]
 //   55   uint8 dst_dsize = dma_init_struct.DMA_DestDataSize;
-        LDRB     R10,[SP, #+84]
+        LDRB     R7,[SP, #+68]
 //   56   int16 dst_addroffset = dma_init_struct.DMA_DestAddrOffset;
-        LDRSH    R0,[SP, #+86]
-        STRH     R0,[SP, #+0]
+        LDRSH    R12,[SP, #+70]
 //   57   int32 dst_lastadj = dma_init_struct.DMA_LastDestAddrAdj;
-        LDR      R0,[SP, #+88]
-        STR      R0,[SP, #+4]
+        LDR      LR,[SP, #+72]
 //   58   boolean auto_disable = dma_init_struct.DMA_AutoDisableReq;
-        LDRB     R11,[SP, #+92]
+        LDRB     R8,[SP, #+76]
 //   59   
 //   60   //参数检查
 //   61 #if defined(CPU_MK60DZ10) || defined(CPU_MK60D10) 
 //   62   ASSERT( chx <= DMA_CH15 );       //eDMA通道选择
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        CMP      R4,#+16
-        BLT.N    ??LPLD_DMA_Init_0
-        MOVS     R1,#+62
-        LDR.W    R0,??DataTable18_2
-        BL       assert_failed
 //   63 #elif defined(CPU_MK60F12) || defined(CPU_MK60F15)
 //   64   ASSERT( chx <= DMA_CH31 );       //eDMA通道选择
 //   65 #endif
 //   66   ASSERT( req <= DMA_MUX_63 );     //请求源选择
-??LPLD_DMA_Init_0:
-        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-        CMP      R5,#+64
-        BLT.N    ??LPLD_DMA_Init_1
-        MOVS     R1,#+66
-        LDR.W    R0,??DataTable18_2
-        BL       assert_failed
 //   67   ASSERT( major_cnt <= 0x7FFF );   //主计数判断
-??LPLD_DMA_Init_1:
-        UXTH     R6,R6            ;; ZeroExt  R6,R6,#+16,#+16
-        CMP      R6,#+32768
-        BLT.N    ??LPLD_DMA_Init_2
-        MOVS     R1,#+67
-        LDR.W    R0,??DataTable18_2
-        BL       assert_failed
 //   68   ASSERT( src_addr != NULL );      //源地址判断
-??LPLD_DMA_Init_2:
-        CMP      R7,#+0
-        BNE.N    ??LPLD_DMA_Init_3
-        MOVS     R1,#+68
-        LDR.W    R0,??DataTable18_2
-        BL       assert_failed
 //   69   ASSERT( (src_dsize <= DMA_SRC_32BIT)||(src_dsize == DMA_SRC_16BYTE) );     //源数据传输大小判断
-??LPLD_DMA_Init_3:
-        UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
-        CMP      R8,#+3
-        BLT.N    ??LPLD_DMA_Init_4
-        UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
-        CMP      R8,#+4
-        BEQ.N    ??LPLD_DMA_Init_4
-        MOVS     R1,#+69
-        LDR.W    R0,??DataTable18_2
-        BL       assert_failed
 //   70   ASSERT( dst_addr != NULL );      //目的地址判断
-??LPLD_DMA_Init_4:
-        CMP      R9,#+0
-        BNE.N    ??LPLD_DMA_Init_5
-        MOVS     R1,#+70
-        LDR.W    R0,??DataTable18_2
-        BL       assert_failed
 //   71   ASSERT( (dst_dsize <= DMA_DST_32BIT)||(dst_dsize == DMA_DST_16BYTE) );     //目的数据传输大小判断
-??LPLD_DMA_Init_5:
-        UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
-        CMP      R10,#+3
-        BLT.N    ??LPLD_DMA_Init_6
-        UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
-        CMP      R10,#+4
-        BEQ.N    ??LPLD_DMA_Init_6
-        MOVS     R1,#+71
-        LDR.W    R0,??DataTable18_2
-        BL       assert_failed
 //   72  
 //   73 #if defined(CPU_MK60DZ10) || defined(CPU_MK60D10)   
 //   74   SIM->SCGC6 |= SIM_SCGC6_DMAMUX_MASK;  //打开DMA通道多路复用器时钟 
-??LPLD_DMA_Init_6:
-        LDR.W    R0,??DataTable18_3  ;; 0x4004803c
-        LDR      R0,[R0, #+0]
-        ORRS     R0,R0,#0x2
-        LDR.W    R1,??DataTable18_3  ;; 0x4004803c
-        STR      R0,[R1, #+0]
+        LDR.W    R10,??DataTable18_2  ;; 0x4004803c
+        LDR      R10,[R10, #+0]
+        ORRS     R10,R10,#0x2
+        LDR.W    R11,??DataTable18_2  ;; 0x4004803c
+        STR      R10,[R11, #+0]
 //   75 #elif defined(CPU_MK60F12) || defined(CPU_MK60F15)
 //   76   SIM->SCGC6 |= SIM_SCGC6_DMAMUX0_MASK;  //打开DMA通道多路复用器时钟 
 //   77   SIM->SCGC6 |= SIM_SCGC6_DMAMUX1_MASK;  //打开DMA通道多路复用器时钟 
 //   78 #endif  
 //   79   SIM->SCGC7 |= SIM_SCGC7_DMA_MASK;     //打开DMA模块时钟
-        LDR.W    R0,??DataTable18_4  ;; 0x40048040
-        LDR      R0,[R0, #+0]
-        ORRS     R0,R0,#0x2
-        LDR.W    R1,??DataTable18_4  ;; 0x40048040
-        STR      R0,[R1, #+0]
+        LDR.W    R10,??DataTable18_3  ;; 0x40048040
+        LDR      R10,[R10, #+0]
+        ORRS     R10,R10,#0x2
+        LDR.W    R11,??DataTable18_3  ;; 0x40048040
+        STR      R10,[R11, #+0]
 //   80   
 //   81   //关闭通道x硬件DMA请求 
 //   82   DMA0->ERQ &= ~(1<<chx);
-        LDR.W    R0,??DataTable18_5  ;; 0x4000800c
-        LDR      R0,[R0, #+0]
-        MOVS     R1,#+1
-        LSLS     R1,R1,R4
-        BICS     R0,R0,R1
-        LDR.W    R1,??DataTable18_5  ;; 0x4000800c
-        STR      R0,[R1, #+0]
+        LDR.W    R10,??DataTable18_4  ;; 0x4000800c
+        LDR      R10,[R10, #+0]
+        MOVS     R11,#+1
+        LSLS     R11,R11,R0
+        BICS     R10,R10,R11
+        LDR.W    R11,??DataTable18_4  ;; 0x4000800c
+        STR      R10,[R11, #+0]
 //   83   
 //   84   //选择 通道x 配置外设的DMA源请求编号
 //   85 #if defined(CPU_MK60DZ10) || defined(CPU_MK60D10) 
 //   86   DMAMUX->CHCFG[chx] = DMAMUX_CHCFG_SOURCE(req);
-        ANDS     R0,R5,#0x3F
-        LDR.W    R1,??DataTable18_6  ;; 0x40021000
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        STRB     R0,[R4, R1]
+        LDRB     R10,[SP, #+1]
+        ANDS     R10,R10,#0x3F
+        LDR.W    R11,??DataTable18_5  ;; 0x40021000
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        STRB     R10,[R0, R11]
 //   87   //是否使能周期触发功能
 //   88   if(periodic_trigg == TRUE)
-        LDRB     R0,[SP, #+16]
-        CMP      R0,#+1
-        BNE.N    ??LPLD_DMA_Init_7
+        LDRB     R10,[SP, #+0]
+        CMP      R10,#+1
+        BNE.N    ??LPLD_DMA_Init_0
 //   89   {
 //   90     DMAMUX->CHCFG[chx] |= DMAMUX_CHCFG_TRIG_MASK;
-        LDR.W    R0,??DataTable18_6  ;; 0x40021000
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LDRB     R0,[R4, R0]
-        ORRS     R0,R0,#0x40
-        LDR.W    R1,??DataTable18_6  ;; 0x40021000
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        STRB     R0,[R4, R1]
-        B.N      ??LPLD_DMA_Init_8
+        LDR.W    R10,??DataTable18_5  ;; 0x40021000
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LDRB     R10,[R0, R10]
+        ORRS     R10,R10,#0x40
+        LDR.W    R11,??DataTable18_5  ;; 0x40021000
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        STRB     R10,[R0, R11]
+        B.N      ??LPLD_DMA_Init_1
 //   91   }
 //   92   else
 //   93   {
 //   94     DMAMUX->CHCFG[chx] &= ~(DMAMUX_CHCFG_TRIG_MASK);
-??LPLD_DMA_Init_7:
-        LDR.W    R0,??DataTable18_6  ;; 0x40021000
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LDRB     R0,[R4, R0]
-        ANDS     R0,R0,#0xBF
-        LDR.W    R1,??DataTable18_6  ;; 0x40021000
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        STRB     R0,[R4, R1]
+??LPLD_DMA_Init_0:
+        LDR.W    R10,??DataTable18_5  ;; 0x40021000
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LDRB     R10,[R0, R10]
+        ANDS     R10,R10,#0xBF
+        LDR.W    R11,??DataTable18_5  ;; 0x40021000
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        STRB     R10,[R0, R11]
 //   95   }
 //   96 #elif defined(CPU_MK60F12) || defined(CPU_MK60F15)
 //   97   if(chx < 16)
@@ -362,76 +303,72 @@ LPLD_DMA_Init:
 //  126   
 //  127   //设置源地址   
 //  128   DMA0->TCD[chx].SADDR = DMA_SADDR_SADDR(src_addr);
-??LPLD_DMA_Init_8:
-        LDR.W    R0,??DataTable18_7  ;; 0x40009000
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        STR      R7,[R1, R0]
+??LPLD_DMA_Init_1:
+        LDR.W    R10,??DataTable18_6  ;; 0x40009000
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R11,R0,#+5
+        STR      R9,[R11, R10]
 //  129   //在执行完针对源地址的操作之后，在源地址的基础上增加/减少偏移地址
 //  130   DMA0->TCD[chx].SOFF = DMA_SOFF_SOFF(src_addroffset);
-        LDRH     R0,[SP, #+2]
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+4]
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R9,R0,#+5
+        ADD      R9,R9,#+1073741824
+        ADDS     R9,R9,#+36864
+        STRH     R4,[R9, #+4]
 //  131   //设置源地址的传输大小
 //  132   DMA0->TCD[chx].ATTR = 0 | DMA_ATTR_SSIZE(src_dsize);
-        UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
-        LSLS     R0,R8,#+8
-        ANDS     R0,R0,#0x700
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+6]
+        UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+        LSLS     R3,R3,#+8
+        ANDS     R3,R3,#0x700
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R4,R0,#+5
+        ADD      R4,R4,#+1073741824
+        ADDS     R4,R4,#+36864
+        STRH     R3,[R4, #+6]
 //  133   //主的计数次数（major iteration count）达到后，重新调整源地址
 //  134   DMA0->TCD[chx].SLAST = DMA_SLAST_SLAST(src_lastadj);
-        LDR      R0,[SP, #+8]
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STR      R0,[R1, #+12]
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R3,R0,#+5
+        ADD      R3,R3,#+1073741824
+        ADDS     R3,R3,#+36864
+        STR      R5,[R3, #+12]
 //  135   
 //  136   //设置目的地址 
 //  137   DMA0->TCD[chx].DADDR = DMA_DADDR_DADDR(dst_addr);
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R0,R4,#+5
-        ADD      R0,R0,#+1073741824
-        ADDS     R0,R0,#+36864
-        STR      R9,[R0, #+16]
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R3,R0,#+5
+        ADD      R3,R3,#+1073741824
+        ADDS     R3,R3,#+36864
+        STR      R6,[R3, #+16]
 //  138   //在执行完针对目的地址的操作之后，在目的地址的基础上增加/减少偏移地址
 //  139   DMA0->TCD[chx].DOFF = DMA_DOFF_DOFF(dst_addroffset);
-        LDRH     R0,[SP, #+0]
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+20]
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R3,R0,#+5
+        ADD      R3,R3,#+1073741824
+        ADDS     R3,R3,#+36864
+        STRH     R12,[R3, #+20]
 //  140   //设置目的地址的传输宽度
 //  141   DMA0->TCD[chx].ATTR |= DMA_ATTR_DSIZE(dst_dsize);
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R0,R4,#+5
-        ADD      R0,R0,#+1073741824
-        ADDS     R0,R0,#+36864
-        LDRH     R0,[R0, #+6]
-        UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
-        ANDS     R1,R10,#0x7
-        ORRS     R0,R1,R0
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+6]
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R3,R0,#+5
+        ADD      R3,R3,#+1073741824
+        ADDS     R3,R3,#+36864
+        LDRH     R3,[R3, #+6]
+        UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+        ANDS     R4,R7,#0x7
+        ORRS     R3,R4,R3
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R4,R0,#+5
+        ADD      R4,R4,#+1073741824
+        ADDS     R4,R4,#+36864
+        STRH     R3,[R4, #+6]
 //  142   //主的计数次数（major iteration count）达到后，重新调整目的地址
 //  143   DMA0->TCD[chx].DLAST_SGA = DMA_DLAST_SGA_DLASTSGA(dst_lastadj);
-        LDR      R0,[SP, #+4]
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STR      R0,[R1, #+24]
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R3,R0,#+5
+        ADD      R3,R3,#+1073741824
+        ADDS     R3,R3,#+36864
+        STR      LR,[R3, #+24]
 //  144   
 //  145   //默认为禁用通道链接功能，后续更新添加此功能
 //  146   if( 1 == 1)
@@ -439,22 +376,22 @@ LPLD_DMA_Init:
 //  148     //===============设置主计数器长度，循环次数====================================
 //  149     //设置主循环计数器 current major loop count
 //  150     DMA0->TCD[chx].CITER_ELINKNO = DMA_CITER_ELINKNO_CITER(major_cnt);
-        LSLS     R0,R6,#+17       ;; ZeroExtS R0,R6,#+17,#+17
-        LSRS     R0,R0,#+17
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+22]
+        LSLS     R3,R1,#+17       ;; ZeroExtS R3,R1,#+17,#+17
+        LSRS     R3,R3,#+17
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R4,R0,#+5
+        ADD      R4,R4,#+1073741824
+        ADDS     R4,R4,#+36864
+        STRH     R3,[R4, #+22]
 //  151     //起始循环计数器，当主循环计数器为零的时候，将装载起始循环计数器的值
 //  152     DMA0->TCD[chx].BITER_ELINKNO = DMA_CITER_ELINKNO_CITER(major_cnt);
-        LSLS     R0,R6,#+17       ;; ZeroExtS R0,R6,#+17,#+17
-        LSRS     R0,R0,#+17
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+30]
+        LSLS     R1,R1,#+17       ;; ZeroExtS R1,R1,#+17,#+17
+        LSRS     R1,R1,#+17
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R3,R0,#+5
+        ADD      R3,R3,#+1073741824
+        ADDS     R3,R3,#+36864
+        STRH     R1,[R3, #+30]
 //  153   }
 //  154   
 //  155   //默认为禁用次循环地址偏移功能，后续更新添加此功能
@@ -462,131 +399,130 @@ LPLD_DMA_Init:
 //  157   {
 //  158     //次循环一次传输字节的个数
 //  159     DMA0->TCD[chx].NBYTES_MLNO = DMA_NBYTES_MLNO_NBYTES(minor_cnt);
-        LDR      R0,[SP, #+12]
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R1,R0,#+5
         ADD      R1,R1,#+1073741824
         ADDS     R1,R1,#+36864
-        STR      R0,[R1, #+8]
+        STR      R2,[R1, #+8]
 //  160   }
 //  161   
 //  162   //清空TCD控制寄存器     
 //  163   DMA0->TCD[chx].CSR = 0;
-        MOVS     R0,#+0
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
-        ADD      R1,R1,#+1073741824
-        ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+28]
+        MOVS     R1,#+0
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R2,R0,#+5
+        ADD      R2,R2,#+1073741824
+        ADDS     R2,R2,#+36864
+        STRH     R1,[R2, #+28]
 //  164   
 //  165   //配置eDMA中断
 //  166   if((dma_init_struct.DMA_Isr != NULL) && 
 //  167      (dma_init_struct.DMA_MajorCompleteIntEnable == TRUE))
-        LDR      R0,[SP, #+96]
-        CMP      R0,#+0
-        BEQ.N    ??LPLD_DMA_Init_9
-        LDRB     R0,[SP, #+93]
-        CMP      R0,#+1
-        BNE.N    ??LPLD_DMA_Init_9
+        LDR      R1,[SP, #+80]
+        CMP      R1,#+0
+        BEQ.N    ??LPLD_DMA_Init_2
+        LDRB     R1,[SP, #+77]
+        CMP      R1,#+1
+        BNE.N    ??LPLD_DMA_Init_2
 //  168   {
 //  169 
 //  170        DMA0->TCD[chx].CSR |= DMA_CSR_INTMAJOR_MASK; //使能DMA 主循环计数器减到零 中断
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R0,R4,#+5
-        ADD      R0,R0,#+1073741824
-        ADDS     R0,R0,#+36864
-        LDRH     R0,[R0, #+28]
-        ORRS     R0,R0,#0x2
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R1,R0,#+5
         ADD      R1,R1,#+1073741824
         ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+28]
+        LDRH     R1,[R1, #+28]
+        ORRS     R1,R1,#0x2
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R2,R0,#+5
+        ADD      R2,R2,#+1073741824
+        ADDS     R2,R2,#+36864
+        STRH     R1,[R2, #+28]
 //  171        DMA_ISR[chx] = dma_init_struct.DMA_Isr;
-        LDR      R0,[SP, #+96]
-        LDR.N    R1,??DataTable18_8
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        STR      R0,[R1, R4, LSL #+2]
+        LDR      R1,[SP, #+80]
+        LDR.N    R2,??DataTable18_7
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        STR      R1,[R2, R0, LSL #+2]
 //  172   }
 //  173   if((dma_init_struct.DMA_Isr != NULL) && 
 //  174      (dma_init_struct.DMA_MajorHalfCompleteIntEnable == TRUE))
-??LPLD_DMA_Init_9:
-        LDR      R0,[SP, #+96]
-        CMP      R0,#+0
-        BEQ.N    ??LPLD_DMA_Init_10
-        LDRB     R0,[SP, #+94]
-        CMP      R0,#+1
-        BNE.N    ??LPLD_DMA_Init_10
+??LPLD_DMA_Init_2:
+        LDR      R1,[SP, #+80]
+        CMP      R1,#+0
+        BEQ.N    ??LPLD_DMA_Init_3
+        LDRB     R1,[SP, #+78]
+        CMP      R1,#+1
+        BNE.N    ??LPLD_DMA_Init_3
 //  175   {
 //  176 
 //  177        DMA0->TCD[chx].CSR |= DMA_CSR_INTHALF_MASK; //使能DMA 主循环计数器减到一半 中断
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R0,R4,#+5
-        ADD      R0,R0,#+1073741824
-        ADDS     R0,R0,#+36864
-        LDRH     R0,[R0, #+28]
-        ORRS     R0,R0,#0x4
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R1,R0,#+5
         ADD      R1,R1,#+1073741824
         ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+28]
+        LDRH     R1,[R1, #+28]
+        ORRS     R1,R1,#0x4
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R2,R0,#+5
+        ADD      R2,R2,#+1073741824
+        ADDS     R2,R2,#+36864
+        STRH     R1,[R2, #+28]
 //  178        DMA_ISR[chx] = dma_init_struct.DMA_Isr;
-        LDR      R0,[SP, #+96]
-        LDR.N    R1,??DataTable18_8
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        STR      R0,[R1, R4, LSL #+2]
+        LDR      R1,[SP, #+80]
+        LDR.N    R2,??DataTable18_7
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        STR      R1,[R2, R0, LSL #+2]
 //  179   }
 //  180     
 //  181   if(auto_disable == TRUE)
-??LPLD_DMA_Init_10:
-        UXTB     R11,R11          ;; ZeroExt  R11,R11,#+24,#+24
-        CMP      R11,#+1
-        BNE.N    ??LPLD_DMA_Init_11
+??LPLD_DMA_Init_3:
+        UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
+        CMP      R8,#+1
+        BNE.N    ??LPLD_DMA_Init_4
 //  182   {
 //  183      DMA0->TCD[chx].CSR |= DMA_CSR_DREQ_MASK; //主循环计数器等于零后，自动关闭DMA 
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R0,R4,#+5
-        ADD      R0,R0,#+1073741824
-        ADDS     R0,R0,#+36864
-        LDRH     R0,[R0, #+28]
-        ORRS     R0,R0,#0x8
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R1,R0,#+5
         ADD      R1,R1,#+1073741824
         ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+28]
-        B.N      ??LPLD_DMA_Init_12
+        LDRH     R1,[R1, #+28]
+        ORRS     R1,R1,#0x8
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R2,R0,#+5
+        ADD      R2,R2,#+1073741824
+        ADDS     R2,R2,#+36864
+        STRH     R1,[R2, #+28]
+        B.N      ??LPLD_DMA_Init_5
 //  184   }
 //  185   else
 //  186   {
 //  187      DMA0->TCD[chx].CSR &= ~(DMA_CSR_DREQ_MASK); //主循环计数器等于零后，不关闭DMA
-??LPLD_DMA_Init_11:
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R0,R4,#+5
-        ADD      R0,R0,#+1073741824
-        ADDS     R0,R0,#+36864
-        LDRH     R0,[R0, #+28]
-        MOVW     R1,#+65527
-        ANDS     R0,R1,R0
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LSLS     R1,R4,#+5
+??LPLD_DMA_Init_4:
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R1,R0,#+5
         ADD      R1,R1,#+1073741824
         ADDS     R1,R1,#+36864
-        STRH     R0,[R1, #+28]
+        LDRH     R1,[R1, #+28]
+        MOVW     R2,#+65527
+        ANDS     R1,R2,R1
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LSLS     R2,R0,#+5
+        ADD      R2,R2,#+1073741824
+        ADDS     R2,R2,#+36864
+        STRH     R1,[R2, #+28]
 //  188   } 
 //  189  
 //  190   //DMA通道使能
 //  191 #if defined(CPU_MK60DZ10) || defined(CPU_MK60D10)   
 //  192   DMAMUX->CHCFG[chx] |= DMAMUX_CHCFG_ENBL_MASK;
-??LPLD_DMA_Init_12:
-        LDR.N    R0,??DataTable18_6  ;; 0x40021000
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        LDRB     R0,[R4, R0]
-        ORRS     R0,R0,#0x80
-        LDR.N    R1,??DataTable18_6  ;; 0x40021000
-        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-        STRB     R0,[R4, R1]
+??LPLD_DMA_Init_5:
+        LDR.N    R1,??DataTable18_5  ;; 0x40021000
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        LDRB     R1,[R0, R1]
+        ORRS     R1,R1,#0x80
+        LDR.N    R2,??DataTable18_5  ;; 0x40021000
+        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+        STRB     R1,[R0, R2]
 //  193 #elif defined(CPU_MK60F12) || defined(CPU_MK60F15)
 //  194   if(chx < 16)
 //  195   {
@@ -599,8 +535,7 @@ LPLD_DMA_Init:
 //  202 #endif
 //  203   return 1;
         MOVS     R0,#+1
-        ADD      SP,SP,#+20
-        POP      {R4-R11}
+        POP      {R1,R4-R11}
         LDR      PC,[SP], #+20    ;; return
 //  204 }
 //  205 
@@ -742,15 +677,15 @@ DMA0_IRQHandler:
 //  294   
 //  295   //调用用户自定义中断服务
 //  296   DMA_ISR[0]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+0]
         BLX      R0
 //  297   //清除中断标志位
 //  298   DMA0->INT |= 0x1u<<0;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x1
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  299   
 //  300 #if (UCOS_II > 0u)
@@ -775,15 +710,15 @@ DMA1_IRQHandler:
 //  313   
 //  314   //调用用户自定义中断服务
 //  315   DMA_ISR[1]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+4]
         BLX      R0
 //  316   //清除中断标志位
 //  317   DMA0->INT |= 0x1u<<1;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x2
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  318   
 //  319 #if (UCOS_II > 0u)
@@ -808,15 +743,15 @@ DMA2_IRQHandler:
 //  332   
 //  333   //调用用户自定义中断服务
 //  334   DMA_ISR[2]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+8]
         BLX      R0
 //  335   //清除中断标志位
 //  336   DMA0->INT |= 0x1u<<2;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x4
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  337   
 //  338 #if (UCOS_II > 0u)
@@ -841,15 +776,15 @@ DMA3_IRQHandler:
 //  351   
 //  352   //调用用户自定义中断服务
 //  353   DMA_ISR[3]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+12]
         BLX      R0
 //  354   //清除中断标志位
 //  355   DMA0->INT |= 0x1u<<3;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x8
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  356   
 //  357 #if (UCOS_II > 0u)
@@ -874,15 +809,15 @@ DMA4_IRQHandler:
 //  370   
 //  371   //调用用户自定义中断服务
 //  372   DMA_ISR[4]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+16]
         BLX      R0
 //  373   //清除中断标志位
 //  374   DMA0->INT |= 0x1u<<4;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x10
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  375   
 //  376 #if (UCOS_II > 0u)
@@ -907,15 +842,15 @@ DMA5_IRQHandler:
 //  389   
 //  390   //调用用户自定义中断服务
 //  391   DMA_ISR[5]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+20]
         BLX      R0
 //  392   //清除中断标志位
 //  393   DMA0->INT |= 0x1u<<5;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x20
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  394   
 //  395 #if (UCOS_II > 0u)
@@ -940,15 +875,15 @@ DMA6_IRQHandler:
 //  408   
 //  409   //调用用户自定义中断服务
 //  410   DMA_ISR[6]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+24]
         BLX      R0
 //  411   //清除中断标志位
 //  412   DMA0->INT |= 0x1u<<6;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x40
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  413   
 //  414 #if (UCOS_II > 0u)
@@ -973,15 +908,15 @@ DMA7_IRQHandler:
 //  427   
 //  428   //调用用户自定义中断服务
 //  429   DMA_ISR[7]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+28]
         BLX      R0
 //  430   //清除中断标志位
 //  431   DMA0->INT |= 0x1u<<7;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x80
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  432   
 //  433 #if (UCOS_II > 0u)
@@ -1006,15 +941,15 @@ DMA8_IRQHandler:
 //  446   
 //  447   //调用用户自定义中断服务
 //  448   DMA_ISR[8]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+32]
         BLX      R0
 //  449   //清除中断标志位
 //  450   DMA0->INT |= 0x1u<<8;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x100
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  451   
 //  452 #if (UCOS_II > 0u)
@@ -1039,15 +974,15 @@ DMA9_IRQHandler:
 //  465   
 //  466   //调用用户自定义中断服务
 //  467   DMA_ISR[9]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+36]
         BLX      R0
 //  468   //清除中断标志位
 //  469   DMA0->INT |= 0x1u<<9;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x200
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  470   
 //  471 #if (UCOS_II > 0u)
@@ -1072,15 +1007,15 @@ DMA10_IRQHandler:
 //  484   
 //  485   //调用用户自定义中断服务
 //  486   DMA_ISR[10]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+40]
         BLX      R0
 //  487   //清除中断标志位
 //  488   DMA0->INT |= 0x1u<10;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x1
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  489   
 //  490 #if (UCOS_II > 0u)
@@ -1105,15 +1040,15 @@ DMA11_IRQHandler:
 //  503   
 //  504   //调用用户自定义中断服务
 //  505   DMA_ISR[11]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+44]
         BLX      R0
 //  506   //清除中断标志位
 //  507   DMA0->INT |= 0x1u<<11;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x800
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  508   
 //  509 #if (UCOS_II > 0u)
@@ -1138,15 +1073,15 @@ DMA12_IRQHandler:
 //  522   
 //  523   //调用用户自定义中断服务
 //  524   DMA_ISR[12]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+48]
         BLX      R0
 //  525   //清除中断标志位
 //  526   DMA0->INT |= 0x1u<<12;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x1000
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  527   
 //  528 #if (UCOS_II > 0u)
@@ -1171,15 +1106,15 @@ DMA13_IRQHandler:
 //  541   
 //  542   //调用用户自定义中断服务
 //  543   DMA_ISR[13]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+52]
         BLX      R0
 //  544   //清除中断标志位
 //  545   DMA0->INT |= 0x1u<<13;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x2000
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  546   
 //  547 #if (UCOS_II > 0u)
@@ -1204,15 +1139,15 @@ DMA14_IRQHandler:
 //  560   
 //  561   //调用用户自定义中断服务
 //  562   DMA_ISR[14]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+56]
         BLX      R0
 //  563   //清除中断标志位
 //  564   DMA0->INT |= 0x1u<<14;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x4000
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  565   
 //  566 #if (UCOS_II > 0u)
@@ -1237,15 +1172,15 @@ DMA15_IRQHandler:
 //  579   
 //  580   //调用用户自定义中断服务
 //  581   DMA_ISR[15]();
-        LDR.N    R0,??DataTable18_8
+        LDR.N    R0,??DataTable18_7
         LDR      R0,[R0, #+60]
         BLX      R0
 //  582   //清除中断标志位
 //  583   DMA0->INT |= 0x1u<<15;
-        LDR.N    R0,??DataTable18_9  ;; 0x40008024
+        LDR.N    R0,??DataTable18_8  ;; 0x40008024
         LDR      R0,[R0, #+0]
         ORRS     R0,R0,#0x8000
-        LDR.N    R1,??DataTable18_9  ;; 0x40008024
+        LDR.N    R1,??DataTable18_8  ;; 0x40008024
         STR      R0,[R1, #+0]
 //  584   
 //  585 #if (UCOS_II > 0u)
@@ -1270,48 +1205,42 @@ DMA15_IRQHandler:
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
 ??DataTable18_2:
-        DC32     ?_0
-
-        SECTION `.text`:CODE:NOROOT(2)
-        SECTION_TYPE SHT_PROGBITS, 0
-        DATA
-??DataTable18_3:
         DC32     0x4004803c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable18_4:
+??DataTable18_3:
         DC32     0x40048040
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable18_5:
+??DataTable18_4:
         DC32     0x4000800c
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable18_6:
+??DataTable18_5:
         DC32     0x40021000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable18_7:
+??DataTable18_6:
         DC32     0x40009000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable18_8:
+??DataTable18_7:
         DC32     DMA_ISR
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable18_9:
+??DataTable18_8:
         DC32     0x40008024
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
@@ -1324,17 +1253,6 @@ DMA15_IRQHandler:
 
         SECTION __DLIB_PERTHREAD_init:DATA:REORDER:NOROOT(0)
         SECTION_TYPE SHT_PROGBITS, 0
-
-        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
-?_0:
-        DATA
-        DC8 45H, 3AH, 5CH, 67H, 69H, 74H, 50H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 5CH, 4DH, 79H
-        DC8 65H, 42H, 45H, 53H, 54H, 5CH, 70H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 53H, 6EH, 61H
-        DC8 6BH, 65H, 5CH, 6CH, 69H, 62H, 5CH, 4CH
-        DC8 50H, 4CH, 44H, 5CH, 48H, 57H, 5CH, 48H
-        DC8 57H, 5FH, 44H, 4DH, 41H, 2EH, 63H, 0
 
         END
 //  589 #elif defined(CPU_MK60F12) || defined(CPU_MK60F15)
@@ -1852,12 +1770,10 @@ DMA15_IRQHandler:
 // 1101 
 // 
 //    64 bytes in section .bss
-//    56 bytes in section .rodata
-// 1 292 bytes in section .text
+// 1 160 bytes in section .text
 // 
-// 1 292 bytes of CODE  memory
-//    56 bytes of CONST memory
-//    64 bytes of DATA  memory
+// 1 160 bytes of CODE memory
+//    64 bytes of DATA memory
 //
 //Errors: none
 //Warnings: none

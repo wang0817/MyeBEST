@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       25/Oct/2015  00:03:57
+// IAR ANSI C/C++ Compiler V7.20.2.7424/W32 for ARM       26/Oct/2015  14:59:51
 // Copyright 1999-2014 IAR Systems AB.
 //
 //    Cpu mode     =  thumb
@@ -58,8 +58,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
         #define SHT_PROGBITS 0x1
-
-        EXTERN assert_failed
 
         PUBLIC GPIO_ISR
         PUBLIC LPLD_GPIO_DisableIrq
@@ -158,58 +156,37 @@ GPIO_ISR:
 //   42 {
 LPLD_GPIO_Init:
         PUSH     {R0-R3}
-        PUSH     {R3-R9,LR}
+        PUSH     {R4-R7}
 //   43   uint8 i;
 //   44   PORT_Type *portx;
 //   45   uint32 pcr = PORT_PCR_MUX(1)| gpio_init_structure.GPIO_PinControl; 
-        LDR      R0,[SP, #+40]
-        ORRS     R4,R0,#0x100
+        LDR      R0,[SP, #+24]
+        ORRS     R0,R0,#0x100
 //   46   GPIO_Type *ptx = gpio_init_structure.GPIO_PTx;
-        LDR      R7,[SP, #+32]
+        LDR      R3,[SP, #+16]
 //   47   uint32 pins = gpio_init_structure.GPIO_Pins;
-        LDR      R5,[SP, #+36]
+        LDR      R1,[SP, #+20]
 //   48   uint8 dir = gpio_init_structure.GPIO_Dir;
-        LDRB     R8,[SP, #+44]
+        LDRB     R7,[SP, #+28]
 //   49   uint8 output = gpio_init_structure.GPIO_Output;
-        LDRB     R9,[SP, #+45]
+        LDRB     R4,[SP, #+29]
 //   50   GPIO_ISR_CALLBACK isr_func = gpio_init_structure.GPIO_Isr;
-        LDR      R6,[SP, #+48]
+        LDR      R2,[SP, #+32]
 //   51   
 //   52   //参数检查
 //   53   ASSERT( ptx <= PTE);                  //判断端口
-        LDR.N    R0,??DataTable9_2  ;; 0x400ff101
-        CMP      R7,R0
-        BCC.N    ??LPLD_GPIO_Init_0
-        MOVS     R1,#+53
-        LDR.N    R0,??DataTable9_3
-        BL       assert_failed
 //   54   ASSERT( dir <= 1 );                   //判断方向
-??LPLD_GPIO_Init_0:
-        UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
-        CMP      R8,#+2
-        BLT.N    ??LPLD_GPIO_Init_1
-        MOVS     R1,#+54
-        LDR.N    R0,??DataTable9_3
-        BL       assert_failed
 //   55   ASSERT( output <= 1 );                //判断输出电平状态
-??LPLD_GPIO_Init_1:
-        UXTB     R9,R9            ;; ZeroExt  R9,R9,#+24,#+24
-        CMP      R9,#+2
-        BLT.N    ??LPLD_GPIO_Init_2
-        MOVS     R1,#+55
-        LDR.N    R0,??DataTable9_3
-        BL       assert_failed
 //   56   
 //   57   if(ptx == PTA)
-??LPLD_GPIO_Init_2:
-        LDR.N    R0,??DataTable9_4  ;; 0x400ff000
-        CMP      R7,R0
-        BNE.N    ??LPLD_GPIO_Init_3
+        LDR.N    R5,??DataTable9_2  ;; 0x400ff000
+        CMP      R3,R5
+        BNE.N    ??LPLD_GPIO_Init_0
 //   58   {
 //   59     portx = PORTA;  
-        LDR.N    R1,??DataTable9_5  ;; 0x40049000
+        LDR.N    R6,??DataTable9_3  ;; 0x40049000
 //   60     i = 0;
-        MOVS     R0,#+0
+        MOVS     R5,#+0
 //   61   }
 //   62   else if(ptx == PTB) 
 //   63   {
@@ -236,112 +213,113 @@ LPLD_GPIO_Init:
 //   84   
 //   85   //输入或输出设置
 //   86   if(dir==DIR_OUTPUT)
-??LPLD_GPIO_Init_4:
-        UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
-        CMP      R8,#+1
-        BNE.N    ??LPLD_GPIO_Init_5
+??LPLD_GPIO_Init_1:
+        UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+        CMP      R7,#+1
+        BNE.N    ??LPLD_GPIO_Init_2
 //   87   {
 //   88     ptx->PDDR |= pins;
-        LDR      R2,[R7, #+20]
-        ORRS     R2,R5,R2
-        STR      R2,[R7, #+20]
+        LDR      R7,[R3, #+20]
+        ORRS     R7,R1,R7
+        STR      R7,[R3, #+20]
 //   89     //设置初始输出
 //   90     if(output==OUTPUT_H)
-        UXTB     R9,R9            ;; ZeroExt  R9,R9,#+24,#+24
-        CMP      R9,#+1
-        BNE.N    ??LPLD_GPIO_Init_6
+        UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+        CMP      R4,#+1
+        BNE.N    ??LPLD_GPIO_Init_3
 //   91     {
 //   92       ptx->PSOR = pins; 
-        STR      R5,[R7, #+4]
-        B.N      ??LPLD_GPIO_Init_7
+        STR      R1,[R3, #+4]
+        B.N      ??LPLD_GPIO_Init_4
 //   93     }
-??LPLD_GPIO_Init_3:
-        LDR.N    R0,??DataTable9_6  ;; 0x400ff040
-        CMP      R7,R0
+??LPLD_GPIO_Init_0:
+        LDR.N    R5,??DataTable9_4  ;; 0x400ff040
+        CMP      R3,R5
+        BNE.N    ??LPLD_GPIO_Init_5
+        LDR.N    R6,??DataTable9_5  ;; 0x4004a000
+        MOVS     R5,#+1
+        B.N      ??LPLD_GPIO_Init_1
+??LPLD_GPIO_Init_5:
+        LDR.N    R5,??DataTable9_6  ;; 0x400ff080
+        CMP      R3,R5
+        BNE.N    ??LPLD_GPIO_Init_6
+        LDR.N    R6,??DataTable9_7  ;; 0x4004b000
+        MOVS     R5,#+2
+        B.N      ??LPLD_GPIO_Init_1
+??LPLD_GPIO_Init_6:
+        LDR.N    R5,??DataTable9_8  ;; 0x400ff0c0
+        CMP      R3,R5
+        BNE.N    ??LPLD_GPIO_Init_7
+        LDR.N    R6,??DataTable9_9  ;; 0x4004c000
+        MOVS     R5,#+3
+        B.N      ??LPLD_GPIO_Init_1
+??LPLD_GPIO_Init_7:
+        LDR.N    R5,??DataTable9_10  ;; 0x400ff100
+        CMP      R3,R5
         BNE.N    ??LPLD_GPIO_Init_8
-        LDR.N    R1,??DataTable9_7  ;; 0x4004a000
-        MOVS     R0,#+1
-        B.N      ??LPLD_GPIO_Init_4
+        LDR.N    R6,??DataTable9_11  ;; 0x4004d000
+        MOVS     R5,#+4
+        B.N      ??LPLD_GPIO_Init_1
 ??LPLD_GPIO_Init_8:
-        LDR.N    R0,??DataTable9_8  ;; 0x400ff080
-        CMP      R7,R0
-        BNE.N    ??LPLD_GPIO_Init_9
-        LDR.N    R1,??DataTable9_9  ;; 0x4004b000
-        MOVS     R0,#+2
-        B.N      ??LPLD_GPIO_Init_4
-??LPLD_GPIO_Init_9:
-        LDR.N    R0,??DataTable9_10  ;; 0x400ff0c0
-        CMP      R7,R0
-        BNE.N    ??LPLD_GPIO_Init_10
-        LDR.N    R1,??DataTable9_11  ;; 0x4004c000
-        MOVS     R0,#+3
-        B.N      ??LPLD_GPIO_Init_4
-??LPLD_GPIO_Init_10:
-        LDR.N    R0,??DataTable9_12  ;; 0x400ff100
-        CMP      R7,R0
-        BNE.N    ??LPLD_GPIO_Init_11
-        LDR.N    R1,??DataTable9_13  ;; 0x4004d000
-        MOVS     R0,#+4
-        B.N      ??LPLD_GPIO_Init_4
-??LPLD_GPIO_Init_11:
         MOVS     R0,#+0
-        B.N      ??LPLD_GPIO_Init_12
+        B.N      ??LPLD_GPIO_Init_9
 //   94     else
 //   95     {
 //   96       ptx->PCOR = pins;
-??LPLD_GPIO_Init_6:
-        STR      R5,[R7, #+8]
-        B.N      ??LPLD_GPIO_Init_7
+??LPLD_GPIO_Init_3:
+        STR      R1,[R3, #+8]
+        B.N      ??LPLD_GPIO_Init_4
 //   97     }
 //   98   }
 //   99   else
 //  100   { 
 //  101     ptx->PDDR &= ~(pins);
-??LPLD_GPIO_Init_5:
-        LDR      R2,[R7, #+20]
-        BICS     R2,R2,R5
-        STR      R2,[R7, #+20]
+??LPLD_GPIO_Init_2:
+        LDR      R4,[R3, #+20]
+        BICS     R4,R4,R1
+        STR      R4,[R3, #+20]
 //  102   }
 //  103   
 //  104   //配置所选引脚的控制寄存器
 //  105   for(uint8 i=0; i<32; i++)
-??LPLD_GPIO_Init_7:
-        MOVS     R2,#+0
-        B.N      ??LPLD_GPIO_Init_13
+??LPLD_GPIO_Init_4:
+        MOVS     R3,#+0
+        B.N      ??LPLD_GPIO_Init_10
 //  106   {
 //  107     if(pins&(1ul<<i))
-??LPLD_GPIO_Init_14:
-        LSRS     R3,R5,R2
-        LSLS     R3,R3,#+31
-        BPL.N    ??LPLD_GPIO_Init_15
+??LPLD_GPIO_Init_11:
+        LSRS     R4,R1,R3
+        LSLS     R4,R4,#+31
+        BPL.N    ??LPLD_GPIO_Init_12
 //  108     {
 //  109       portx->PCR[i] = pcr;
-        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
-        STR      R4,[R1, R2, LSL #+2]
+        UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+        STR      R0,[R6, R3, LSL #+2]
 //  110     }
 //  111   }
-??LPLD_GPIO_Init_15:
-        ADDS     R2,R2,#+1
-??LPLD_GPIO_Init_13:
-        UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
-        CMP      R2,#+32
-        BLT.N    ??LPLD_GPIO_Init_14
+??LPLD_GPIO_Init_12:
+        ADDS     R3,R3,#+1
+??LPLD_GPIO_Init_10:
+        UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+        CMP      R3,#+32
+        BLT.N    ??LPLD_GPIO_Init_11
 //  112 
 //  113   if(isr_func!=NULL)
-        MOVS     R1,R6
-        CMP      R1,#+0
-        BEQ.N    ??LPLD_GPIO_Init_16
+        MOVS     R0,R2
+        CMP      R0,#+0
+        BEQ.N    ??LPLD_GPIO_Init_13
 //  114     GPIO_ISR[i] = isr_func;
-        LDR.N    R1,??DataTable9_14
-        UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-        STR      R6,[R1, R0, LSL #+2]
+        LDR.N    R0,??DataTable9_12
+        UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+        STR      R2,[R0, R5, LSL #+2]
 //  115   
 //  116   return 1;
-??LPLD_GPIO_Init_16:
+??LPLD_GPIO_Init_13:
         MOVS     R0,#+1
-??LPLD_GPIO_Init_12:
-        POP      {R1,R4-R9}
-        LDR      PC,[SP], #+20    ;; return
+??LPLD_GPIO_Init_9:
+        POP      {R4-R7}
+        ADD      SP,SP,#+16
+        BX       LR               ;; return
 //  117 }
 //  118 
 //  119 /*
@@ -364,66 +342,59 @@ LPLD_GPIO_Init:
 //  133 {
 LPLD_GPIO_EnableIrq:
         PUSH     {R0-R3}
-        PUSH     {R4,LR}
+        PUSH     {R7,LR}
 //  134   uint8 i;
 //  135   GPIO_Type *ptx = gpio_init_structure.GPIO_PTx;
-        LDR      R4,[SP, #+8]
+        LDR      R0,[SP, #+8]
 //  136   
 //  137   //参数检查
 //  138   ASSERT( ptx <= PTE);                  //判断端口
-        LDR.N    R0,??DataTable9_2  ;; 0x400ff101
-        CMP      R4,R0
-        BCC.N    ??LPLD_GPIO_EnableIrq_0
-        MOVS     R1,#+138
-        LDR.N    R0,??DataTable9_3
-        BL       assert_failed
 //  139   
 //  140   if(ptx == PTA)
-??LPLD_GPIO_EnableIrq_0:
-        LDR.N    R0,??DataTable9_4  ;; 0x400ff000
-        CMP      R4,R0
-        BNE.N    ??LPLD_GPIO_EnableIrq_1
+        LDR.N    R1,??DataTable9_2  ;; 0x400ff000
+        CMP      R0,R1
+        BNE.N    ??LPLD_GPIO_EnableIrq_0
 //  141     i = 0;
         MOVS     R0,#+0
-        B.N      ??LPLD_GPIO_EnableIrq_2
+        B.N      ??LPLD_GPIO_EnableIrq_1
 //  142   else if(ptx == PTB) 
-??LPLD_GPIO_EnableIrq_1:
-        LDR.N    R0,??DataTable9_6  ;; 0x400ff040
-        CMP      R4,R0
-        BNE.N    ??LPLD_GPIO_EnableIrq_3
+??LPLD_GPIO_EnableIrq_0:
+        LDR.N    R1,??DataTable9_4  ;; 0x400ff040
+        CMP      R0,R1
+        BNE.N    ??LPLD_GPIO_EnableIrq_2
 //  143     i = 1;
         MOVS     R0,#+1
-        B.N      ??LPLD_GPIO_EnableIrq_2
+        B.N      ??LPLD_GPIO_EnableIrq_1
 //  144   else if(ptx == PTC) 
-??LPLD_GPIO_EnableIrq_3:
-        LDR.N    R0,??DataTable9_8  ;; 0x400ff080
-        CMP      R4,R0
-        BNE.N    ??LPLD_GPIO_EnableIrq_4
+??LPLD_GPIO_EnableIrq_2:
+        LDR.N    R1,??DataTable9_6  ;; 0x400ff080
+        CMP      R0,R1
+        BNE.N    ??LPLD_GPIO_EnableIrq_3
 //  145     i = 2;
         MOVS     R0,#+2
-        B.N      ??LPLD_GPIO_EnableIrq_2
+        B.N      ??LPLD_GPIO_EnableIrq_1
 //  146   else if(ptx == PTD) 
-??LPLD_GPIO_EnableIrq_4:
-        LDR.N    R0,??DataTable9_10  ;; 0x400ff0c0
-        CMP      R4,R0
-        BNE.N    ??LPLD_GPIO_EnableIrq_5
+??LPLD_GPIO_EnableIrq_3:
+        LDR.N    R1,??DataTable9_8  ;; 0x400ff0c0
+        CMP      R0,R1
+        BNE.N    ??LPLD_GPIO_EnableIrq_4
 //  147     i = 3;
         MOVS     R0,#+3
-        B.N      ??LPLD_GPIO_EnableIrq_2
+        B.N      ??LPLD_GPIO_EnableIrq_1
 //  148   else
 //  149     i = 4;
-??LPLD_GPIO_EnableIrq_5:
+??LPLD_GPIO_EnableIrq_4:
         MOVS     R0,#+4
 //  150 
 //  151   enable_irq((IRQn_Type)(i + PORTA_IRQn));
-??LPLD_GPIO_EnableIrq_2:
+??LPLD_GPIO_EnableIrq_1:
         ADDS     R0,R0,#+87
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         BL       NVIC_EnableIRQ
 //  152   
 //  153   return 1;
         MOVS     R0,#+1
-        POP      {R4}
+        POP      {R1}
         LDR      PC,[SP], #+20    ;; return
 //  154 }
 //  155 
@@ -447,66 +418,59 @@ LPLD_GPIO_EnableIrq:
 //  170 {
 LPLD_GPIO_DisableIrq:
         PUSH     {R0-R3}
-        PUSH     {R4,LR}
+        PUSH     {R7,LR}
 //  171   uint8 i;
 //  172   GPIO_Type *ptx = gpio_init_structure.GPIO_PTx;
-        LDR      R4,[SP, #+8]
+        LDR      R0,[SP, #+8]
 //  173   
 //  174   //参数检查
 //  175   ASSERT( ptx <= PTE);                  //判断端口
-        LDR.N    R0,??DataTable9_2  ;; 0x400ff101
-        CMP      R4,R0
-        BCC.N    ??LPLD_GPIO_DisableIrq_0
-        MOVS     R1,#+175
-        LDR.N    R0,??DataTable9_3
-        BL       assert_failed
 //  176   
 //  177   if(ptx == PTA)
-??LPLD_GPIO_DisableIrq_0:
-        LDR.N    R0,??DataTable9_4  ;; 0x400ff000
-        CMP      R4,R0
-        BNE.N    ??LPLD_GPIO_DisableIrq_1
+        LDR.N    R1,??DataTable9_2  ;; 0x400ff000
+        CMP      R0,R1
+        BNE.N    ??LPLD_GPIO_DisableIrq_0
 //  178     i = 0;
         MOVS     R0,#+0
-        B.N      ??LPLD_GPIO_DisableIrq_2
+        B.N      ??LPLD_GPIO_DisableIrq_1
 //  179   else if(ptx == PTB) 
-??LPLD_GPIO_DisableIrq_1:
-        LDR.N    R0,??DataTable9_6  ;; 0x400ff040
-        CMP      R4,R0
-        BNE.N    ??LPLD_GPIO_DisableIrq_3
+??LPLD_GPIO_DisableIrq_0:
+        LDR.N    R1,??DataTable9_4  ;; 0x400ff040
+        CMP      R0,R1
+        BNE.N    ??LPLD_GPIO_DisableIrq_2
 //  180     i = 1;
         MOVS     R0,#+1
-        B.N      ??LPLD_GPIO_DisableIrq_2
+        B.N      ??LPLD_GPIO_DisableIrq_1
 //  181   else if(ptx == PTC) 
-??LPLD_GPIO_DisableIrq_3:
-        LDR.N    R0,??DataTable9_8  ;; 0x400ff080
-        CMP      R4,R0
-        BNE.N    ??LPLD_GPIO_DisableIrq_4
+??LPLD_GPIO_DisableIrq_2:
+        LDR.N    R1,??DataTable9_6  ;; 0x400ff080
+        CMP      R0,R1
+        BNE.N    ??LPLD_GPIO_DisableIrq_3
 //  182     i = 2;
         MOVS     R0,#+2
-        B.N      ??LPLD_GPIO_DisableIrq_2
+        B.N      ??LPLD_GPIO_DisableIrq_1
 //  183   else if(ptx == PTD) 
-??LPLD_GPIO_DisableIrq_4:
-        LDR.N    R0,??DataTable9_10  ;; 0x400ff0c0
-        CMP      R4,R0
-        BNE.N    ??LPLD_GPIO_DisableIrq_5
+??LPLD_GPIO_DisableIrq_3:
+        LDR.N    R1,??DataTable9_8  ;; 0x400ff0c0
+        CMP      R0,R1
+        BNE.N    ??LPLD_GPIO_DisableIrq_4
 //  184     i = 3;
         MOVS     R0,#+3
-        B.N      ??LPLD_GPIO_DisableIrq_2
+        B.N      ??LPLD_GPIO_DisableIrq_1
 //  185   else
 //  186     i = 4;
-??LPLD_GPIO_DisableIrq_5:
+??LPLD_GPIO_DisableIrq_4:
         MOVS     R0,#+4
 //  187   
 //  188   disable_irq((IRQn_Type)(i + PORTA_IRQn));
-??LPLD_GPIO_DisableIrq_2:
+??LPLD_GPIO_DisableIrq_1:
         ADDS     R0,R0,#+87
         SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
         BL       NVIC_DisableIRQ
 //  189   
 //  190   return 1;
         MOVS     R0,#+1
-        POP      {R4}
+        POP      {R1}
         LDR      PC,[SP], #+20    ;; return
 //  191 }
 //  192 
@@ -817,12 +781,12 @@ PORTA_IRQHandler:
 //  412   
 //  413   //调用用户自定义中断服务
 //  414   GPIO_ISR[0](); 
-        LDR.N    R0,??DataTable9_14
+        LDR.N    R0,??DataTable9_12
         LDR      R0,[R0, #+0]
         BLX      R0
 //  415   PORTA->ISFR =0xFFFFFFFF;
         MOVS     R0,#-1
-        LDR.N    R1,??DataTable9_15  ;; 0x400490a0
+        LDR.N    R1,??DataTable9_13  ;; 0x400490a0
         STR      R0,[R1, #+0]
 //  416   
 //  417 #if (UCOS_II > 0u)
@@ -847,12 +811,12 @@ PORTB_IRQHandler:
 //  430   
 //  431   //调用用户自定义中断服务
 //  432   GPIO_ISR[1](); 
-        LDR.N    R0,??DataTable9_14
+        LDR.N    R0,??DataTable9_12
         LDR      R0,[R0, #+4]
         BLX      R0
 //  433   PORTB->ISFR =0xFFFFFFFF;
         MOVS     R0,#-1
-        LDR.N    R1,??DataTable9_16  ;; 0x4004a0a0
+        LDR.N    R1,??DataTable9_14  ;; 0x4004a0a0
         STR      R0,[R1, #+0]
 //  434   
 //  435 #if (UCOS_II > 0u)
@@ -877,12 +841,12 @@ PORTC_IRQHandler:
 //  448   
 //  449   //调用用户自定义中断服务
 //  450   GPIO_ISR[2](); 
-        LDR.N    R0,??DataTable9_14
+        LDR.N    R0,??DataTable9_12
         LDR      R0,[R0, #+8]
         BLX      R0
 //  451   PORTC->ISFR =0xFFFFFFFF;
         MOVS     R0,#-1
-        LDR.N    R1,??DataTable9_17  ;; 0x4004b0a0
+        LDR.N    R1,??DataTable9_15  ;; 0x4004b0a0
         STR      R0,[R1, #+0]
 //  452   
 //  453 #if (UCOS_II > 0u)
@@ -907,12 +871,12 @@ PORTD_IRQHandler:
 //  466   
 //  467   //调用用户自定义中断服务
 //  468   GPIO_ISR[3](); 
-        LDR.N    R0,??DataTable9_14
+        LDR.N    R0,??DataTable9_12
         LDR      R0,[R0, #+12]
         BLX      R0
 //  469   PORTD->ISFR =0xFFFFFFFF;
         MOVS     R0,#-1
-        LDR.N    R1,??DataTable9_18  ;; 0x4004c0a0
+        LDR.N    R1,??DataTable9_16  ;; 0x4004c0a0
         STR      R0,[R1, #+0]
 //  470   
 //  471 #if (UCOS_II > 0u)
@@ -937,12 +901,12 @@ PORTE_IRQHandler:
 //  484   
 //  485   //调用用户自定义中断服务
 //  486   GPIO_ISR[4](); 
-        LDR.N    R0,??DataTable9_14
+        LDR.N    R0,??DataTable9_12
         LDR      R0,[R0, #+16]
         BLX      R0
 //  487   PORTE->ISFR =0xFFFFFFFF;
         MOVS     R0,#-1
-        LDR.N    R1,??DataTable9_19  ;; 0x4004d0a0
+        LDR.N    R1,??DataTable9_17  ;; 0x4004d0a0
         STR      R0,[R1, #+0]
 //  488   
 //  489 #if (UCOS_II > 0u)
@@ -967,108 +931,96 @@ PORTE_IRQHandler:
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
 ??DataTable9_2:
-        DC32     0x400ff101
-
-        SECTION `.text`:CODE:NOROOT(2)
-        SECTION_TYPE SHT_PROGBITS, 0
-        DATA
-??DataTable9_3:
-        DC32     ?_0
-
-        SECTION `.text`:CODE:NOROOT(2)
-        SECTION_TYPE SHT_PROGBITS, 0
-        DATA
-??DataTable9_4:
         DC32     0x400ff000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_5:
+??DataTable9_3:
         DC32     0x40049000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_6:
+??DataTable9_4:
         DC32     0x400ff040
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_7:
+??DataTable9_5:
         DC32     0x4004a000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_8:
+??DataTable9_6:
         DC32     0x400ff080
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_9:
+??DataTable9_7:
         DC32     0x4004b000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_10:
+??DataTable9_8:
         DC32     0x400ff0c0
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_11:
+??DataTable9_9:
         DC32     0x4004c000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_12:
+??DataTable9_10:
         DC32     0x400ff100
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_13:
+??DataTable9_11:
         DC32     0x4004d000
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_14:
+??DataTable9_12:
         DC32     GPIO_ISR
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_15:
+??DataTable9_13:
         DC32     0x400490a0
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_16:
+??DataTable9_14:
         DC32     0x4004a0a0
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_17:
+??DataTable9_15:
         DC32     0x4004b0a0
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_18:
+??DataTable9_16:
         DC32     0x4004c0a0
 
         SECTION `.text`:CODE:NOROOT(2)
         SECTION_TYPE SHT_PROGBITS, 0
         DATA
-??DataTable9_19:
+??DataTable9_17:
         DC32     0x4004d0a0
 
         SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
@@ -1082,28 +1034,13 @@ PORTE_IRQHandler:
         SECTION __DLIB_PERTHREAD_init:DATA:REORDER:NOROOT(0)
         SECTION_TYPE SHT_PROGBITS, 0
 
-        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
-?_0:
-        DATA
-        DC8 45H, 3AH, 5CH, 67H, 69H, 74H, 50H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 5CH, 4DH, 79H
-        DC8 65H, 42H, 45H, 53H, 54H, 5CH, 70H, 72H
-        DC8 6FH, 6AH, 65H, 63H, 74H, 53H, 6EH, 61H
-        DC8 6BH, 65H, 5CH, 6CH, 69H, 62H, 5CH, 4CH
-        DC8 50H, 4CH, 44H, 5CH, 48H, 57H, 5CH, 48H
-        DC8 57H, 5FH, 47H, 50H, 49H, 4FH, 2EH, 63H
-        DC8 0
-        DC8 0, 0, 0
-
         END
 // 
 //  20 bytes in section .bss
-//  60 bytes in section .rodata
-// 692 bytes in section .text
+// 594 bytes in section .text
 // 
-// 692 bytes of CODE  memory
-//  60 bytes of CONST memory
-//  20 bytes of DATA  memory
+// 594 bytes of CODE memory
+//  20 bytes of DATA memory
 //
 //Errors: none
 //Warnings: none

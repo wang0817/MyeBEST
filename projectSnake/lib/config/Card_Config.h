@@ -11,10 +11,16 @@ typedef struct
 
 typedef struct
 {
-  GPIO_InitTypeDef SCL_Pin;
-  GPIO_InitTypeDef SDA_Pin;
-  GPIO_InitTypeDef DC_Pin;
-  GPIO_InitTypeDef RST_Pin;
+  GPIO_InitTypeDef gpioPins;
+  uint32 pinNum;
+}OledPinConfig;
+
+typedef struct
+{
+  OledPinConfig SCL_Pin;
+  OledPinConfig SDA_Pin;
+  OledPinConfig DC_Pin;
+  OledPinConfig RST_Pin;
 }OledConfig;
 
 
