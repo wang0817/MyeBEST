@@ -1,19 +1,19 @@
 /**
- * --------------»ùÓÚ"À­ÆÕÀ¼µÂK60µ×²ã¿âV3"µÄ¹¤³Ì£¨myK10Project£©-----------------
+ * --------------åŸºäºŽ"æ‹‰æ™®å…°å¾·K60åº•å±‚åº“V3"çš„å·¥ç¨‹ï¼ˆmyK10Projectï¼‰-----------------
  * @file myK10Project.c
  * @version 0.0
  * @date 2013-9-29
- * @brief ¹ØÓÚ¸Ã¹¤³ÌµÄÃèÊö
+ * @brief å…³äºŽè¯¥å·¥ç¨‹çš„æè¿°
  *
- * °æÈ¨ËùÓÐ:±±¾©À­ÆÕÀ¼µÂµç×Ó¼¼ÊõÓÐÏÞ¹«Ë¾
+ * ç‰ˆæƒæ‰€æœ‰:åŒ—äº¬æ‹‰æ™®å…°å¾·ç”µå­æŠ€æœ¯æœ‰é™å…¬å¸
  * http://www.lpld.cn
  * mail:support@lpld.cn
- * Ó²¼þÆ½Ì¨:  LPLD K60 Card / LPLD K60 Nano
+ * ç¡¬ä»¶å¹³å°:  LPLD K60 Card / LPLD K60 Nano
  *
- * ±¾¹¤³Ì»ùÓÚ"À­ÆÕÀ¼µÂK60µ×²ã¿âV3"¿ª·¢£¬
- * ËùÓÐ¿ªÔ´´úÂë¾ùÔÚ"lib"ÎÄ¼þ¼ÐÏÂ£¬ÓÃ»§²»±Ø¸ü¸Ä¸ÃÄ¿Â¼ÏÂ´úÂë£¬
- * ËùÓÐÓÃ»§¹¤³ÌÐè±£´æÔÚ"project"ÎÄ¼þ¼ÐÏÂ£¬ÒÔ¹¤³ÌÃû¶¨ÒåÎÄ¼þ¼ÐÃû£¬
- * µ×²ã¿âÊ¹ÓÃ·½·¨¼ûÏà¹ØÎÄµµ¡£ 
+ * æœ¬å·¥ç¨‹åŸºäºŽ"æ‹‰æ™®å…°å¾·K60åº•å±‚åº“V3"å¼€å‘ï¼Œ
+ * æ‰€æœ‰å¼€æºä»£ç å‡åœ¨"lib"æ–‡ä»¶å¤¹ä¸‹ï¼Œç”¨æˆ·ä¸å¿…æ›´æ”¹è¯¥ç›®å½•ä¸‹ä»£ç ï¼Œ
+ * æ‰€æœ‰ç”¨æˆ·å·¥ç¨‹éœ€ä¿å­˜åœ¨"project"æ–‡ä»¶å¤¹ä¸‹ï¼Œä»¥å·¥ç¨‹åå®šä¹‰æ–‡ä»¶å¤¹åï¼Œ
+ * åº•å±‚åº“ä½¿ç”¨æ–¹æ³•è§ç›¸å…³æ–‡æ¡£ã€‚ 
  *
  */
 #include "common.h"
@@ -26,13 +26,8 @@ void main (void)
   
   while(1)
   {
-<<<<<<< Updated upstream
-//    OLED_WriteChar(0, 0, 'a', 0);
-//    OLED_Refresh_Gram();
-=======
     OLED_WriteChar(0, 0, 'a', 1);
     OLED_Refresh_Gram();
->>>>>>> Stashed changes
   }
 }
 
