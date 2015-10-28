@@ -1,7 +1,3 @@
-/*
-*
-*
-*/
 #include "DEV_OLED.h"
 #include "common.h"
 #include "Card_Config.h"
